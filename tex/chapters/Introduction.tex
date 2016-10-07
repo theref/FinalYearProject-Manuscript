@@ -28,8 +28,20 @@ and
 
 Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
+These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are comonally used in literature (find references).
+A more detailed explanation of the Prisoner's Dilemma is given in ~\cite{Gotts2003}.
 
-A more detailed explanation is given in ~\cite{Gotts2003}.
+\begin{equation}\label{eq:payoff_matrix}
+% 
+P = \bordermatrix{~ & C & D \cr
+                  C & (3, 3) & (5, 0) \cr
+                  D & (0, 5) & (1, 1) \cr}
+% 
+\end{equation}
+
+It is well known that the game has one Nash Equilibrium (find a reference): both players defect.
+However, by repeatadely playing the game, it appears that cooperative behaviour can emerge from the originally selfish situation.
+This is called the Iterated Prisoner's Dilemma (IPD).
 
 
 
