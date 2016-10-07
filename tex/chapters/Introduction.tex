@@ -2,7 +2,34 @@
 
 \section{Introduction}
 
-A much more detailed explanation is given in ~\cite{Gotts2003}.
+The Prisoner's Dilemma is a classical model in Game Theory.
+It is a simple two player game where the agents must make a binary decision without communicating.
+This is often presented as two suspects who have been arrested, are being interrogated separately and have the option of whether to Cooperate $(C)$ or Defect $(D)$.
+Each player receives an indivual payoff that depends on the actions that have been taken.
+There are 3 possible outcomes:
+
+\begin{itemize}  
+\item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
+\item They both choose $D$ (mutual defection) and receive a payoff $P$ (Punish)
+\item One player chooses $C$ and the other chooses $D$. The cooperator receives a payoff $S$ (Sucker) and the defector receives a payoff $T$ (Temptation).
+\end{itemize}
+
+These payoffs must satisfy the following inequalities:
+
+\begin{equation}\label{eq:intuitive}
+S < D < C < T
+\end{equation}
+
+and
+
+\begin{equation}\label{eq:ensure_coop}
+(S + T) < 2 C
+\end{equation}
+
+Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
+Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
+
+A more detailed explanation is given in ~\cite{Gotts2003}.
 
 
 
