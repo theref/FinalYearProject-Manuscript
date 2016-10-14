@@ -13,6 +13,28 @@
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
 psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 
+
+\section{Fingerprinting}\label{sec:fingerprinting}
+
+\begin{definition}\label{def:joss-ann}
+If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A} $JA(A, x, y)$ is a strategy which has a probablility $x$ of choosing move $C$, a probability $y$ of chosing move $D$, and otherwise uses the response appropriate to strategy $A$.
+\end{definition}
+
+\begin{definition}\label{def:fingerprint}
+A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $JA(A, x, y)$ for each possible $(x, y)$.
+\end{definition}
+
+\begin{definition}\label{def:double-fingerprint}
+The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
+\end{definition}
+
+\begin{definition}\label{def:dual}
+Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
+\end{definition}
+
+\begin{theorem}\label{fingerprint-unit-square}
+If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extened over the unit square.
+\end{theorem}
 % Note that I can refer to other chapters: see Chapter~\ref{cha:introduction} and
 % even specific equations in each chapter, this is an
 % equation~(\ref{equ:random_data}).
