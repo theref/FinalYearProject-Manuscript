@@ -2,21 +2,45 @@
 
 \chapter{Introduction}\label{cha:introduction}
 
-\section{Introduction}
-
-The Prisoner's Dilemma is a classical model in Game Theory.
+The Prisoner's Dilemma (PD) is a classical model in Game Theory.
 It is a simple two player game where the agents must make a binary decision without communicating.
-This is often presented as two suspects who have been arrested, are being interrogated separately and have the option of whether to Cooperate $(C)$ or Defect $(D)$.
-Each player receives an indivual payoff that depends on the actions that have been taken.
-There are 3 possible outcomes:
+This is often presented as two suspects who have been arrested and are being interrogated separately.
+They have the option of whether to cooperate with each other or defect and each player receives an indivual payoff that depends on the actions that have been taken.
 
-\begin{itemize}  
+Now, consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
+Furthermore, allow this process to continue repeatadely. 
+This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever sincethe 1950's but became more popular after Robert Axelrod's large amount of work in the 1980's.
+
+
+\section{Prisoner's Dilemma}
+The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University ~\cite{Gass2005}.
+However, the idea was first formulated by the Merrils ~\cite{Flood1958} in 1950 whilst working for the RAND cooperation.
+
+A desription of the PD - Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
+They receive payoffs as follows:
+
+\begin{itemize}
 \item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
 \item They both choose $D$ (mutual defection) and receive a payoff $P$ (Punish)
 \item One player chooses $C$ and the other chooses $D$. The cooperator receives a payoff $S$ (Sucker) and the defector receives a payoff $T$ (Temptation).
 \end{itemize}
 
-These payoffs must satisfy the following inequalities:
+Figure \ref{eq:payoff_matrix_symb} shows the payoff matrix.
+
+\begin{equation}\label{eq:payoff_matrix_symb}
+% 
+P = \bordermatrix{~ & C & D \cr
+                  C & (R, R) & (T, S) \cr
+                  D & (S, T) & (P, P) \cr}
+% 
+\end{equation}
+
+There are also two assumptions that need to be stated.
+Firstly, both players are rational.
+Secondly, there is no communication between them.
+It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
+Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
+Additionaly, to ensure this behaviour occurs, the payoffs must satisfy the following inequalities:
 
 \begin{equation}\label{eq:intuitive}
 S < D < C < T
@@ -30,7 +54,8 @@ and
 
 Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
-These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are comonally used in literature (find references).
+These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references).
+We can now formulate the new payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
 A more detailed explanation of the Prisoner's Dilemma is given in ~\cite{Gotts2003}.
 
 \begin{equation}\label{eq:payoff_matrix}
@@ -41,9 +66,16 @@ P = \bordermatrix{~ & C & D \cr
 % 
 \end{equation}
 
-It is well known that the game has one Nash Equilibrium (find a reference): both players defect.
-However, by repeatadely playing the game, it appears that cooperative behaviour can emerge from the originally selfish situation.
-This is called the Iterated Prisoner's Dilemma (IPD).
+
+
+
+
+
+
+
+
+
+
 
 \begin{tabular}{ l | l l l l l }
 & 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
