@@ -11,6 +11,13 @@ Now, consider the situation that both prisoners return to their cells each night
 Furthermore, allow this process to continue repeatadely. 
 This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever sincethe 1950's but became more popular after Robert Axelrod's large amount of work in the 1980's.
 
+Several computer based IPD tournament have been held over the years, but the first was held by Axelrod in 1980 (use our paper for refs).
+Subsequently, two anniversary tournaments were held in 2004 and finally there was the Stewart and Plotkin 2012 tournament.
+The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-useable.
+
+Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament ~\cite{Knight2016}.
+Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecologi-cal simulations for populations of strategies.
+At the time of writing, the library has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
 
 \section{Prisoner's Dilemma}
 The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University ~\cite{Gass2005}.
@@ -66,7 +73,25 @@ P = \bordermatrix{~ & C & D \cr
 % 
 \end{equation}
 
+\section{Problem Description}
 
+As previously mentioned, the Axelrod-Python library contains 139 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments.
+This now raises the issue of duplication, and subsequently, how to tell the difference between strategies.
+Currently the most popular method is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure.
+
+The issue with this method is that it relies on knowledge of the underlying markov chain of the strategy which cannot be easily constructed from the source code.
+
+More needed once we know what's actually gonna happen.
+
+
+\section{Structure}
+This report is organized into several chapters. Continuing from this introduction:
+
+\begin{itemize}
+    \item Chapter \ref{cha:awesome_theorems_and_stuff}
+    
+    \item Chapter \ref{cha:conclusion}
+\end{itemize}
 
 
 
@@ -84,22 +109,22 @@ P = \bordermatrix{~ & C & D \cr
  & (C, D): (0.00, nan) & (C, D): (0.35, 0.36) & (C, D): (0.39, 0.38) & (C, D): (0.42, 0.42) & (C, D): (0.46, 0.45) \\ 
  & (D, C): (0.00, nan) & (D, C): (0.27, 0.29) & (D, C): (0.22, 0.23) & (D, C): (0.16, 0.17) & (D, C): (0.09, 0.09) \\ 
  & (D, D): (0.00, nan) & (D, D): (0.34, 0.36) & (D, D): (0.38, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.45, 0.45) \\ 
-\hline 
+\\
 0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.17, 0.15) & (C, C): (0.13, 0.12) & (C, C): (0.10, 0.10) \\ 
  & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\ 
  & (D, C): (0.00, 0.00) & (D, C): (0.24, 0.25) & (D, C): (0.22, 0.23) & (D, C): (0.17, 0.18) & (D, C): (0.10, 0.10) \\ 
  & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.30, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.39, 0.40) \\ 
-\hline 
+\\ 
 0.4 & (C, C): (1.00, 1.00) & (C, C): (0.40, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.19, 0.20) & (C, C): (0.15, 0.18) \\ 
  & (C, D): (0.00, 0.00) & (C, D): (0.18, 0.19) & (C, D): (0.25, 0.25) & (C, D): (0.31, 0.30) & (C, D): (0.34, 0.35) \\ 
  & (D, C): (0.00, 0.00) & (D, C): (0.24, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.20, 0.20) & (D, C): (0.17, 0.12) \\ 
  & (D, D): (0.00, 0.00) & (D, D): (0.18, 0.19) & (D, D): (0.25, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.33, 0.35) \\ 
-\hline 
+\\ 
 0.6 & (C, C): (1.00, 1.00) & (C, C): (0.45, 0.43) & (C, C): (0.30, 0.30) & (C, C): (0.25, 0.25) & (C, C): (0.21, 0.23) \\ 
  & (C, D): (0.00, 0.00) & (C, D): (0.13, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.25, 0.25) & (C, D): (0.29, 0.31) \\ 
  & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\ 
  & (D, D): (0.00, 0.00) & (D, D): (0.13, 0.14) & (D, D): (0.19, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\ 
-\hline 
+\\
 0.8 & (C, C): (1.00, 1.00) & (C, C): (0.42, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.30, 0.25) & (C, C): (0.25, 0.25) \\ 
  & (C, D): (0.00, 0.00) & (C, D): (0.09, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.21, 0.19) & (C, D): (0.25, 0.25) \\ 
  & (D, C): (0.00, 0.00) & (D, C): (0.40, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.29, 0.38) & (D, C): (0.26, 0.25) \\ 
