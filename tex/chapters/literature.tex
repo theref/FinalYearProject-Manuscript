@@ -10,7 +10,17 @@
 
 - Work to reproduce Axelrod's tournament ~\cite{Knight2016}
 
-
+\begin{tabular}{c c c c}\label{tab:tournament_refs}
+Year & Reference & Number of Strategies & Type\\
+\hline
+1979 & & 13 & Standard\\
+1979 & & 64 & Standard\\
+1984 & & 64 & Evolutionary\\
+1991 & & 13 & Noisy\\
+2005 & & 223 & Varied\\
+2012 & & 13 & Standard\\
+\hline
+\end{tabular}
 
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
 psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
@@ -19,8 +29,14 @@ psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 \section{Fingerprinting}\label{sec:fingerprinting}
 
 \begin{definition}\label{def:joss-ann}
-If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A} $JA(A, x, y)$ is a strategy which has a probablility $x$ of choosing move $C$, a probability $y$ of chosing move $D$, and otherwise uses the response appropriate to strategy $A$.
+If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $JA(A, x, y)$ is a strategy which has a probablility $x$ of choosing move $C$, a probability $y$ of chosing move $D$, and otherwise uses the response appropriate to strategy $A$.
 \end{definition}
+
+The notation $JA$ comes from the initials of the names Joss and Anne.
+Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
+Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection.
+When $x + y = 1$, the original strategy is not used, and the resulting behavior is a random strategy with probabilities $(x, y)$.
+In more general terms, a $JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
 
 \begin{definition}\label{def:fingerprint}
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $JA(A, x, y)$ for each possible $(x, y)$.
@@ -37,7 +53,17 @@ Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ ca
 \begin{theorem}\label{fingerprint-unit-square}
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extened over the unit square.
 \end{theorem}
-% Note that I can refer to other chapters: see Chapter~\ref{cha:introduction} and
-% even specific equations in each chapter, this is an
-% equation~(\ref{equ:random_data}).
 
+
+\section{Example Fingerprint Construction}
+
+There are several steps to constructing the Fingerprint of a strategy a basic familiarity of Markov Chains is required.
+An outline of the steps is as follows:
+
+\begin{itemize}
+    \item Build the markov chain for IPD between the strategy and probe strategy.
+    \item Construct the corresponding transition matrix.
+    \item Find the steady state distribution.
+    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector.
+    \item Plot the resulting function. 
+\end{itemize}
