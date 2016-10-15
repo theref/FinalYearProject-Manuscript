@@ -20,6 +20,7 @@ Year & Reference & Number of Strategies & Type\\
 2005 & & 223 & Varied\\
 2012 & & 13 & Standard\\
 \hline
+\caption{An overview of published tournaments}
 \end{tabular}
 
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
@@ -70,12 +71,36 @@ An outline of the steps is as follows:
 
 We will now apply this process in order to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
 
-\textbf{Step 1}
+\textbf{Step 1} - Build the markov chain.
 
-\textbf{Step 2}
+\textbf{Step 2} - Construct the transition matrix.
 
-\textbf{Step 3}
+\begin{equation}\label{eq:transition_matrix}
+% 
+T = \bordermatrix{~      & (C, C) & (C, D) & (D, C) & (D, D) \cr
+                  (C, C) & 1 - y  & 0      & 0      & x      \cr
+                  (C, D) & y      & 0      & 0      & 1 - x  \cr
+                  (D, C) & 0      & 1 - y  & x      & 0      \cr
+                  (D, D) & 0      & y      & 1 - x  & 0}
+% 
+\end{equation}
 
-\textbf{Step 4}
+\textbf{Step 3} - Find the steady state distribution.
 
-\textbf{Step 5}
+\begin{equation}\label{eq:steady_state}
+%
+\pi =
+\begin{bmatrix}
+\cfrac{x (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}, \\
+\cfrac{y (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}, \\
+\cfrac{y (1 - y)}{2y(1-x) + x(1-x) + y(1-y)}, \\
+\cfrac{y (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}
+\end{bmatrix}
+\end{equation}
+\textbf{Step 4} - Calculate the expected score.
+
+\begin{equation}
+F = \cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
+\end{equation}
+
+\textbf{Step 5} - Plot the resulting function.
