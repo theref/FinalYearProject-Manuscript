@@ -7,17 +7,17 @@ It is a simple two player game where the agents must make a binary decision with
 This is often presented as two suspects who have been arrested and are being interrogated separately.
 They have the option of whether to cooperate with each other or defect and each player receives an indivual payoff that depends on the actions that have been taken.
 
-Now, consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
+Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
 Furthermore, allow this process to continue repeatadely. 
-This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever sincethe 1950's but became more popular after Robert Axelrod's large amount of work in the 1980's.
+This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's ~\cite{Axelrod2016}.
 
-Several computer based IPD tournament have been held over the years, but the first was held by Axelrod in 1980 (use our paper for refs).
-Subsequently, two anniversary tournaments were held in 2004 and finally there was the Stewart and Plotkin 2012 tournament.
+Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 (use our paper for refs).
+Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
 The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-useable.
 
 Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament ~\cite{Knight2016}.
 Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecologi-cal simulations for populations of strategies.
-At the time of writing, the library has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
+The version of the library used in this work will be ~\cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
 
 \section{Prisoner's Dilemma}
 The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University ~\cite{Gass2005}.
@@ -77,7 +77,7 @@ P = \bordermatrix{~ & C & D \cr
 
 As previously mentioned, the Axelrod-Python library contains 139 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments.
 This now raises the issue of duplication, and subsequently, how to tell the difference between strategies.
-Currently the most popular method is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure.
+Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure.
 
 The issue with this method is that it relies on knowledge of the underlying markov chain of the strategy which cannot be easily constructed from the source code.
 
