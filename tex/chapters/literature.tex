@@ -30,21 +30,21 @@ psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 \section{Fingerprinting}\label{sec:fingerprinting}
 
 \begin{definition}\label{def:joss-ann}
-If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $JA(A, x, y)$ is a strategy which has a probablility $x$ of choosing move $C$, a probability $y$ of chosing move $D$, and otherwise uses the response appropriate to strategy $A$.
+If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy. Instead of the original behaviour, it makes move $C$ with probablility $x$, move $D$ with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
 \end{definition}
 
-The notation $JA$ comes from the initials of the names Joss and Anne.
+The notation $\JA$ comes from the initials of the names Joss and Anne.
 Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
-Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection.
+Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection ~\cite{Ashlock2008}.
 When $x + y = 1$, the original strategy is not used, and the resulting behavior is a random strategy with probabilities $(x, y)$.
-In more general terms, a $JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
+In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
 
 \begin{definition}\label{def:fingerprint}
-A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $JA(A, x, y)$ for each possible $(x, y)$.
+A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
 \end{definition}
 
 \begin{definition}\label{def:double-fingerprint}
-The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
+The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
 \end{definition}
 
 \begin{definition}\label{def:dual}
@@ -52,7 +52,7 @@ Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ ca
 \end{definition}
 
 \begin{theorem}\label{fingerprint-unit-square}
-If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extened over the unit square.
+If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
 
@@ -61,14 +61,15 @@ If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the
 There are several steps to constructing the Fingerprint of a strategy a basic familiarity of Markov Chains is required.
 An outline of the steps is as follows:
 
-\begin{itemize}
+\begin{enumerate}
     \item Build the markov chain for IPD between the strategy and probe strategy.
     \item Construct the corresponding transition matrix.
     \item Find the steady state distribution.
-    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector.
+    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in .
+    %TODO
     \item Plot the resulting function. 
-\end{itemize}
-
+\end{enumerate}
+{}
 We will now apply this process in order to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
 
 \textbf{Step 1} - Build the markov chain.
@@ -104,3 +105,35 @@ F = \cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
 \end{equation}
 
 \textbf{Step 5} - Plot the resulting function.
+
+
+\begin{tabular}{c | c c c c c}
+& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
+\hline 
+& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
+\hline 
+0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\ 
+ & (C, D): (0.00, nan) & (C, D): (0.36, 0.36) & (C, D): (0.38, 0.38) & (C, D): (0.41, 0.42) & (C, D): (0.45, 0.45) \\ 
+ & (D, C): (0.00, nan) & (D, C): (0.29, 0.29) & (D, C): (0.23, 0.23) & (D, C): (0.18, 0.17) & (D, C): (0.09, 0.09) \\ 
+ & (D, D): (0.00, nan) & (D, D): (0.36, 0.36) & (D, D): (0.39, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.46, 0.45) \\ 
+\hline 
+0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.14, 0.15) & (C, C): (0.12, 0.12) & (C, C): (0.09, 0.10) \\ 
+ & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\ 
+ & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.24, 0.23) & (D, C): (0.18, 0.18) & (D, C): (0.12, 0.10) \\ 
+ & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.31, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.40, 0.40) \\ 
+\hline 
+0.4 & (C, C): (1.00, 1.00) & (C, C): (0.38, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.20, 0.20) & (C, C): (0.17, 0.18) \\ 
+ & (C, D): (0.00, 0.00) & (C, D): (0.19, 0.19) & (C, D): (0.26, 0.25) & (C, D): (0.30, 0.30) & (C, D): (0.32, 0.35) \\ 
+ & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.21, 0.20) & (D, C): (0.18, 0.12) \\ 
+ & (D, D): (0.00, 0.00) & (D, D): (0.19, 0.19) & (D, D): (0.26, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.32, 0.35) \\ 
+\hline 
+0.6 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.43) & (C, C): (0.29, 0.30) & (C, C): (0.26, 0.25) & (C, C): (0.23, 0.23) \\ 
+ & (C, D): (0.00, 0.00) & (C, D): (0.14, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.24, 0.25) & (C, D): (0.27, 0.31) \\ 
+ & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\ 
+ & (D, D): (0.00, 0.00) & (D, D): (0.14, 0.14) & (D, D): (0.20, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\ 
+\hline 
+0.8 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.27, 0.25) & (C, C): (0.26, 0.25) \\ 
+ & (C, D): (0.00, 0.00) & (C, D): (0.10, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.20, 0.19) & (C, D): (0.24, 0.25) \\ 
+ & (D, C): (0.00, 0.00) & (D, C): (0.38, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.32, 0.38) & (D, C): (0.26, 0.25) \\ 
+ & (D, D): (0.00, 0.00) & (D, D): (0.10, 0.10) & (D, D): (0.16, 0.14) & (D, D): (0.20, 0.19) & (D, D): (0.24, 0.25) \\ 
+\end{tabular}
