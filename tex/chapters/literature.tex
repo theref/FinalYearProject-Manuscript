@@ -30,7 +30,8 @@ psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 \section{Fingerprinting}\label{sec:fingerprinting}
 
 \begin{definition}\label{def:joss-ann}
-If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy. Instead of the original behaviour, it makes move $C$ with probablility $x$, move $D$ with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
+If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy.
+Instead of the original behaviour, it makes move $C$ with probablility $x$, move $D$ with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
 \end{definition}
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
@@ -42,6 +43,8 @@ In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that 
 \begin{definition}\label{def:fingerprint}
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
 \end{definition}
+
+
 
 \begin{definition}\label{def:double-fingerprint}
 The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
@@ -67,7 +70,7 @@ An outline of the steps is as follows:
     \item Find the steady state distribution.
     \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in .
     %TODO
-    \item Plot the resulting function. 
+    \item Plot the resulting function.
 \end{enumerate}
 {}
 We will now apply this process in order to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
@@ -77,13 +80,13 @@ We will now apply this process in order to obtain a fingerprint for the strategy
 \textbf{Step 2} - Construct the transition matrix.
 
 \begin{equation}\label{eq:transition_matrix}
-% 
+%
 T = \bordermatrix{~      & (C, C) & (C, D) & (D, C) & (D, D) \cr
                   (C, C) & 1 - y  & 0      & 0      & x      \cr
                   (C, D) & y      & 0      & 0      & 1 - x  \cr
                   (D, C) & 0      & 1 - y  & x      & 0      \cr
                   (D, D) & 0      & y      & 1 - x  & 0}
-% 
+%
 \end{equation}
 
 \textbf{Step 3} - Find the steady state distribution.
@@ -107,33 +110,42 @@ F = \cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
 \textbf{Step 5} - Plot the resulting function.
 
 
+\begin{figure}[!hbtp]
+    \begin{center}
+        \includestandalone{../img/Tit4TatFSM}
+        \caption{FSM for TitForTat}\label{fig:Tit4TatFSM}
+    \end{center}
+\end{figure}
+
+
+
 \begin{tabular}{c | c c c c c}
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
-\hline 
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
-\hline 
-0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\ 
- & (C, D): (0.00, nan) & (C, D): (0.36, 0.36) & (C, D): (0.38, 0.38) & (C, D): (0.41, 0.42) & (C, D): (0.45, 0.45) \\ 
- & (D, C): (0.00, nan) & (D, C): (0.29, 0.29) & (D, C): (0.23, 0.23) & (D, C): (0.18, 0.17) & (D, C): (0.09, 0.09) \\ 
- & (D, D): (0.00, nan) & (D, D): (0.36, 0.36) & (D, D): (0.39, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.46, 0.45) \\ 
-\hline 
-0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.14, 0.15) & (C, C): (0.12, 0.12) & (C, C): (0.09, 0.10) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.24, 0.23) & (D, C): (0.18, 0.18) & (D, C): (0.12, 0.10) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.31, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.40, 0.40) \\ 
-\hline 
-0.4 & (C, C): (1.00, 1.00) & (C, C): (0.38, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.20, 0.20) & (C, C): (0.17, 0.18) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.19, 0.19) & (C, D): (0.26, 0.25) & (C, D): (0.30, 0.30) & (C, D): (0.32, 0.35) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.21, 0.20) & (D, C): (0.18, 0.12) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.19, 0.19) & (D, D): (0.26, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.32, 0.35) \\ 
-\hline 
-0.6 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.43) & (C, C): (0.29, 0.30) & (C, C): (0.26, 0.25) & (C, C): (0.23, 0.23) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.14, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.24, 0.25) & (C, D): (0.27, 0.31) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.14, 0.14) & (D, D): (0.20, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\ 
-\hline 
-0.8 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.27, 0.25) & (C, C): (0.26, 0.25) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.10, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.20, 0.19) & (C, D): (0.24, 0.25) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.38, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.32, 0.38) & (D, C): (0.26, 0.25) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.10, 0.10) & (D, D): (0.16, 0.14) & (D, D): (0.20, 0.19) & (D, D): (0.24, 0.25) \\ 
+& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\
+\hline
+& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\
+\hline
+0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\
+ & (C, D): (0.00, nan) & (C, D): (0.36, 0.36) & (C, D): (0.38, 0.38) & (C, D): (0.41, 0.42) & (C, D): (0.45, 0.45) \\
+ & (D, C): (0.00, nan) & (D, C): (0.29, 0.29) & (D, C): (0.23, 0.23) & (D, C): (0.18, 0.17) & (D, C): (0.09, 0.09) \\
+ & (D, D): (0.00, nan) & (D, D): (0.36, 0.36) & (D, D): (0.39, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.46, 0.45) \\
+\hline
+0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.14, 0.15) & (C, C): (0.12, 0.12) & (C, C): (0.09, 0.10) \\
+ & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\
+ & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.24, 0.23) & (D, C): (0.18, 0.18) & (D, C): (0.12, 0.10) \\
+ & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.31, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.40, 0.40) \\
+\hline
+0.4 & (C, C): (1.00, 1.00) & (C, C): (0.38, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.20, 0.20) & (C, C): (0.17, 0.18) \\
+ & (C, D): (0.00, 0.00) & (C, D): (0.19, 0.19) & (C, D): (0.26, 0.25) & (C, D): (0.30, 0.30) & (C, D): (0.32, 0.35) \\
+ & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.21, 0.20) & (D, C): (0.18, 0.12) \\
+ & (D, D): (0.00, 0.00) & (D, D): (0.19, 0.19) & (D, D): (0.26, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.32, 0.35) \\
+\hline
+0.6 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.43) & (C, C): (0.29, 0.30) & (C, C): (0.26, 0.25) & (C, C): (0.23, 0.23) \\
+ & (C, D): (0.00, 0.00) & (C, D): (0.14, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.24, 0.25) & (C, D): (0.27, 0.31) \\
+ & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\
+ & (D, D): (0.00, 0.00) & (D, D): (0.14, 0.14) & (D, D): (0.20, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\
+\hline
+0.8 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.27, 0.25) & (C, C): (0.26, 0.25) \\
+ & (C, D): (0.00, 0.00) & (C, D): (0.10, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.20, 0.19) & (C, D): (0.24, 0.25) \\
+ & (D, C): (0.00, 0.00) & (D, C): (0.38, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.32, 0.38) & (D, C): (0.26, 0.25) \\
+ & (D, D): (0.00, 0.00) & (D, D): (0.10, 0.10) & (D, D): (0.16, 0.14) & (D, D): (0.20, 0.19) & (D, D): (0.24, 0.25) \\
 \end{tabular}

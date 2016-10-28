@@ -1,0 +1,22 @@
+%!TEX root = ../tex/main.tex
+
+\begin{tikzpicture}
+    \tikzstyle{state}=[minimum width=2cm, font=\boldmath];
+    % First row
+    \node (CC) at (0,0) [state] {$(C,C)$};
+    \node (CD) at ($(CC)+(3,0)$) [state] {$(C,D)$};
+    \node (DC) at ($(CC)+(0,-3)$) [state] {$(D,C)$};
+    \node (DD) at ($(DC)+(3,0)$) [state] {$(D,D)$};
+
+    \draw (CC) edge[out=45, in=135, loop, thick] node [below] {$C$} (CC);
+    \draw (CC) edge[out=45, in=135, ->, thick] node [above] {$C$} (CD);
+
+    \draw (CD) edge[out=-45,in=45,->,thick] node [right] {$D$} (DD);
+    \draw (CD) edge[out=-90,in=0,->,thick] node [left] {$C$} (DC);
+
+    \draw (DD) edge[out=-135,in=-45,->,thick] node [below] {$C$} (DC);
+    \draw (DD) edge[out=-135, in=-45, loop, thick] node [above] {$D$} (DD);
+
+    \draw (DC) edge[out=135,in=-135,->,thick] node [left] {$C$} (CC);
+    \draw (DC) edge[out=90,in=180,->,thick] node [right] {$C$} (CD);
+\end{tikzpicture}
