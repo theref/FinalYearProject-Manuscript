@@ -1,0 +1,29 @@
+%!TEX root = ../tex/main.tex
+
+\begin{tikzpicture}
+    \tikzstyle{state}=[minimum width=2cm, font=\boldmath];
+    % First row
+    \node (1C) at (0,1) [state] {$(C)$};
+    \node (1D) at (0,-1) [state] {$(D)$};
+
+    \node (2CD) at (3,0) [state] {$(CD)$};
+    \node (2CC) at ($(2CD)+(0,2)$) [state] {$(CC)$};
+    \node (2DD) at ($(2CD)+(0,-2)$) [state] {$(DD)$};
+
+    \node (3CCD) at ($(1C)+(6,0)$) [state] {$(CCD)$};
+    \node (3CCC) at ($(3CCD)+(0,2)$) [state] {$(CCC)$};
+    \node (3DDC) at ($(3CCD)+(0,-2)$) [state] {$(DDC)$};
+    \node (3DDD) at ($(3CCD)+(0,-4)$) [state] {$(DDD)$};
+
+    \draw (1C) edge[out=45, in=-135, ->, thick] node [above] {$C$} (2CC);
+    \draw (1C) edge[out=-45, in=135, ->, thick] node [below] {$D$} (2CD);
+    \draw (1D) edge[out=45, in=-135, ->, thick] node [above] {$C$} (2CD);
+    \draw (1D) edge[out=-45, in=135, ->, thick] node [below] {$D$} (2DD);
+
+    \draw (2CC) edge[out=0, in=180, ->, thick] node [above] {$C$} (3CCC);
+    \draw (2CC) edge[out=-45, in=135, ->, thick] node [below] {$D$} (3CCD);
+    \draw (2CD) edge[out=30, in=-150, ->, thick] node [above] {$C$} (3CCD);
+    \draw (2CD) edge[out=-30, in=150, ->, thick] node [below] {$D$} (3DDC);
+    \draw (2DD) edge[out=45, in=-135, ->, thick] node [above] {$C$} (3DDC);
+    \draw (2DD) edge[out=0, in=180, ->, thick] node [below] {$D$} (3DDD);
+\end{tikzpicture}
