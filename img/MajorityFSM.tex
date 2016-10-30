@@ -12,18 +12,33 @@
 
     \node (3CCD) at ($(1C)+(6,0)$) [state] {$(CCD)$};
     \node (3CCC) at ($(3CCD)+(0,2)$) [state] {$(CCC)$};
-    \node (3DDC) at ($(3CCD)+(0,-2)$) [state] {$(DDC)$};
+    \node (3CDD) at ($(3CCD)+(0,-2)$) [state] {$(CDD)$};
     \node (3DDD) at ($(3CCD)+(0,-4)$) [state] {$(DDD)$};
 
-    \draw (1C) edge[out=45, in=-135, ->, thick] node [above] {$C$} (2CC);
-    \draw (1C) edge[out=-45, in=135, ->, thick] node [below] {$D$} (2CD);
-    \draw (1D) edge[out=45, in=-135, ->, thick] node [above] {$C$} (2CD);
-    \draw (1D) edge[out=-45, in=135, ->, thick] node [below] {$D$} (2DD);
+    \node (4CCDD) at ($(2CD)+(6,0)$) [state] {$(CCDD)$};
+    \node (4CCCC) at ($(4CCDD)+(0,4)$) [state] {$(CCCC)$};
+    \node (4CCCD) at ($(4CCDD)+(0,2)$) [state] {$(CCCD)$};
+    \node (4CDDD) at ($(4CCDD)+(0,-2)$) [state] {$(CDDD)$};
+    \node (4DDDD) at ($(4CCDD)+(0,-4)$) [state] {$(DDDD)$};
 
-    \draw (2CC) edge[out=0, in=180, ->, thick] node [above] {$C$} (3CCC);
-    \draw (2CC) edge[out=-45, in=135, ->, thick] node [below] {$D$} (3CCD);
-    \draw (2CD) edge[out=30, in=-150, ->, thick] node [above] {$C$} (3CCD);
-    \draw (2CD) edge[out=-30, in=150, ->, thick] node [below] {$D$} (3DDC);
-    \draw (2DD) edge[out=45, in=-135, ->, thick] node [above] {$C$} (3DDC);
-    \draw (2DD) edge[out=0, in=180, ->, thick] node [below] {$D$} (3DDD);
+    \draw (1C) edge[out=20, in=-160, ->, thick] node [above] {$C$} (2CC);
+    \draw (1C) edge[out=-20, in=160, ->, thick] node [below] {$D$} (2CD);
+    \draw (1D) edge[out=20, in=-160, ->, thick] node [above] {$C$} (2CD);
+    \draw (1D) edge[out=-20, in=160, ->, thick] node [below] {$D$} (2DD);
+
+    \draw (2CC) edge[out=20, in=-160, ->, thick] node [above] {$C$} (3CCC);
+    \draw (2CC) edge[out=-20, in=160, ->, thick] node [below] {$D$} (3CCD);
+    \draw (2CD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (3CCD);
+    \draw (2CD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (3CDD);
+    \draw (2DD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (3CDD);
+    \draw (2DD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (3DDD);
+
+    \draw (3CCC) edge[out=20, in=-160, ->, thick] node [above] {$C$} (4CCCC);
+    \draw (3CCC) edge[out=-20, in=160, ->, thick] node [below] {$D$} (4CCCD);
+    \draw (3CCD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (4CCCD);
+    \draw (3CCD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (4CCDD);
+    \draw (3CDD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (4CCDD);
+    \draw (3CDD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (4CDDD);
+    \draw (3DDD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (4CDDD);
+    \draw (3DDD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (4DDDD);
 \end{tikzpicture}
