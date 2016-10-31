@@ -54,7 +54,7 @@ The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ retu
 Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
 \end{definition}
 
-\begin{theorem}\label{fingerprint-unit-square}
+\begin{theorem}\label{thm:fingerprint-unit-square}
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
@@ -104,10 +104,72 @@ T = \bordermatrix{~      & (C, C) & (C, D) & (D, C) & (D, D) \cr
 \textbf{Step 4} - Calculate the expected score.
 
 \begin{equation}
-F = \cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
+F = \pi \cdot
+\begin{bmatrix}
+3 \\
+0 \\
+5 \\
+1
+\end{bmatrix}
+=
+\cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
 \end{equation}
 
 \textbf{Step 5} - Plot the resulting function.
+
+\section{Finite State Machines}\label{sec:fsm}
+
+Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show the Finite State Machine (FSM) representations for Tit-For-Tat and Pavlov respectively.
+Nodes represent the previous action taken by the strategy and the opponent, ie node $(D, C)$ implies that is the preceding turn, the strategy chose to Defect and the opponent chose to co-operate.
+Arcs represent the choice made by the opponent at the current turn, and lead us to the state of the next turn.
+
+It should be noted that these figures are not necessarily the simplest representation of their corresponding strategy.
+For example, Tit-For-Tat requires no knowledge of its own previous moves, but they have been included for completeness.
+
+In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority which plays in the following way:
+
+\begin{itemize}
+  \item If the opponent has cooperated the majority of the time, Majority will cooperate
+  \item If the opponent has defected the majority of the time, Majority will defect
+  \item Note - the strategy shown is technically Soft Majority, if the opponents cooperations and defections are equal it will cooperate. Hard Majority would defect in this situation.
+\end{itemize}
+
+This implies that the strategy Majority requires knowledge of all previous states, and therefore could not be represented as an FSM.
+However in Theorem \ref{thm:fsm} it is shown that if the number of turns in a game is known, any strategy can be represented as an FSM. A formal defintion of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modeled with a FSM:
+
+\begin{itemize}
+ \item The system must be describable by a finite set of states.
+ \item The system must have a finite set of inputs that can trigger transitions between states.
+ \item The behavior of the system at a given point in time depends upon the current state and the input that occurs at that time.
+ \item For each state the system may be in, behavior is defined for each possible input.
+ \item The system has a particular initial state.
+\end{itemize}
+
+\begin{definition}\label{def:fsm}
+A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta, s_0, F)$ where
+\begin{itemize}
+ \item $\sigma$ is the set of symbols representing the input of $M$.
+ \item $S$ is the set of states of $M$.
+ \item $s_0 \in S$ is the starting state.
+ \item $F \subseteq S$ is the set of final states of $M$.
+ \item $\delta: S \times \sigma \rightarrow S$ is the transition function.
+\end{itemize}
+\end{definition}
+
+\begin{theorem}\label{thm:fsm}
+Given a determenistic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in 1,2,3,...$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
+\end{theorem}
+
+\begin{proof}\label{prf:fsm}
+Let $\sigma = \{C, D\}$ and
+\[
+S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
+\delta((h_1, h_2), a) =()
+\]
+
+\end{proof}
+
+
 
 
 \begin{figure}[!hbtp]
