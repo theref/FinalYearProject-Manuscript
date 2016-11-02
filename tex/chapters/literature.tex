@@ -10,7 +10,9 @@
 
 - Work to reproduce Axelrod's tournament ~\cite{Knight2016}
 
-\begin{tabular}{c c c c}\label{tab:tournament_refs}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c c c c}
 Year & Reference & Number of Strategies & Type\\
 \hline
 1979 & & 13 & Standard\\
@@ -20,8 +22,10 @@ Year & Reference & Number of Strategies & Type\\
 2005 & & 223 & Varied\\
 2012 & & 13 & Standard\\
 \hline
-% \caption{An overview of published tournaments}
 \end{tabular}
+\label{tab:tournament_refs}
+\caption{An overview of published tournaments}
+\end{table}
 
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
 psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
@@ -53,6 +57,48 @@ The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ retu
 \begin{definition}\label{def:dual}
 Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
 \end{definition}
+
+An alternative wording is that, given a history for an opponent, the responses of the original strategy and the dual would be opposite.
+It's important to note that this is different to taking a strategy and flipping it's responses.
+The dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not
+This is shown in Table \ref{tab:strat-dual-flip}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c c  c | c}
+Pavlov & Dual & Flip & Opponent \\
+\hline
+C & D & D & C\\
+C & D & C & D\\
+D & C & C & D\\
+C & D & C & C\\
+C & D & D & C\\
+C & D & C & D\\
+D & C & C & C\\
+D & C & D & D\\
+C & D & D &
+\end{tabular}
+\caption{The different responses of Pavlov, Pavlov's Dual and Flipped Pavlov}
+\label{tab:strat-dual-flip}
+\end{table}
+
+The subtle difference between Dual and Flip can be highlighted further by inspecting each row individualy.
+
+\underline{Row 1} - Pavlov always plays $C$ on the first go.
+Flip will change this to $D$.
+Dual knows that Pavlov always plays $C$ and so swaps to $D$.
+
+\underline{Row 2} - In the previous round for Pavlov the strategies played $(C, C)$, and so Pavlov plays $C$ again.
+For Flip, the preceding interaction was $(D, C)$, in this instance Pavlov would play $D$ again, so this gets flipped to $C$.
+The previous turn for Dual was $(D, C)$ so it infers that Pavlov had $(C, C)$.
+It knows that Pavlov would play $C$ and so plays $D$.
+
+\underline{Row 3} - In the previous round for Pavlov the strategies played $(C, D)$, and so Pavlov would change to play $D$.
+For Flip, the preceding interaction was $(C, D)$, in this instance Pavlov would change to $D$, so this gets flipped to play $C$ again.
+The previous turn for Dual was $(D, D)$ so it infers that Pavlov had $(C, D)$.
+It knows that Pavlov would play $D$ in this instance and so plays $C$.
+
+
 
 \begin{theorem}\label{thm:fingerprint-unit-square}
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
@@ -190,8 +236,6 @@ S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
 
 
 \begin{tabular}{c | c c c c c}
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\
-\hline
 & 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\
 \hline
 0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\
