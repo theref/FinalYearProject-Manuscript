@@ -8,7 +8,11 @@
 
 % A package to include graphics files (jpg, png, eps, pdf etc...)
 \usepackage{graphicx}
-
+\usepackage{subfig}
+\usepackage{longtable}
+\usepackage{alphalph}
+\renewcommand\thesubfigure{\alphalph{\value{subfigure}}}
+% \usepackage{float}
 % Some basic packages that are almost standad
 \usepackage{amssymb}
 \usepackage{tikz}
