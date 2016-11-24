@@ -107,100 +107,11 @@ If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the
 
 \section{Example Fingerprint Construction}
 
-There are several steps to constructing the Fingerprint of a strategy a basic familiarity of Markov Chains is required.
-An outline of the steps is as follows:
 
-\begin{enumerate}
-    \item Build the markov chain for IPD between the strategy and probe strategy.
-    \item Construct the corresponding transition matrix.
-    \item Find the steady state distribution.
-    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in .
-    %TODO
-    \item Plot the resulting function.
-\end{enumerate}
-{}
-We will now apply this process in order to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
-
-\textbf{Step 1} - Build the markov chain.
-
-\textbf{Step 2} - Construct the transition matrix.
-
-\begin{equation}\label{eq:transition_matrix}
-%
-T = \bordermatrix{~      & (C, C) & (C, D) & (D, C) & (D, D) \cr
-                  (C, C) & 1 - y  & 0      & 0      & x      \cr
-                  (C, D) & y      & 0      & 0      & 1 - x  \cr
-                  (D, C) & 0      & 1 - y  & x      & 0      \cr
-                  (D, D) & 0      & y      & 1 - x  & 0}
-%
-\end{equation}
-
-\textbf{Step 3} - Find the steady state distribution.
-
-\begin{equation}\label{eq:steady_state}
-%
-\pi =
-\begin{bmatrix}
-\cfrac{x (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}, \\
-\cfrac{y (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}, \\
-\cfrac{y (1 - y)}{2y(1-x) + x(1-x) + y(1-y)}, \\
-\cfrac{y (1 - x)}{2y(1-x) + x(1-x) + y(1-y)}
-\end{bmatrix}
-\end{equation}
-\textbf{Step 4} - Calculate the expected score.
-
-\begin{equation}
-F = \pi \cdot
-\begin{bmatrix}
-3 \\
-0 \\
-5 \\
-1
-\end{bmatrix}
-=
-\cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
-\end{equation}
-
-\textbf{Step 5} - Plot the resulting function.
 
 \section{Finite State Machines}\label{sec:fsm}
 
-Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show the Finite State Machine (FSM) representations for Tit-For-Tat and Pavlov respectively.
-Nodes represent the previous action taken by the strategy and the opponent, ie node $(D, C)$ implies that is the preceding turn, the strategy chose to Defect and the opponent chose to co-operate.
-Arcs represent the choice made by the opponent at the current turn, and lead us to the state of the next turn.
 
-It should be noted that these figures are not necessarily the simplest representation of their corresponding strategy.
-For example, Tit-For-Tat requires no knowledge of its own previous moves, but they have been included for completeness.
-
-In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority which plays in the following way:
-
-\begin{itemize}
-  \item If the opponent has cooperated the majority of the time, Majority will cooperate
-  \item If the opponent has defected the majority of the time, Majority will defect
-  \item Note - the strategy shown is technically Soft Majority, if the opponents cooperations and defections are equal it will cooperate. Hard Majority would defect in this situation.
-\end{itemize}
-
-This implies that the strategy Majority requires knowledge of all previous states, and therefore could not be represented as an FSM.
-However in Theorem \ref{thm:fsm} it is shown that if the number of turns in a game is known, any strategy can be represented as an FSM. A formal defintion of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modeled with a FSM:
-
-\begin{itemize}
- \item The system must be describable by a finite set of states.
- \item The system must have a finite set of inputs that can trigger transitions between states.
- \item The behavior of the system at a given point in time depends upon the current state and the input that occurs at that time.
- \item For each state the system may be in, behavior is defined for each possible input.
- \item The system has a particular initial state.
-\end{itemize}
-
-\begin{definition}\label{def:fsm}
-A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta, s_0, F)$ where
-\begin{itemize}
- \item $\sigma$ is the set of symbols representing the input of $M$.
- \item $S$ is the set of states of $M$.
- \item $s_0 \in S$ is the starting state.
- \item $F \subseteq S$ is the set of final states of $M$.
- \item $\delta: S \times \sigma \rightarrow S$ is the transition function.
-\end{itemize}
-\end{definition}
 
 \begin{theorem}\label{thm:fsm}
 Given a determenistic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in 1,2,3,...$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
@@ -218,48 +129,5 @@ S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
 
 
 
-\begin{figure}[!hbtp]
-    \begin{center}
-        \includestandalone{../img/Tit4TatFSM}
-        \caption{FSM for TitForTat}\label{fig:Tit4TatFSM}
-        \includestandalone{../img/PavlovFSM}
-        \caption{FSM for Pavlov (Win-Stay Lose-Shift)}\label{fig:PavlovFSM}
-    \end{center}
-\end{figure}
-
-\begin{figure}[!hbtp]
-    \begin{center}
-        \includestandalone{../img/MajorityFSM}
-        \caption{FSM for Majority in a game with 4 Turns}\label{fig:MajorityFSM}
-    \end{center}
-\end{figure}
 
 
-\begin{tabular}{c | c c c c c}
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\
-\hline
-0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\
- & (C, D): (0.00, nan) & (C, D): (0.36, 0.36) & (C, D): (0.38, 0.38) & (C, D): (0.41, 0.42) & (C, D): (0.45, 0.45) \\
- & (D, C): (0.00, nan) & (D, C): (0.29, 0.29) & (D, C): (0.23, 0.23) & (D, C): (0.18, 0.17) & (D, C): (0.09, 0.09) \\
- & (D, D): (0.00, nan) & (D, D): (0.36, 0.36) & (D, D): (0.39, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.46, 0.45) \\
-\hline
-0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.14, 0.15) & (C, C): (0.12, 0.12) & (C, C): (0.09, 0.10) \\
- & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.24, 0.23) & (D, C): (0.18, 0.18) & (D, C): (0.12, 0.10) \\
- & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.31, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.40, 0.40) \\
-\hline
-0.4 & (C, C): (1.00, 1.00) & (C, C): (0.38, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.20, 0.20) & (C, C): (0.17, 0.18) \\
- & (C, D): (0.00, 0.00) & (C, D): (0.19, 0.19) & (C, D): (0.26, 0.25) & (C, D): (0.30, 0.30) & (C, D): (0.32, 0.35) \\
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.21, 0.20) & (D, C): (0.18, 0.12) \\
- & (D, D): (0.00, 0.00) & (D, D): (0.19, 0.19) & (D, D): (0.26, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.32, 0.35) \\
-\hline
-0.6 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.43) & (C, C): (0.29, 0.30) & (C, C): (0.26, 0.25) & (C, C): (0.23, 0.23) \\
- & (C, D): (0.00, 0.00) & (C, D): (0.14, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.24, 0.25) & (C, D): (0.27, 0.31) \\
- & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\
- & (D, D): (0.00, 0.00) & (D, D): (0.14, 0.14) & (D, D): (0.20, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\
-\hline
-0.8 & (C, C): (1.00, 1.00) & (C, C): (0.41, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.27, 0.25) & (C, C): (0.26, 0.25) \\
- & (C, D): (0.00, 0.00) & (C, D): (0.10, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.20, 0.19) & (C, D): (0.24, 0.25) \\
- & (D, C): (0.00, 0.00) & (D, C): (0.38, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.32, 0.38) & (D, C): (0.26, 0.25) \\
- & (D, D): (0.00, 0.00) & (D, D): (0.10, 0.10) & (D, D): (0.16, 0.14) & (D, D): (0.20, 0.19) & (D, D): (0.24, 0.25) \\
-\end{tabular}
