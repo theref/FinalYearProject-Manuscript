@@ -116,6 +116,21 @@ A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta
 
 
 
-The end.
+
+
+\begin{theorem}\label{thm:fsm}
+Given a determenistic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in 1,2,3,...$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
+\end{theorem}
+
+\begin{proof}\label{prf:fsm}
+Let $\sigma = \{C, D\}$ and
+\[
+S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
+\delta((h_1, h_2), a) =()
+\]
+
+\end{proof}
+
+
 
 \lipsum

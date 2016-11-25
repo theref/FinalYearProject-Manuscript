@@ -33,6 +33,19 @@ psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 
 \section{Fingerprinting}\label{sec:fingerprinting}
 
+A method for differentiating between strategies in a graphical manner is first given in ~\cite{Ashlock2004} by Ashlock.
+Several definitions, theorems and proofs concerning the construction of a fingerprint are outlined.
+This is then followed by a few examples.
+The examples presented are of low quality and the only probe strategy (see section/definition etc) used is TitForTat.
+%TODO
+
+Ashlock then extends his fingerprinting work further in ~\cite{Ashlock2008}.
+Far more examples are presented, and many different fingerprint functions are listed.
+A large number of the analytical fingerprint functions use a probe that is not TitForTat.
+Fingerprinting is then used to to assess how three evolutionary algorithms produce different populations.
+The evolutionary methods involved are finite-state machines, lookup tables and feedforward neural nets.
+
+
 \begin{definition}\label{def:joss-ann}
 If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy.
 Instead of the original behaviour, it makes move $C$ with probablility $x$, move $D$ with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
@@ -104,27 +117,10 @@ It knows that Pavlov would play $D$ in this instance and so plays $C$.
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
-
-\section{Example Fingerprint Construction}
-
-
-
-\section{Finite State Machines}\label{sec:fsm}
+proof given in ~\cite{Ashlock2004}
 
 
 
-\begin{theorem}\label{thm:fsm}
-Given a determenistic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in 1,2,3,...$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
-\end{theorem}
-
-\begin{proof}\label{prf:fsm}
-Let $\sigma = \{C, D\}$ and
-\[
-S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
-\delta((h_1, h_2), a) =()
-\]
-
-\end{proof}
 
 
 
