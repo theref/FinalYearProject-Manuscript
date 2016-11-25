@@ -61,11 +61,15 @@ In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that 
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and probe $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
 \end{definition}
 
-
+The fingerprint function can often be found quite easily (see Chapter \ref{cha:theory} for an example construction) however it is the plot of this function that is of interest.
+This is because an approximation of the plot can be found in cases where the analytical function would be too difficult or time consuming to compute.
 
 \begin{definition}\label{def:double-fingerprint}
 The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
 \end{definition}
+
+The double fingerprint allows us to extend the idea of a fingerprint over the full unit square.
+A unit square is preferable because it is more easily manipulated by a computer, is more easily viewed by humans, and uses paper more efficiently. %TODO, do we like this line
 
 \begin{definition}\label{def:dual}
 Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
@@ -117,7 +121,19 @@ It knows that Pavlov would play $D$ in this instance and so plays $C$.
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
-proof given in ~\cite{Ashlock2004}
+Proof from ~\cite{Ashlock2004}:
+\begin{proof}\label{prf:fingerprint-unit-square}
+The Markov chain for the dual strategy $A'$ will have the same transitions as the Morkov chain for the strategy $A$.
+However, each entry for $x$ corresponds to the probability that the strategy $J(A, x, y)$ will randomly choose $C$ when it would not normally do so.
+For strategy $A'$, this will occur whenever $J(A', x, y)$ does not randomly respond $D$, which has probability $1 - y$.
+
+Similarly, each $y$ corresponds to the probability that the strategy $J(A, x, y)$ will randomly choose $D$ when it would usually respond $C$.
+For strategy $A'$, this will occur whenever $J(A', x, y)$ does not randomly respond $C$, which has probability $1 - x$.
+
+Thus the Markov chain for $J(A', x, y)$ is the Markov chain for $J(A, x, y)$ with the mapping $(x, y) \rightarrow (1-y, 1-x)$.
+Therefore $F_{AA'}(S, x, y)$ extends to the remainder of the unit square the function given by $F_A(S, x, y)$. $\blacksquare$
+\end{proof}
+
 
 
 
