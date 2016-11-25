@@ -3,15 +3,17 @@
 \chapter{Introduction}\label{cha:introduction}
 
 The Prisoner's Dilemma (PD) is a classical model in Game Theory.
-It is a simple two player game where the agents must make a binary decision without communicating.
+It is a simple two player game where the agents must make a choice of two options without communicating.
 This is often presented as two suspects who have been arrested and are being interrogated separately.
 They have the option of whether to cooperate with each other or defect and each player receives an indivual payoff that depends on the actions that have been taken.
 
 Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
-Furthermore, allow this process to continue repeatadely. 
+Furthermore, allow this process to continue repeatadely.
 This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's ~\cite{Axelrod2016}.
+Every player in IPD will have a strategy.
+A strategy is a predetermined program of play that tells the player what actions to take in response to every possible strategy other players might use.
 
-Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 (use our paper for refs).
+Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 (use our paper for refs). %TODO
 Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
 The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-useable.
 
@@ -35,11 +37,11 @@ They receive payoffs as follows:
 Figure \ref{eq:payoff_matrix_symb} shows the payoff matrix.
 
 \begin{equation}\label{eq:payoff_matrix_symb}
-% 
+%
 P = \bordermatrix{~ & C & D \cr
                   C & (R, R) & (T, S) \cr
                   D & (S, T) & (P, P) \cr}
-% 
+%
 \end{equation}
 
 There are also two assumptions that need to be stated.
@@ -61,103 +63,38 @@ and
 
 Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
-These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references).
+These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
 We can now formulate the new payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
 A more detailed explanation of the Prisoner's Dilemma is given in ~\cite{Gotts2003}.
 
 \begin{equation}\label{eq:payoff_matrix}
-% 
+%
 P = \bordermatrix{~ & C & D \cr
                   C & (3, 3) & (5, 0) \cr
                   D & (0, 5) & (1, 1) \cr}
-% 
+%
 \end{equation}
 
 \section{Problem Description}
 
 As previously mentioned, the Axelrod-Python library contains 139 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments.
-This now raises the issue of duplication, and subsequently, how to tell the difference between strategies.
-Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure.
+This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
+Currently the only known approach to this problem in literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
 
 The issue with this method is that it relies on knowledge of the underlying markov chain of the strategy which cannot be easily constructed from the source code.
+In this paper an algorithm is presented that allows the construction of a fingerprint for any strategy.
+Example code is also given that shows how this has been implemented within the Axelrod library.
 
-More needed once we know what's actually gonna happen.
+%TODO - a new way of telling strategies apart...signiture?
 
 
 \section{Structure}
 This report is organized into several chapters. Continuing from this introduction:
 
 \begin{itemize}
-    \item Chapter \ref{cha:awesome_theorems_and_stuff}
-    
+    \item Chapter \ref{cha:literature} An overview of previous literature is given
+    \item Chapter \ref{cha:theory} an example analytical fingerprint is constructed
+    \item Chapter \ref{cha:results} example code, the algorith and comparison of fingerprints
     \item Chapter \ref{cha:conclusion}
 \end{itemize}
-
-
-
-
-
-
-
-
-
-
-\begin{tabular}{ l | l l l l l }
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
-\hline 
-0.0 & (C, C): (1.00, nan) & (C, C): (0.04, 0.00) & (C, C): (0.02, 0.00) & (C, C): (0.01, 0.00) & (C, C): (0.00, 0.00) \\ 
- & (C, D): (0.00, nan) & (C, D): (0.35, 0.36) & (C, D): (0.39, 0.38) & (C, D): (0.42, 0.42) & (C, D): (0.46, 0.45) \\ 
- & (D, C): (0.00, nan) & (D, C): (0.27, 0.29) & (D, C): (0.22, 0.23) & (D, C): (0.16, 0.17) & (D, C): (0.09, 0.09) \\ 
- & (D, D): (0.00, nan) & (D, D): (0.34, 0.36) & (D, D): (0.38, 0.38) & (D, D): (0.41, 0.42) & (D, D): (0.45, 0.45) \\ 
-\\
-0.2 & (C, C): (1.00, 1.00) & (C, C): (0.27, 0.25) & (C, C): (0.17, 0.15) & (C, C): (0.13, 0.12) & (C, C): (0.10, 0.10) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.24, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.24, 0.25) & (D, C): (0.22, 0.23) & (D, C): (0.17, 0.18) & (D, C): (0.10, 0.10) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.24, 0.25) & (D, D): (0.30, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.39, 0.40) \\ 
-\\ 
-0.4 & (C, C): (1.00, 1.00) & (C, C): (0.40, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.19, 0.20) & (C, C): (0.15, 0.18) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.18, 0.19) & (C, D): (0.25, 0.25) & (C, D): (0.31, 0.30) & (C, D): (0.34, 0.35) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.24, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.20, 0.20) & (D, C): (0.17, 0.12) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.18, 0.19) & (D, D): (0.25, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.33, 0.35) \\ 
-\\ 
-0.6 & (C, C): (1.00, 1.00) & (C, C): (0.45, 0.43) & (C, C): (0.30, 0.30) & (C, C): (0.25, 0.25) & (C, C): (0.21, 0.23) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.13, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.25, 0.25) & (C, D): (0.29, 0.31) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.30, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.26, 0.25) & (D, C): (0.22, 0.15) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.13, 0.14) & (D, D): (0.19, 0.20) & (D, D): (0.24, 0.25) & (D, D): (0.28, 0.31) \\ 
-\\
-0.8 & (C, C): (1.00, 1.00) & (C, C): (0.42, 0.40) & (C, C): (0.35, 0.29) & (C, C): (0.30, 0.25) & (C, C): (0.25, 0.25) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.09, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.21, 0.19) & (C, D): (0.25, 0.25) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.40, 0.40) & (D, C): (0.33, 0.43) & (D, C): (0.29, 0.38) & (D, C): (0.26, 0.25) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.09, 0.10) & (D, D): (0.15, 0.14) & (D, D): (0.21, 0.19) & (D, D): (0.24, 0.25) \\ 
-\end{tabular}
-
-\begin{tabular}{ l | l l l l l }
-& 0.0 & 0.2 & 0.4 & 0.6 & 0.8 \\ 
-\\
-0.0 & (C, C): (1.00, nan) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) & (C, C): (0.00, 0.00) \\ 
- & (C, D): (0.00, nan) & (C, D): (0.36, 0.36) & (C, D): (0.39, 0.38) & (C, D): (0.41, 0.42) & (C, D): (0.45, 0.45) \\ 
- & (D, C): (0.00, nan) & (D, C): (0.28, 0.29) & (D, C): (0.22, 0.23) & (D, C): (0.17, 0.17) & (D, C): (0.09, 0.09) \\ 
- & (D, D): (0.00, nan) & (D, D): (0.36, 0.36) & (D, D): (0.39, 0.38) & (D, D): (0.42, 0.42) & (D, D): (0.46, 0.45) \\ 
-\\
-0.2 & (C, C): (1.00, 1.00) & (C, C): (0.26, 0.25) & (C, C): (0.15, 0.15) & (C, C): (0.13, 0.12) & (C, C): (0.09, 0.10) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.25, 0.25) & (C, D): (0.31, 0.31) & (C, D): (0.35, 0.35) & (C, D): (0.40, 0.40) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.23, 0.23) & (D, C): (0.18, 0.18) & (D, C): (0.11, 0.10) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.25, 0.25) & (D, D): (0.31, 0.31) & (D, D): (0.35, 0.35) & (D, D): (0.40, 0.40) \\ 
-\\
-0.4 & (C, C): (1.00, 1.00) & (C, C): (0.38, 0.38) & (C, C): (0.22, 0.25) & (C, C): (0.20, 0.20) & (C, C): (0.16, 0.18) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.19, 0.19) & (C, D): (0.26, 0.25) & (C, D): (0.30, 0.30) & (C, D): (0.33, 0.35) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.25, 0.25) & (D, C): (0.27, 0.25) & (D, C): (0.20, 0.20) & (D, C): (0.18, 0.12) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.19, 0.19) & (D, D): (0.26, 0.25) & (D, D): (0.30, 0.30) & (D, D): (0.33, 0.35) \\ 
-\\
-0.6 & (C, C): (1.00, 1.00) & (C, C): (0.42, 0.43) & (C, C): (0.30, 0.30) & (C, C): (0.26, 0.25) & (C, C): (0.21, 0.23) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.14, 0.14) & (C, D): (0.20, 0.20) & (C, D): (0.25, 0.25) & (C, D): (0.29, 0.31) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.31, 0.29) & (D, C): (0.31, 0.30) & (D, C): (0.24, 0.25) & (D, C): (0.22, 0.15) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.14, 0.14) & (D, D): (0.20, 0.20) & (D, D): (0.25, 0.25) & (D, D): (0.29, 0.31) \\ 
-\\ 
-0.8 & (C, C): (1.00, 1.00) & (C, C): (0.40, 0.40) & (C, C): (0.32, 0.29) & (C, C): (0.30, 0.25) & (C, C): (0.26, 0.25) \\ 
- & (C, D): (0.00, 0.00) & (C, D): (0.10, 0.10) & (C, D): (0.16, 0.14) & (C, D): (0.21, 0.19) & (C, D): (0.25, 0.25) \\ 
- & (D, C): (0.00, 0.00) & (D, C): (0.40, 0.40) & (D, C): (0.36, 0.43) & (D, C): (0.27, 0.38) & (D, C): (0.24, 0.25) \\ 
- & (D, D): (0.00, 0.00) & (D, D): (0.10, 0.10) & (D, D): (0.16, 0.14) & (D, D): (0.21, 0.19) & (D, D): (0.25, 0.25) \\ 
-\end{tabular}
-
 
