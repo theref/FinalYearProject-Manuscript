@@ -10,15 +10,14 @@ Finally, an introduction to fingerprinting and some necessary defenitions and th
 
 \section{Background}
 
-The political scientist Robert Axelrod held the first IPD tournament in 1980.
+The political scientist Robert Axelrod held the first IPD tournament in 1980 \cite{Axelrod1980a}.
 Many well-known game theorists were invited to submit strategies that would compete against each other in a round robin style format.
 All strategies also competed against a random strategy (that would randomly choose between $C$ and $D$) and a copy of themselves.
 All strategies knew that the length of each game was 200 moves, and the whole tournamtent was repeated 5 times for reliability.
-Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the
-University of Toronto.
+Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
 
 TitForTat is a very simple strategy that begins by playing $C$ and then plays the same move as it opponent did on the previous turn.
-As explained in ~\cite{Axelrod1980}, TitForTat won because of three defining characteristics:
+As explained in \cite{Axelrod1980b}, TitForTat won because of three defining characteristics:
 
 \begin{itemize}
     \item 'Niceness' - A strategy is said to be nice if it is not the first to defect.
@@ -26,13 +25,21 @@ As explained in ~\cite{Axelrod1980}, TitForTat won because of three defining cha
     \item 'Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
 \end{itemize}
 
+Axelrod's second tournament was a dramatic improvement in terms of size, 62 strategies were entered from 6 different countries.
+The contestants ranged from a 10-year-old computer hobbyist to professors of computer science, economics, psychology, mathematics, sociology, political science and evolutionary biology.
+The countries represented were the United States, Canada, Great Britain, Norway, Switzerland, and New Zealand.
+Despite the fact that all contestants had full knowledge of the previous tournament, TitForTat was the overall winner once again.
+One large difference in the mechanics of the first and second tournament was that the second tournament did not specify how many moves a game would last.
+Instead, the game ended probabilistically with a 0.00346 chance of finishing on any given move.
+This parameter was chosen so that the median length of a game would be 200 moves (and match the first tournament).
+
 \begin{table}[htbp]
 \centering
 \begin{tabular}{c c c c}
 Year & Reference & Number of Strategies & Type\\
 \hline
-1979 & & 13 & Standard\\
-1979 & & 64 & Standard\\
+1979 & \cite{Axelrod1980a} & 13 & Standard\\
+1979 & \cite{Axelrod1980b} & 64 & Standard\\
 1984 & & 64 & Evolutionary\\
 1991 & & 13 & Noisy\\
 2005 & & 223 & Varied\\
