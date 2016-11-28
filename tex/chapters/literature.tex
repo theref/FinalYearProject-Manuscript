@@ -2,13 +2,29 @@
 
 \chapter{Literature Review}\label{cha:literature_review}
 
+Prisoner's Dilemma is a very popular problem in game theory and there have been many papers written about the subject.
+In this chapter a brief overview of the available literature will be given and particularly relevant work will be highlighted.
+This is followed by an outline of how Axelrod's work is currently being reproduced by an open-source community.
+Finally, an introduction to fingerprinting and some necessary defenitions and theorems are given at the end of the chapter.
+
+
 \section{Background}
 
-- Explain Prisoner's Dilemma
+The political scientist Robert Axelrod held the first IPD tournament in 1980.
+Many well-known game theorists were invited to submit strategies that would compete against each other in a round robin style format.
+All strategies also competed against a random strategy (that would randomly choose between $C$ and $D$) and a copy of themselves.
+All strategies knew that the length of each game was 200 moves, and the whole tournamtent was repeated 5 times for reliability.
+Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the
+University of Toronto.
 
-- Axelrod's original tournament
+TitForTat is a very simple strategy that begins by playing $C$ and then plays the same move as it opponent did on the previous turn.
+As explained in ~\cite{Axelrod1980}, TitForTat won because of three defining characteristics:
 
-- Work to reproduce Axelrod's tournament ~\cite{Knight2016}
+\begin{itemize}
+    \item 'Niceness' - A strategy is said to be nice if it is not the first to defect.
+    \item 'Provocability' - Immediately after an opponent defects, the strategy should defect in retaliation.
+    \item 'Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
+\end{itemize}
 
 \begin{table}[htbp]
 \centering
@@ -26,6 +42,12 @@ Year & Reference & Number of Strategies & Type\\
 \label{tab:tournament_refs}
 \caption{An overview of published tournaments}
 \end{table}
+
+\section{Axelrod Python Library}
+
+- Work to reproduce Axelrod's tournament ~\cite{Knight2016}
+
+
 
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
 psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
