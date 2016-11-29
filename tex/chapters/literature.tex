@@ -8,7 +8,7 @@ This is followed by an outline of how Axelrod's work is currently being reproduc
 Finally, an introduction to fingerprinting and some necessary defenitions and theorems are given at the end of the chapter.
 
 
-\section{Background}
+\section{Background}\label{sec:axelrodoriginal}
 
 The political scientist Robert Axelrod held the first IPD tournament in 1980 \cite{Axelrod1980a}.
 Many well-known game theorists were invited to submit strategies that would compete against each other in a round robin style format.
@@ -20,9 +20,9 @@ TitForTat is a very simple strategy that begins by playing $C$ and then plays th
 As explained in \cite{Axelrod1980b}, TitForTat won because of three defining characteristics:
 
 \begin{itemize}
-    \item 'Niceness' - A strategy is said to be nice if it is not the first to defect.
-    \item 'Provocability' - Immediately after an opponent defects, the strategy should defect in retaliation.
-    \item 'Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
+    \item `Niceness' - A strategy is said to be nice if it is not the first to defect.
+    \item `Provocability' - Immediately after an opponent defects, the strategy should defect in retaliation.
+    \item `Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
 \end{itemize}
 
 Axelrod's second tournament was a dramatic improvement in terms of size, 62 strategies were entered from 6 different countries.
@@ -31,7 +31,7 @@ The countries represented were the United States, Canada, Great Britain, Norway,
 Despite the fact that all contestants had full knowledge of the previous tournament, TitForTat was the overall winner once again.
 One large difference in the mechanics of the first and second tournament was that the second tournament did not specify how many moves a game would last.
 Instead, the game ended probabilistically with a 0.00346 chance of finishing on any given move.
-This parameter was chosen so that the median length of a game would be 200 moves (and match the first tournament).
+This parameter was chosen so that the median length of a game would be 200 moves (in line with the first tournament).
 
 \begin{table}[htbp]
 \centering
@@ -50,9 +50,18 @@ Year & Reference & Number of Strategies & Type\\
 \caption{An overview of published tournaments}
 \end{table}
 
-\section{Axelrod Python Library}
+\section{Axelrod-Python Library}
 
-- Work to reproduce Axelrod's tournament ~\cite{Knight2016}
+The Axelrod-Python library \cite{axelrodproject} is an open source Python package for creating reproducable research into Prisoner's Dilemma.
+The original aim was to recreate Axelrod's tournaments as described in section \ref{sec:axelrodoriginal} and verify their results.
+For many of the tournaments that have been described the orignal source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
+
+The Axelrod-Python is equipped with an extensive tests suite and all code is comprehensively documented.
+The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
+In total the library now consists of 147 strategies (at the time of writing) including classical ones from the literature and and some exciting original contributions.
+It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
+The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
+
 
 
 
@@ -94,7 +103,7 @@ The fingerprint function can often be found quite easily (see Chapter \ref{cha:t
 This is because an approximation of the plot can be found in cases where the analytical function would be too difficult or time consuming to compute.
 
 \begin{definition}\label{def:double-fingerprint}
-The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
+The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $\JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
 \end{definition}
 
 The double fingerprint allows us to extend the idea of a fingerprint over the full unit square.
@@ -150,25 +159,32 @@ It knows that Pavlov would play $D$ in this instance and so plays $C$.
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
-Proof from ~\cite{Ashlock2004}:
+A proof for this theorem will now be given which was first presented in \cite{Ashlock2004}:
 \begin{proof}\label{prf:fingerprint-unit-square}
 The Markov chain for the dual strategy $A'$ will have the same transitions as the Morkov chain for the strategy $A$.
-However, each entry for $x$ corresponds to the probability that the strategy $J(A, x, y)$ will randomly choose $C$ when it would not normally do so.
-For strategy $A'$, this will occur whenever $J(A', x, y)$ does not randomly respond $D$, which has probability $1 - y$.
+However, each entry for $x$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose $C$ when it would not normally do so.
+For strategy $A'$, this will occur whenever $\JA(A', x, y)$ does not randomly respond $D$, which has probability $1 - y$.
 
-Similarly, each $y$ corresponds to the probability that the strategy $J(A, x, y)$ will randomly choose $D$ when it would usually respond $C$.
-For strategy $A'$, this will occur whenever $J(A', x, y)$ does not randomly respond $C$, which has probability $1 - x$.
+Similarly, each $y$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose $D$ when it would usually respond $C$.
+For strategy $A'$, this will occur whenever $\JA(A', x, y)$ does not randomly respond $C$, which has probability $1 - x$.
 
-Thus the Markov chain for $J(A', x, y)$ is the Markov chain for $J(A, x, y)$ with the mapping $(x, y) \rightarrow (1-y, 1-x)$.
+Thus the Markov chain for $\JA(A', x, y)$ is the Markov chain for $\JA(A, x, y)$ with the mapping $(x, y) \rightarrow (1-y, 1-x)$.
 Therefore $F_{AA'}(S, x, y)$ extends to the remainder of the unit square the function given by $F_A(S, x, y)$. $\blacksquare$
 \end{proof}
 
+Theorem \ref{thm:fingerprint-unit-square} allows the fingerprint function to naturally extend over the unit square.
+Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left} region of the plot, the strategy plays against $\JA(A, x, y)$ and in the \textcolor{sol-cyan}{top right} region it plays against $\JA(A', 1-y, 1-x)$.
+
+\begin{figure}[!hbtp]
+    \begin{center}
+        \includestandalone{../img/Dual}
+        \caption{Whether the Strategy is probed by the Dual or not}\label{fig:DualProbe}
+    \end{center}
+\end{figure}
 
 
 
 
-
-
-
+\solarizedPalette
 
 

@@ -92,8 +92,14 @@ In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majo
   \item Note - the strategy shown is technically Soft Majority, if the opponents cooperations and defections are equal it will cooperate. Hard Majority would defect in this situation.
 \end{itemize}
 
-This implies that the strategy Majority requires knowledge of all previous states, and therefore could not be represented as an FSM.
-However in Theorem \ref{thm:fsm} it is shown that if the number of turns in a game is known, any strategy can be represented as an FSM. A formal defintion of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modeled with a FSM:
+This implies that the strategy Majority requires knowledge of all previous states, and therefore could not be represented as a FSM.
+However in Theorem \ref{thm:fsm} it is stated that if the number of turns in a game is known, any strategy can be represented as an FSM.
+This will be proved in two different ways:
+\begin{itemize}
+  \item Firstly, by extending the definition of an
+  \item If the opponent has defected the majority of the time, Majority will defect
+\end{itemize}
+A formal defintion of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modeled with a FSM:
 
 \begin{itemize}
  \item The system must be describable by a finite set of states.

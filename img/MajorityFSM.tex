@@ -42,8 +42,8 @@
     \draw (3DDD) edge[out=20, in=-160, ->, thick] node [above] {$C$} (4CDDD);
     \draw (3DDD) edge[out=-20, in=160, ->, thick] node [below] {$D$} (4DDDD);
 
-    \draw [dashed, line width=1mm, red, opacity=.3] ($(1C) + (-.5,-1.5)$) rectangle ($(4CCCC) + (1,0.5)$);
-    \node (label) at ($(1C) + (3,3)$) [draw=red] {States where Majority would Cooperate};
-    \draw [dashed, line width=1mm, blue, opacity=.3] ($(1D) + (-.5,0.5)$) rectangle ($(4DDDD) + (1,-.5)$);
-    \node (label) at ($(1D) + (3,-3)$) [draw=blue] {States where Majority would Defect};
+    \draw [dashed, line width=1mm, sol-red, opacity=.3] ($(1C) + (-.5,-1.5)$) rectangle ($(4CCCC) + (1,0.5)$);
+    \node (label) at ($(1C) + (3,3)$) [draw=sol-red] {States where Majority would Cooperate};
+    \draw [dashed, line width=1mm, sol-blue, opacity=.3] ($(1D) + (-.5,0.5)$) rectangle ($(4DDDD) + (1,-.5)$);
+    \node (label) at ($(1D) + (3,-3)$) [draw=sol-blue] {States where Majority would Defect};
 \end{tikzpicture}
