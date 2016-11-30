@@ -14,6 +14,8 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usepackage{minted}
+% \usemintedstyle{solarizedlight}
 
 % Package to get hyperrlinks
 \usepackage{hyperref}
@@ -34,4 +36,8 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proof}{Proof}
+
+\newminted[SourceCode]{python}{linenos=true, mathescape, style=solarizedlight, bgcolor=sol-base3}
+\newminted[ExampleCode]{python}{linenos=true, mathescape, style=solarizeddark, bgcolor=sol-base03}
+
 

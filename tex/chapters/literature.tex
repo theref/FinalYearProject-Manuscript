@@ -62,8 +62,93 @@ In total the library now consists of 147 strategies (at the time of writing) inc
 It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
 The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
 
+An example implementation of a strategy and a demonstration of using the library will now be given, followed by examples of some of the many plots the library can produce.
+The source code for TitForTat is shown in \ref{lst:TFT}.
 
+\begin{listing}[htbp]
+\begin{SourceCode}
+class TitForTat(Player):
+    """
+    A player starts by cooperating and then mimics the previous action of the
+    opponent.
 
+    Note that the code for this strategy is written in a fairly verbose
+    way. This is done so that it can serve as an example strategy for
+    those who might be new to Python.
+
+    Names:
+
+    - Rapoport's strategy: [Axelrod1980]_
+    - TitForTat: [Axelrod1980]_
+    """
+
+    # These are various properties for the strategy
+    name = 'Tit For Tat'
+    classifier = {
+        'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
+        'stochastic': False,
+        'makes_use_of': set(),
+        'long_run_time': False,
+        'inspects_source': False,
+        'manipulates_source': False,
+        'manipulates_state': False
+    }
+
+    def strategy(self, opponent):
+        """This is the actual strategy"""
+        # First move
+        if not self.history:
+            return C
+        # React to the opponent's last move
+        if opponent.history[-1] == D:
+            return D
+        return C
+\end{SourceCode}
+\caption{Source code for TitForTat}
+\label{lst:TFT}
+\end{listing}
+
+\begin{listing}[htbp]
+\begin{ExampleCode}
+class TitForTat(Player):
+    """
+    A player starts by cooperating and then mimics the previous action of the
+    opponent.
+
+    Note that the code for this strategy is written in a fairly verbose
+    way. This is done so that it can serve as an example strategy for
+    those who might be new to Python.
+
+    Names:
+
+    - Rapoport's strategy: [Axelrod1980]_
+    - TitForTat: [Axelrod1980]_
+    """
+
+    # These are various properties for the strategy
+    name = 'Tit For Tat'
+    classifier = {
+        'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
+        'stochastic': False,
+        'makes_use_of': set(),
+        'long_run_time': False,
+        'inspects_source': False,
+        'manipulates_source': False,
+        'manipulates_state': False
+    }
+
+    def strategy(self, opponent):
+        """This is the actual strategy"""
+        # First move
+        if not self.history:
+            return C
+        # React to the opponent's last move
+        if opponent.history[-1] == D:
+            return D
+        return C
+\end{ExampleCode}
+\caption{Source code for TitForTat}
+\end{listing}
 
 is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
 psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
