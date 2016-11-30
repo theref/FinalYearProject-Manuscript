@@ -1,6 +1,6 @@
 *.DS_Store
 *checkpoint.ipynb
-
+tex/_minted-main/*
 *.aux
 *.glo
 *.idx
