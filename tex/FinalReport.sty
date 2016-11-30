@@ -8,11 +8,14 @@
 
 % A package to include graphics files (jpg, png, eps, pdf etc...)
 \usepackage{graphicx}
-
+\usepackage[prefix=sol-]{xcolor-solarized}
 % Some basic packages that are almost standad
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usepackage{minted}
+% \usemintedstyle{solarizedlight}
 
 % Package to get hyperrlinks
 \usepackage{hyperref}
@@ -27,3 +30,14 @@
 % A package to generate latin. You do not need this: I am just using it to get
 % random text.
 \usepackage{lipsum}
+
+\newcommand{\JA}{\text{JA}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proof}{Proof}
+
+\newminted[SourceCode]{python}{linenos=true, mathescape, style=solarizedlight, bgcolor=sol-base3}
+\newminted[ExampleCode]{python}{linenos=true, mathescape, style=solarizeddark, bgcolor=sol-base03}
+
+
