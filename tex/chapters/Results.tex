@@ -7,23 +7,22 @@ This includes the addition of two strategy transformers, the Dual and JossAnn as
 Then several results will be presented where analytical fingerprints are compared with analytical ones.
 A discussion that compares different fingerprints of strategies within Axelrod-Python will also be given.
 
-\section{The Dual}{}
+\section{The Dual}
+The dual of a strategy is defined such that when when the original strategy and the dual are presented with identical histories they will return opposite actions.
+This can be achieved by having the original strategy as an attribute of the dual.
+Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should be made, and then flip that action.
 
+\IncMargin{1.5em}
 \begin{algorithm}[H]
- \KwData{this text}
- \KwResult{how to write algorithm with \LaTeX2e }{}
- initialization\;
- \While{not at end of this document}{
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
- \caption{How to write algorithms}
-\end{algorithm}
+ \KwData{A strategy}
+ \KwResult{The d of the strategy}{}
+  \If{First Turn}{
+   create copy of original strategy\;}
+  simulate original strategy\;
+  update original strategy's history/internal state\;
+  \Return{Flip of original strategy's move}
+ \caption{The Dual of a Strategy}
+\end{algorithm}\DecMargin{1.5em}
 
 \section{Comparison of Analytical and Numerical Plots}
 
