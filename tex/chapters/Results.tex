@@ -9,8 +9,8 @@ A discussion that compares different fingerprints of strategies within Axelrod-P
 
 \section{The Dual}
 The dual of a strategy is defined such that when when the original strategy and the dual are presented with identical histories they will return opposite actions.
-This can be achieved by having the original strategy as an attribute of the dual.
-Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should be made, and then flip that action.
+This relies on knowledge of how the original strategy would have behaved in a given situation, would be impractical to infer from the source code, however, the required behaviour can be achieved by having the original strategy as an attribute of the dual.
+Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should it would have made, and then flip that action.
 
 \IncMargin{1.5em}
 \begin{algorithm}[H]
@@ -26,3 +26,11 @@ Whenever the dual has to submit a move, it can first get the original strategy t
 
 \section{Comparison of Analytical and Numerical Plots}
 
+In figure , several analytical fingerprints from previous literature are shown. %TODO - figure ref, paper ref
+Colourings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
+The popular plotting library matplotlib has many options for different colour maps which are demonstrated in Appendix . %TODO
+
+Using the analytical fingerprints from previous literature, and the fingerprint formulae provided alongside them, the most appropriate colour map was chosen.
+The colour map Seismic was selected due to its divergent properties (although all colour maps are available within the library).
+With divergent colour maps, all extreme values (high or low) are coloured, whilst mid range values are left white.
+This highlights areas of interest, and in Figure it can be seen that this matches previous work very well.
