@@ -50,3 +50,25 @@ This highlights areas of interest, and in Figure \ref{fig:WSLS-ashlock-compariso
 \caption{A comparison of a fingerprint plot from previous literature to asses the suitability of the Seismic colour map}
 \label{fig:WSLS-ashlock-comparison}
 \end{figure}
+
+With the knowledge that the choice of colourmap is appropriate, a comparison can now be made between analytical fingerprints and numerical ones obtained via the Axelrod-Python library.
+Table gives the fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{2}
+\setlength{\tabcolsep}{12pt}
+\begin{tabular}{l l}
+\toprule
+Strategy & Analytical Fingerprint Function\\
+\midrule
+TitForTat &  $\displaystyle \frac{y^2 + 5xy + 3x^2}{(x + y)^2} $\\
+Psycho (Anti TitForTat& $\displaystyle \frac{4(y-1)(x-1) + 5(y-1)^2}{2(y-1)(x-1) + (x-1)^2 + (y-1)^2} $ \\
+WinStayLoseShit (Pavlov) & $\displaystyle \frac{(3x+y)(x-1) + 5y(y-1)}{(x+2y)(x-1) + y(y-1)} $\\
+AllC (Cooperator) & $\displaystyle 3 - 3y $ \\
+AllD (Defector) & $\displaystyle 4x + 1 $\\
+\bottomrule
+\end{tabular}
+\label{tab:fingerprint-functions}
+\caption{A selection of exact fingerprint functions for well known strategies. The probe used is TitForTat.}
+\end{table}
