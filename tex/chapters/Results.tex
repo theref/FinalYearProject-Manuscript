@@ -24,12 +24,82 @@ Whenever the dual has to submit a move, it can first get the original strategy t
  \caption{The Dual of a Strategy}
 \end{algorithm}\DecMargin{1.5em}
 
-\section{Fingerprint}\label{sec:fingerprint-implementation}
+\section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
-fingerprint is just expected score against Joss Ann.
-take a sample of x,y values, then play the strategy against the joss ann for a long time and take the average score per turn to estimate expected score.
-Do this for lots of x,y and then plot the result, should get the same.
-talk about turns, repetitions and step size.
+As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters. %TODO reference definition
+An approximation to this has been implemented within the Axelrod-Python library.
+It begins by taking a sample of the $x,y$ values that may define the Joss-Ann Transformer.
+The strategy then plays a match against the a transformer with each of the sampled values.
+The average score per turn can be calculated at the end of each match which corresponds to the expected score required by the exact fingerprint function.
+The whole process can be repeated for reliability and the resulting scores plotted.
+
+Whether the numerical fingerprint matches the analytical one relies heavily on the choice of parameters.
+The number of $x,y$ values taken is determined by the \mintinline{python}{step} variable.
+
+\begin{listing}[hbtp!]
+\begin{SourceCode}
+def create_points(step):
+    """Creates a set of Points over the unit square.
+    A Point has coordinates (x, y). This function constructs points that are
+    separated by a step equal to `step`. The points are over the unit
+    square which implies that the number created will be (1/`step` + 1)^2.
+    Parameters
+    ----------
+    step : float
+        The separation between each Point. Smaller steps will produce more
+        Points with coordinates that will be closer together.
+    Returns
+    ----------
+    points : list
+        of Point objects with coordinates (x, y)
+    """
+    num = int((1 / step) // 1) + 1
+    points = [Point(j, k) for j in np.linspace(0, 1, num)
+              for k in np.linspace(0, 1, num)]
+
+    return points
+\end{SourceCode}
+\caption{Axelrod-Python code to create a sample of $x,y$ points}
+\label{lst:create-points}
+\end{listing}
+
+\begin{listing}[hbtp!]
+\begin{SourceCode}
+def fingerprint(self, turns=50, repetitions=10, step=0.01, processes=None,
+                filename=None, in_memory=False, progress_bar=True):
+    """Build and play the spatial tournament.
+
+    Creates the probes and their edges then builds a spatial tournament.
+    When the coordinates of the probe sum to more than 1, the dual of the
+    probe is taken instead and then the Joss-Ann Transformer is applied. If
+    the coordinates sum to less than 1 (or equal), then only the Joss-Ann is
+    applied, a dual is not required.
+
+    Parameters
+    ----------
+    turns : integer, optional
+        The number of turns per match
+    repetitions : integer, optional
+        The number of times the round robin should be repeated
+    step : float, optional
+        The separation between each Point. Smaller steps will
+        produce more Points that will be closer together.
+    processes : integer, optional
+        The number of processes to be used for parallel processing
+    progress_bar : bool
+        Whether or not to create a progress bar which will be updated
+
+    Returns
+    ----------
+    self.data : dictionary
+        A dictionary where the keys are coordinates of the form (x, y) and
+        the values are the mean score for the corresponding interactions.
+    """
+\end{SourceCode}
+\caption{Axelrod-Python docstring for the fingerprint function}
+\label{lst:fingerprint-docstring}
+\end{listing}
+
 
 \section{Comparison of Analytical and Numerical Plots}
 
