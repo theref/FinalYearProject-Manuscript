@@ -24,6 +24,13 @@ Whenever the dual has to submit a move, it can first get the original strategy t
  \caption{The Dual of a Strategy}
 \end{algorithm}\DecMargin{1.5em}
 
+\section{Fingerprint}\label{cha:fingerprint-implementation}
+
+fingerprint is just expected score against Joss Ann.
+take a sample of x,y values, then play the strategy against the joss ann for a long time and take the average score per turn to estimate expected score.
+Do this for lots of x,y and then plot the result, should get the same.
+talk about turns, repetitions and step size.
+
 \section{Comparison of Analytical and Numerical Plots}
 
 In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from previous literature are shown \cite{Ashlock2004}.
@@ -52,7 +59,7 @@ This highlights areas of interest, and in Figure \ref{fig:WSLS-ashlock-compariso
 \end{figure}
 
 With the knowledge that the choice of colourmap is appropriate, a comparison can now be made between analytical fingerprints and numerical ones obtained via the Axelrod-Python library.
-Table gives the fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
+Table \ref{tab:fingerprint-functions} gives the exact fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
 
 \begin{table}[htbp]
 \centering
@@ -69,6 +76,40 @@ AllC (Cooperator) & $\displaystyle 3 - 3y $ \\
 AllD (Defector) & $\displaystyle 4x + 1 $\\
 \bottomrule
 \end{tabular}
-\label{tab:fingerprint-functions}
 \caption{A selection of exact fingerprint functions for well known strategies. The probe used is TitForTat.}
+\label{tab:fingerprint-functions}
 \end{table}
+
+Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison} \ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} \ref{fig:Defector-comparison} compare plots of known exact fingerprint functions with analytical approximations obtained with the Axelrod-Python library.
+The analytical plots were created with the code seen in Listing
+
+\begin{figure}[htbp!]
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/TFT-Analytical.pdf}}
+% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\caption{A comparison of the analytical fingerprint of TitForTat and the numerical version produced by Axelrod-Python library.}
+\label{fig:TFT-comparison}
+\end{figure}
+\begin{figure}[htbp!]
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Psycho-Analytical.pdf}}
+% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\caption{A comparison of the analytical fingerprint of Psycho and the numerical version produced by Axelrod-Python library.}
+\label{fig:Psycho-comparison}
+\end{figure}
+\begin{figure}[htbp!]
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/WSLS-Analytical.pdf}}
+% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\caption{A comparison of the analytical fingerprint of WinStayLoseShit and the numerical version produced by Axelrod-Python library.}
+\label{fig:WSLS-comparison}
+\end{figure}
+\begin{figure}[htbp!]
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllC-Analytical.pdf}}
+% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\caption{A comparison of the analytical fingerprint of Cooperator and the numerical version produced by Axelrod-Python library.}
+\label{fig:Cooperator-comparison}
+\end{figure}
+\begin{figure}[htbp!]
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllD-Analytical.pdf}}
+% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\caption{A comparison of the analytical fingerprint of Defector and the numerical version produced by Axelrod-Python library.}
+\label{fig:Defector-comparison}
+\end{figure}
