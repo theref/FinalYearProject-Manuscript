@@ -24,7 +24,7 @@ Whenever the dual has to submit a move, it can first get the original strategy t
  \caption{The Dual of a Strategy}
 \end{algorithm}\DecMargin{1.5em}
 
-\section{Fingerprint}\label{cha:fingerprint-implementation}
+\section{Fingerprint}\label{sec:fingerprint-implementation}
 
 fingerprint is just expected score against Joss Ann.
 take a sample of x,y values, then play the strategy against the joss ann for a long time and take the average score per turn to estimate expected score.
@@ -81,7 +81,25 @@ AllD (Defector) & $\displaystyle 4x + 1 $\\
 \end{table}
 
 Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison} \ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} \ref{fig:Defector-comparison} compare plots of known exact fingerprint functions with analytical approximations obtained with the Axelrod-Python library.
-The analytical plots were created with the code seen in Listing
+The analytical plots were created with the code seen in listing \ref{lst:create-several-fingerprints}.
+The parameters \mintinline{python}{turns=500, repetitions=200, step=0.01} are as described in section \ref{sec:fingerprint-implementation}.
+The parameter \mintinline{python}{processes=0} ensures that the function will use the maximum number of cores available on the computer.
+
+\begin{listing}[hbtp!]
+\begin{ExampleCode}
+import axelrod as axl
+strats = [axl.TitForTat, axl.WinStayLoseShift, axl.AntiTitForTat,
+          axl.Cooperator, axl.Defector]
+for s in strats:
+    probe = axl.TitForTat
+    af = axl.AshlockFingerprint(s, probe)
+    data = af.fingerprint(turns=500, repetitions=200, step=0.01, processes=0)
+    p = af.plot()
+    p.savefig('{}-Numerical.pdf'.format(s.name))
+\end{ExampleCode}
+\caption{Code to create the numerical plots for several strategies}
+\label{lst:create-several-fingerprints}
+\end{listing}
 
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/TFT-Analytical.pdf}}
