@@ -47,7 +47,7 @@ Whether the numerical fingerprint matches the analytical one relies heavily on t
 Specifically the \mintinline{python}{turns, repetetitons} and \mintinline{python}{step} variables.
 The \mintinline{python}{step} variable determines the number of $x,y$ values taken.
 Listing \ref{lst:create-points} shows how a grid of points is constructed over the unit square where the distance between each point is taken as \mintinline{python}{step}.
-Therefore, a smaller \mintinline{python}{step} variable means more points are created and so greater detail is included in the plot (similar to pixels).
+Therefore, a smaller \mintinline{python}{step} value means more points are created and so greater detail is included in the plot (similar to pixels).
 
 \begin{listing}[hbtp!]
 \begin{SourceCode}
@@ -80,7 +80,7 @@ The \mintinline{python}{turns} variable determines how many interactions there w
 Enough turns must be selected to ensure that steady long term behaviour is reached otherwise the average score per turn can be wildly innacurate.
 However, once this state is reached, extending the number of turns has a minimal effect on the accuracy of the plot.
 The \mintinline{python}{repetitions} variable decides how many times the tournament would be repeated.
-Fingerprinting is a random process and high repetitions helps to reduce the effects of this.
+The Axelrod-Python implementation of fingerprinting is a random process (due to the Joss-Ann) and high repetitions helps to reduce the effects of this.
 
 \begin{listing}[hbtp!]
 \begin{SourceCode}
@@ -123,8 +123,8 @@ def fingerprint(self, turns=50, repetitions=10, step=0.01, processes=None,
 \section{Comparison of Analytical and Numerical Plots}
 
 In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from previous literature are shown \cite{Ashlock2004}.
-Colourings and shadings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
-The popular plotting library matplotlib has many options for different colour maps which are demonstrated in Appendix . %TODO
+Colourings or shadings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
+The popular plotting library, matplotlib, has many options for different colour maps which are demonstrated in Appendix . %TODO - appendix reference
 
 \begin{figure}[hbtp!]
     \begin{center}
@@ -192,31 +192,31 @@ for s in strats:
 
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/TFT-Analytical.pdf}}
-% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
 \caption{A comparison of the analytical fingerprint of TitForTat and the numerical version produced by Axelrod-Python library.}
 \label{fig:TFT-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Psycho-Analytical.pdf}}
-% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/AntiTitForTat.pdf}}
 \caption{A comparison of the analytical fingerprint of Psycho and the numerical version produced by Axelrod-Python library.}
 \label{fig:Psycho-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/WSLS-Analytical.pdf}}
-% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Win-Stay-Lose-Shift.pdf}}
 \caption{A comparison of the analytical fingerprint of WinStayLoseShit and the numerical version produced by Axelrod-Python library.}
 \label{fig:WSLS-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllC-Analytical.pdf}}
-% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cooperator.pdf}}
 \caption{A comparison of the analytical fingerprint of Cooperator and the numerical version produced by Axelrod-Python library.}
 \label{fig:Cooperator-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllD-Analytical.pdf}}
-% \subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Defector.pdf}}
 \caption{A comparison of the analytical fingerprint of Defector and the numerical version produced by Axelrod-Python library.}
 \label{fig:Defector-comparison}
 \end{figure}
