@@ -3,7 +3,7 @@
 \chapter{Results}\label{cha:results}
 
 In this chapter, the implementation of a fingerprint function within the Axelrod-Python library will be examined.
-This includes the addition of two strategy transformers, the Dual and JossAnn as defined in \ref{}. %TODO
+This includes the addition of two strategy transformers, the Dual and JossAnn as defined in . %TODO - ref definitions
 Then several results will be presented where analytical fingerprints are compared with analytical ones.
 A discussion that compares different fingerprints of strategies within Axelrod-Python will also be given.
 
@@ -30,7 +30,7 @@ As defined in section a fingerprint function is merely the expected score of a s
 An approximation to this has been implemented within the Axelrod-Python library.
 It begins by taking a sample of the $x,y$ values that may define the Joss-Ann Transformer.
 The strategy then plays a match against the a transformer with each of the sampled values.
-The average score per turn can be calculated at the end of each match which corresponds to the expected score required by the exact fingerprint function.
+The average score per turn can be calculated at the end of each match which corresponds to the expected score required by the analytical fingerprint function.
 The whole process can be repeated for reliability and the resulting scores plotted.
 This method has been modelled as a spatial tournament within Axelrod-Python, where the strategy plays all of the probes and a probe only plays the strategy.
 For an example with 9 probes, see Figure \ref{fig:spatialtourn}.
@@ -122,7 +122,7 @@ def fingerprint(self, turns=50, repetitions=10, step=0.01, processes=None,
 
 \section{Comparison of Analytical and Numerical Plots}
 
-In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from previous literature are shown \cite{Ashlock2004}.
+In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from previous literature are shown \cite{Ashlock2004, Ashlock2008}.
 Colourings or shadings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
 The popular plotting library, matplotlib, has many options for different colour maps which are demonstrated in Appendix . %TODO - appendix reference
 
@@ -130,7 +130,7 @@ The popular plotting library, matplotlib, has many options for different colour 
     \begin{center}
         \includegraphics[width = 0.6\textwidth]{../img/MultipleFingerprintsAshlock}
     \end{center}
-    \caption{Shaded plots of the fingerprint functions for the strategies TitForTat, Psycho, AllD and AllC, in reading order.}
+    \caption{Shaded plots of the fingerprint functions for the strategies TitForTat, Psycho, AllD and AllC, in reading order from \cite{Ashlock2004}}
     \label{fig:ashlock-fingerprints}
 \end{figure}
 
@@ -141,16 +141,16 @@ This highlights areas of interest, and in Figure \ref{fig:WSLS-ashlock-compariso
 
 \begin{figure}[hbtp!]
 \centering
-\subfloat[WSLS fingerprint from previous literature]{\includegraphics[width = 0.4\textwidth]{../img/WSLS-Ashlock}}
+\subfloat[WSLS fingerprint from previous literature \cite{Ashlock2008}]{\includegraphics[width = 0.4\textwidth]{../img/WSLS-Ashlock}}
 \subfloat[Analytical WSLS fingerprint demonstrating Seismic colouring]{\includegraphics[width = 0.7\textwidth]{../img/WSLS-Analytical}}
-\caption{A comparison of a fingerprint plot from previous literature to asses the suitability of the Seismic colour map}
+\caption{A comparison of a fingerprint plot from previous literature to asses the suitability of the Seismic colour map \cite{Ashlock2008}}
 \label{fig:WSLS-ashlock-comparison}
 \end{figure}
 
 With the knowledge that the choice of colourmap is appropriate, a comparison can now be made between analytical fingerprints and numerical ones obtained via the Axelrod-Python library.
-Table \ref{tab:fingerprint-functions} gives the exact fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
+Table \ref{tab:fingerprint-functions} gives the analytical fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
 
-\begin{table}[htbp]
+\begin{table}[htbp!]
 \centering
 \renewcommand{\arraystretch}{2}
 \setlength{\tabcolsep}{12pt}
@@ -165,11 +165,11 @@ AllC (Cooperator) & $\displaystyle 3 - 3y $ \\
 AllD (Defector) & $\displaystyle 4x + 1 $\\
 \bottomrule
 \end{tabular}
-\caption{A selection of exact fingerprint functions for well known strategies. The probe used is TitForTat.}
+\caption{A selection of analytical fingerprint functions for well known strategies. The probe used is TitForTat.}
 \label{tab:fingerprint-functions}
 \end{table}
 
-Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison} \ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} \ref{fig:Defector-comparison} compare plots of known exact fingerprint functions with analytical approximations obtained with the Axelrod-Python library.
+Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison} \ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} \ref{fig:Defector-comparison} compare plots of known analytical fingerprint functions with numerical approximations obtained with the Axelrod-Python library.
 The analytical plots were created with the code seen in listing \ref{lst:create-several-fingerprints}.
 The parameters \mintinline{python}{turns=500, repetitions=200, step=0.01} are as described in section \ref{sec:fingerprint-implementation}.
 The parameter \mintinline{python}{processes=0} ensures that the function will use the maximum number of cores available on the computer.
