@@ -1,0 +1,31 @@
+%!TEX root = ../tex/main.tex
+
+\begin{tikzpicture}
+    \tikzstyle{standard}=[fill=sol-violet, ellipse, draw, minimum width=2cm, font=\boldmath];
+    \tikzstyle{dual}=[fill=sol-cyan, ellipse, draw, minimum width=2cm, font=\boldmath];
+    \tikzstyle{strat}=[fill=sol-blue, ellipse, draw, minimum width=2cm, font=\boldmath];
+    \node (strat) at (0,4) [strat] {strategy};
+
+    \node (01) at (6, 0) [standard] {$(0,0)$};
+    \node (02) at ($(01)+(0, 1)$) [standard] {$(0,0.5)$};
+    \node (03) at ($(01)+(0,2)$) [standard] {$(0,1)$};
+
+    \node (11) at ($(01)+(0, 3)$) [standard] {$(0.5,0)$};
+    \node (12) at ($(01)+(0, 4)$) [standard] {$(0.5,0.5)$};
+    \node (13) at ($(01)+(0,5)$) [dual] {$(0.5,1)$};
+
+    \node (21) at ($(01)+(0, 6)$) [standard] {$(1,0)$};
+    \node (22) at ($(01)+(0, 7)$) [dual] {$(1,0.5)$};
+    \node (23) at ($(01)+(0,8)$) [dual] {$(1,1)$};
+
+    \draw (strat) edge[out=0, in=-180, ->, thick] (01);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (02);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (03);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (11);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (12);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (13);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (21);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (22);
+    \draw (strat) edge[out=0, in=-180, ->, thick] (23);
+
+\end{tikzpicture}
