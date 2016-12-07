@@ -2,20 +2,20 @@
 
 \chapter{Theory}\label{cha:theory}
 
-\section{Analytical Fingerprints}
+\section{Analytical Fingerprints}\label{sec:analytical-fingerprints}
 There are several steps to constructing the Fingerprint of a strategy and basic knowledge of Markov Chains is required.
 An outline of the steps is as follows:
 
 \begin{enumerate}
-    \item Build the markov chain for IPD between the strategy and probe strategy.
+    \item Build a Markov chain model of an IPD between the strategy and probe strategy.
     \item Construct the corresponding transition matrix.
     \item Find the steady state distribution.
-    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in .
-    %TODO
-    \item Plot the resulting function.
+    \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in section \ref{sec:} to obtain the fingerprint function.
+    %TODO - ref introduction
+    \item This can then be plotted as a heatmap to make it easier to visualize.
 \end{enumerate}
 
-We will now apply this process in order to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
+As an example, this process will now be applied to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
 
 \textbf{Step 1} - Build the markov chain.
 
@@ -57,15 +57,18 @@ F = \pi \cdot
 \cfrac{3x(1-x) + y(1-x) + 5y(1-y)}{2y(1-x) + x(1-x) + y(1-y)}
 \end{equation}
 
-\textbf{Step 5} - Plot the resulting function.
+\textbf{Step 5} - Plot the resulting function. % TODO - put a plot here
 
 \section{Finite State Machines}
 
-Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show the Finite State Machine (FSM) representations for Tit-For-Tat and Pavlov respectively.
-Nodes represent the previous action taken by the strategy and the opponent, ie node $(D, C)$ implies that is the preceding turn, the strategy chose to Defect and the opponent chose to co-operate.
-Arcs represent the choice made by the opponent at the current turn, and lead us to the state of the next turn.
+%TODO - Start with formal definition, use diagrams as examples. Include relevant references.
 
-It should be noted that these figures are not necessarily the simplest representation of their corresponding strategy.
+Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show FSM (Finite State Machine) representations for Tit-For-Tat and Pavlov respectively.
+However, it should be noted that FSM representations are not necessarily unique.
+Nodes represent the previous action taken by the strategy and the opponent, ie. node $(D, C)$ implies that on the preceding turn, the strategy chose to Defect and the opponent chose to co-operate.
+Arcs represent the choice made by the opponent at the current turn, and lead us to the state for the next turn.
+
+These are not necessarily the simplest FSM representation of the strategies.
 For example, Tit-For-Tat requires no knowledge of its own previous moves, but they have been included for completeness.
 
 \begin{figure}[!hbtp]
@@ -84,7 +87,8 @@ For example, Tit-For-Tat requires no knowledge of its own previous moves, but th
     \end{center}
 \end{figure}
 
-In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority which plays in the following way:
+In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority for a game with 4 turns.
+Majority plays in the following way:
 
 \begin{itemize}
   \item If the opponent has cooperated the majority of the time, Majority will cooperate
@@ -92,12 +96,13 @@ In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majo
   \item Note - the strategy shown is technically Soft Majority, if the opponents cooperations and defections are equal it will cooperate. Hard Majority would defect in this situation.
 \end{itemize}
 
-This implies that the strategy Majority requires knowledge of all previous states, and therefore could not be represented as a FSM.
-However in Theorem \ref{thm:fsm} it is stated that if the number of turns in a game is known, any strategy can be represented as an FSM.
+Clearly this means that the strategy Majority requires knowledge of all previous states.
+It has been stated previously that this implies that Majority could not be represented as a FSM.
+However in Theorem \ref{thm:fsm} it is shown that if the number of turns in a game is known, any strategy can be represented as a FSM.
 This will be proved in two different ways:
 \begin{itemize}
-  \item Firstly, by extending the definition of an
-  \item If the opponent has defected the majority of the time, Majority will defect
+  \item Firstly, by altering the definition of an automaton
+  \item
 \end{itemize}
 A formal defintion of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modeled with a FSM:
 
@@ -119,13 +124,13 @@ A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta
  \item $\delta: S \times \sigma \rightarrow S$ is the transition function.
 \end{itemize}
 \end{definition}
-
+%TODO - Add a little paragraph here that shows how this definition matches up with the previous examples.
 
 
 
 
 \begin{theorem}\label{thm:fsm}
-Given a determenistic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in 1,2,3,...$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
+Given a deterministic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in \mathbb{N}$ there exists a FSM such that $\alpha(h_1, h_2)$ can be obtained from the FSM.
 \end{theorem}
 
 \begin{proof}\label{prf:fsm}
