@@ -3,6 +3,7 @@
 \chapter{Literature Review}\label{cha:literature_review}
 
 The Prisoner's Dilemma is a very popular model in game theory and there have been many papers written about the subject.
+The game has been applied to many different research areas is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005}, psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
 The start of this chapter will give a brief overview of the literature and particularly relevant work will be highlighted.
 This is followed by an outline of how Axelrod's work is currently being reproduced by an open-source community.
 Finally, an introduction to fingerprinting and some necessary definitions and theorems are given at the end of the chapter.
@@ -36,19 +37,26 @@ This parameter was chosen so that the median length of a game would be 200 moves
 \begin{table}[htbp]
 \centering
 \begin{tabular}{c c c c}
+\toprule
 Year & Reference & Number of Strategies & Type\\
-\hline
+\midrule
 1979 & \cite{Axelrod1980a} & 13 & Standard\\
 1979 & \cite{Axelrod1980b} & 64 & Standard\\
-1984 & & 64 & Evolutionary\\
-1991 & & 13 & Noisy\\
-2005 & & 223 & Varied\\
-2012 & & 13 & Standard\\
-\hline
+1984 & \cite{Axelrod1981} & 64 & Evolutionary\\
+1991 & \cite{Bendor1991} & 13 & Noisy\\
+2005 & \cite{Chong2004} & 223 & Varied\\
+2012 & \cite{Stewart2012} & 13 & Standard\\
+\bottomrule
 \end{tabular}
 \label{tab:tournament_refs}
 \caption{An overview of published tournaments}
 \end{table}
+
+Several papers have been written on individual strategies.
+In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
+Pavlov plays by repeating its previous move if it was succesful (received payoff $T$ or $R$), and swapping the move if it was unsuccesful (received payoff $P$ or $S$).
+The paper explains how this allows it take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
+
 
 \section{Axelrod-Python Library}
 
@@ -109,15 +117,15 @@ class TitForTat(Player):
 \end{listing}
 
 Strategies are implemented as classes with a \mintinline{python}{strategy} method.
-The strategy method contains the logic that defines how the strategy will behave as can be seen in Listing \ref{lst:TFT} lines 28 - 36.
+The strategy method contains the logic that defines how the strategy will behave as can be seen in listing \ref{lst:TFT} lines 28 - 36.
 If the player does not have a history then it must be the first move and it chooses to play `C'.
 On all subsequent moves the player checks whether the opponent played `D' on it's previous move.
 If that statement is true the player also plays `D', otherwise it will play `C'.
 
-In Listings \ref{lst:tournament} an example of how to produce a simple tournament is shown.
+In listing \ref{lst:tournament} an example of how to produce a simple tournament is shown.
 Lines 7 - 10 create two plots.
 The first is a ranked violion plot of the mean payoff for each player and the second is a matrix plot of pair wise payoffs for each player.
-These plots can be seen
+These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}.
 
 \begin{listing}[htbp!]
 \begin{ExampleCode}
@@ -149,23 +157,20 @@ These plots can be seen
 \end{center}
 \end{figure}
 
-is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005},
-psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
-
 
 \section{Fingerprinting}\label{sec:fingerprinting}
 It is easy to produce large numbers of strategies, however their analysis can be time consuming.
 Even the simple question `Are these two strategies the same?' does not always have an obvious answer.
-This is especially true when considering source code, as two identical strategies can be coded in very ways.
+This is especially true when considering source code, as two identical strategies can be coded in different ways.
 
 A method for comparing strategies is first given in ~\cite{Ashlock2004}.
-Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint which are then followed by some examples.
-The examples presented are of low quality and the only probe strategy (see section/definition etc) used is TitForTat.
+Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint.
+These are then followed by some examples, however they are of low quality and the only probe (see section/definition etc) used is TitForTat.
 %TODO - ref definition of probe?
 
 Ashlock then extends his fingerprinting work further in ~\cite{Ashlock2008}.
-Far more examples are presented, and many different fingerprint functions are listed.
-A large number of the analytical fingerprint functions use a probe that is not TitForTat.
+More examples are presented, and many different fingerprint functions are listed.
+Also, a large number of the analytical fingerprint functions use a probe that is not TitForTat.
 Fingerprinting is then used to to assess how three evolutionary algorithms produce different populations.
 The evolutionary methods involved are finite-state machines, lookup tables and feedforward neural nets.
 
