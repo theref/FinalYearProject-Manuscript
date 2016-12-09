@@ -57,6 +57,11 @@ In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as
 Pavlov plays by repeating its previous move if it was succesful (received payoff $T$ or $R$), and swapping the move if it was unsuccesful (received payoff $P$ or $S$).
 The paper explains how this allows it take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
 
+The strategy Gradual is present in \cite{Beaufils1997}.
+It begins the game by cooperating, then after the first defection of the other player, it defects one time and cooperates twice.
+After the second defection of the opponent, it defects two times and cooperates twice.
+After the $n^{th}$ defection it reacts with $n$ consecutive defections and then two cooperations.
+The paper claims that Gradual performs better than TitForTat %TODO confirmed by Axelrod-Python??
 
 \section{Axelrod-Python Library}
 
