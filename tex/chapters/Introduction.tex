@@ -5,27 +5,27 @@
 The Prisoner's Dilemma (PD) is a classical model in Game Theory.
 It is a simple two player game where the agents must make a choice of two options without communicating.
 This is often presented as two suspects who have been arrested and are being interrogated separately.
-They have the option of whether to cooperate with each other or defect and each player receives an indivual payoff that depends on the actions that have been taken.
+They have the option of whether to cooperate with each other or defect and each player receives an individual payoff that depends on the actions that have been taken.
 
 Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
-Furthermore, allow this process to continue repeatadely.
+Furthermore, allow this process to continue repeatedly.
 This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's ~\cite{Axelrod2016}.
 Every player in IPD will have a strategy.
 A strategy is a predetermined program of play that tells the player what actions to take in response to every possible strategy other players might use.
 
 Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 (use our paper for refs). %TODO
 Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
-The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-useable.
+The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
 
 Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament ~\cite{Knight2016}.
-Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecologi-cal simulations for populations of strategies.
+Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
 The version of the library used in this work will be ~\cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
 
 \section{Prisoner's Dilemma}
 The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University ~\cite{Gass2005}.
 However, the idea was first formulated by the Merrils ~\cite{Flood1958} in 1950 whilst working for the RAND cooperation.
 
-A desription of the PD - Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
+A description of the PD - Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
 They receive payoffs as follows:
 
 \begin{itemize}
@@ -49,7 +49,7 @@ Firstly, both players are rational.
 Secondly, there is no communication between them.
 It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
 Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
-Additionaly, to ensure this behaviour occurs, the payoffs must satisfy the following inequalities:
+Additionally, to ensure this behaviour occurs, the payoffs must satisfy the following inequalities:
 
 \begin{equation}\label{eq:intuitive}
 S < D < C < T
@@ -81,13 +81,13 @@ As previously mentioned, the Axelrod-Python library contains 139 strategies, sig
 This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
 Currently the only known approach to this problem in literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
 
-The issue with this method is that it relies on knowledge of the underlying markov chain of the strategy which cannot be easily constructed from the source code.
+The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
 In this paper an algorithm is presented that allows the construction of a fingerprint for any strategy.
 Example code is also given that shows how this has been implemented within the Axelrod library.
 
 %TODO - a new way of telling strategies apart...signiture?
 
-\section{Worth Noting}
+\section{Structure}
 
 Throughout this paper examples and demonstrations of code will be given.
 Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this paper.
@@ -120,13 +120,12 @@ def function_name(parameters):
 \label{lst:exampleexamplecode}
 \end{listing}{}
 
-\section{Structure}
 This report is organized into several chapters. Continuing from this introduction:
 
 \begin{itemize}
     \item Chapter \ref{cha:literature} An overview of previous literature is given
     \item Chapter \ref{cha:theory} an example analytical fingerprint is constructed
-    \item Chapter \ref{cha:results} example code, the algorith and comparison of fingerprints
+    \item Chapter \ref{cha:results} example code, the algorithm and comparison of fingerprints
     \item Chapter \ref{cha:conclusion}
 \end{itemize}
 
