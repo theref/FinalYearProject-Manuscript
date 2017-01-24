@@ -14,7 +14,7 @@ Finally, an introduction to fingerprinting and some necessary definitions and th
 The political scientist Robert Axelrod held the first IPD tournament in 1980 \cite{Axelrod1980a}.
 Many well-known game theorists were invited to submit strategies that would compete against each other in a round robin style format.
 All strategies also competed against a random strategy (that would randomly choose between `C' and `D') and a copy of themselves.
-All strategies knew that the length of each game was 200 moves, and the whole tournamtent was repeated 5 times for reliability.
+All strategies knew that the length of each game was 200 moves, and the whole tournament was repeated 5 times for reliability.
 Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
 
 TitForTat is a very simple strategy that begins by playing `C' and then plays the same move as it opponent did on the previous turn.
@@ -54,7 +54,7 @@ Year & Reference & Number of Strategies & Type\\
 
 Several papers have been written on individual strategies.
 In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
-Pavlov plays by repeating its previous move if it was succesful (received payoff $T$ or $R$), and swapping the move if it was unsuccesful (received payoff $P$ or $S$).
+Pavlov plays by repeating its previous move if it was successful (received payoff $T$ or $R$), and swapping the move if it was unsuccessful (received payoff $P$ or $S$).
 The paper explains how this allows it take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
 
 The strategy Gradual is present in \cite{Beaufils1997}.
@@ -65,9 +65,9 @@ The paper claims that Gradual performs better than TitForTat %TODO confirmed by 
 
 \section{Axelrod-Python Library}
 
-The Axelrod-Python library \cite{axelrodproject} is an open source Python package for creating reproducable research into the Prisoner's Dilemma.
+The Axelrod-Python library \cite{axelrodproject} is an open source Python package for creating reproducible research into the Prisoner's Dilemma.
 The original aim was to recreate Axelrod's tournaments as described in section \ref{sec:axelrodoriginal} and verify their results.
-For many of the tournaments that have been described the orignal source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
+For many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
 
 The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
 The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
@@ -129,7 +129,7 @@ If that statement is true the player also plays `D', otherwise it will play `C'.
 
 In listing \ref{lst:tournament} an example of how to produce a simple tournament is shown.
 Lines 7 - 10 create two plots.
-The first is a ranked violion plot of the mean payoff for each player and the second is a matrix plot of pair wise payoffs for each player.
+The first is a ranked violin plot of the mean payoff for each player and the second is a matrix plot of pair wise payoffs for each player.
 These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}.
 
 \begin{listing}[htbp!]
@@ -152,7 +152,7 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
 \begin{figure}
 %TODO
 \begin{center}
-\caption{Ranked violin plot of th mean payoff for each player}
+\caption{Ranked violin plot of the mean payoff for each player}
 \label{fig:violinplot}
 \end{center}
 
@@ -177,7 +177,7 @@ Ashlock then extends his fingerprinting work further in ~\cite{Ashlock2008}.
 More examples are presented, and many different fingerprint functions are listed.
 Also, a large number of the analytical fingerprint functions use a probe that is not TitForTat.
 Fingerprinting is then used to to assess how three evolutionary algorithms produce different populations.
-The evolutionary methods involved are finite-state machines, lookup tables and feedforward neural nets.
+The evolutionary methods involved are finite-state machines, lookup tables and feed forward neural nets.
 
 
 \begin{definition}\label{def:joss-ann}
@@ -188,7 +188,7 @@ Instead of the original behaviour, it makes move `C' with probablility $x$, move
 The notation $\JA$ comes from the initials of the names Joss and Anne.
 Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
 Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection ~\cite{Ashlock2008}. %TODO - find refs from ashlock
-When $x + y = 1$, the original strategy is not used, and the resulting behavior is a random strategy with probabilities $(x, y)$.
+When $x + y = 1$, the original strategy is not used, and the resulting behaviour is a random strategy with probabilities $(x, y)$.
 In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
 
 \begin{definition}\label{def:fingerprint}
@@ -233,7 +233,7 @@ D & D & C & D \\
 \label{tab:strat-dual-flip}
 \end{table}
 
-The subtle difference between Dual and Flip can be highlighted further by inspecting each row individualy.
+The subtle difference between Dual and Flip can be highlighted further by inspecting each row individually.
 
 \underline{Row 1} - Pavlov always plays `C' on the first go.
 Flip will change this to `D'.
@@ -257,7 +257,7 @@ If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the
 
 A proof for this theorem will now be given which was first presented in \cite{Ashlock2004}:
 \begin{proof}\label{prf:fingerprint-unit-square}
-The Markov chain for the dual strategy $A'$ will have the same transitions as the Morkov chain for the strategy $A$.
+The Markov chain for the dual strategy $A'$ will have the same transitions as the Markov chain for the strategy $A$.
 However, each entry for $x$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose `C' when it would not normally do so.
 For strategy $A'$, this will occur whenever $\JA(A', x, y)$ does not randomly respond `D', which has probability $1 - y$.
 
