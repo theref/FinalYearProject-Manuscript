@@ -3,7 +3,7 @@
 \chapter{Literature Review}\label{cha:literature_review}
 
 The Prisoner's Dilemma is a very popular model in game theory and there have been many papers written about the subject.
-The game has been applied to many different research areas is often used to model systems in biology ~\cite{Sigmund1999}, sociology ~\cite{Franken2005}, psychology ~\cite{Ishibuchi2005}, and economics ~\cite{Chong2005}.
+The game has been applied to many different research areas is often used to model systems in biology \cite{Sigmund1999}, sociology \cite{Franken2005}, psychology \cite{Ishibuchi2005}, and economics \cite{Chong2005}.
 The start of this chapter will give a brief overview of the literature and particularly relevant work will be highlighted.
 This is followed by an outline of how Axelrod's work is currently being reproduced by an open-source community.
 Finally, an introduction to fingerprinting and some necessary definitions and theorems are given at the end of the chapter.
@@ -17,8 +17,7 @@ All strategies also competed against a random strategy (that would randomly choo
 All strategies knew that the length of each game was 200 moves, and the whole tournament was repeated 5 times for reliability.
 Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
 
-TitForTat is a very simple strategy that begins by playing `C' and then plays the same move as it opponent did on the previous turn.
-As explained in \cite{Axelrod1980b}, TitForTat won because of three defining characteristics:
+TitForTat is a very simple strategy (see Section \ref{sec:individual_strategies}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
 
 \begin{itemize}
     \item `Niceness' - A strategy is said to be nice if it is not the first to defect.
@@ -51,6 +50,11 @@ Year & Reference & Number of Strategies & Type\\
 \label{tab:tournament_refs}
 \caption{An overview of published tournaments}
 \end{table}
+
+
+\section{Strategies of Particular Interest}\label{sec:individual_strategies}
+Throughout this report many different strategies will be discussed and used in small examples.
+This section will provide a description of some of these strategies in order to aid the reader, as a strategy's name is not always particularly descriptive.
 
 Several papers have been written on individual strategies.
 In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
