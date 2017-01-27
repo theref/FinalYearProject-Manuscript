@@ -80,66 +80,6 @@ As the library has grown, so has the overall aim.
 The goal now, is "to provide a resource, with facilities for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies" \cite{Knight2016}.
 For many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
 
-
-
-The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
-The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
-In total the library now consists of 147 strategies (at the time of writing) including classical ones from the literature and and some exciting original contributions.
-It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
-The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
-
-An example implementation of a strategy and a demonstration of using the library will now be given, followed by examples of some of the many plots the library can produce.
-The source code for TitForTat is shown in Listing \ref{lst:TFT}.
-
-\begin{listing}[htbp!]
-\begin{SourceCode}
-class TitForTat(Player):
-    """
-    A player starts by cooperating and then mimics the previous action of the
-    opponent.
-
-    Note that the code for this strategy is written in a fairly verbose
-    way. This is done so that it can serve as an example strategy for
-    those who might be new to Python.
-
-    Names:
-
-    - Rapoport's strategy: [Axelrod1980]_
-    - TitForTat: [Axelrod1980]_
-    """
-
-    # These are various properties for the strategy
-    name = 'Tit For Tat'
-    classifier = {
-        'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
-        'stochastic': False,
-        'makes_use_of': set(),
-        'long_run_time': False,
-        'inspects_source': False,
-        'manipulates_source': False,
-        'manipulates_state': False
-    }
-
-    def strategy(self, opponent):
-        """This is the actual strategy"""
-        # First move
-        if not self.history:
-            return C
-        # React to the opponent's last move
-        if opponent.history[-1] == D:
-            return D
-        return C
-\end{SourceCode}
-\caption{Source code for TitForTat}
-\label{lst:TFT}
-\end{listing}
-
-Strategies are implemented as classes with a \mintinline{python}{strategy} method.
-The strategy method contains the logic that defines how the strategy will behave as can be seen in listing \ref{lst:TFT} lines 28 - 36.
-If the player does not have a history then it must be the first move and it chooses to play `C'.
-On all subsequent moves the player checks whether the opponent played `D' on it's previous move.
-If that statement is true the player also plays `D', otherwise it will play `C'.
-
 In listing \ref{lst:tournament} an example of how to produce a simple tournament is shown.
 Lines 7 - 10 create two plots.
 The first is a ranked violin plot of the mean payoff for each player and the second is a matrix plot of pair wise payoffs for each player.
