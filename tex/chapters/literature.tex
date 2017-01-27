@@ -17,7 +17,7 @@ All strategies also competed against a random strategy (that would randomly choo
 All strategies knew that the length of each game was 200 moves, and the whole tournament was repeated 5 times for reliability.
 Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
 
-TitForTat is a very simple strategy (see Section \ref{sec:individual_strategies}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
+TitForTat is a very simple strategy (see Section \ref{ssec:titfortat}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
 
 \begin{itemize}
     \item `Niceness' - A strategy is said to be nice if it is not the first to defect.
@@ -25,7 +25,7 @@ TitForTat is a very simple strategy (see Section \ref{sec:individual_strategies}
     \item `Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
 \end{itemize}
 
-Axelrod's second tournament \cite{Axelrod1980b} saw a dramatic increase in terms of size, with 62 strategies ebing entered from 6 different countries.
+Axelrod's second tournament \cite{Axelrod1980b} saw a dramatic increase in terms of size, with 62 strategies being entered from 6 different countries.
 The contestants ranged from a 10-year-old computer hobbyist to professors of computer science, economics, psychology, mathematics, sociology, political science and evolutionary biology.
 The countries represented were the United States, Canada, Great Britain, Norway, Switzerland, and New Zealand.
 Despite the fact that all contestants had full knowledge of the previous tournament, TitForTat was the overall winner once again.
@@ -56,22 +56,31 @@ Year & Reference & Number of Strategies & Type\\
 Throughout this report many different strategies will be discussed and used in small examples.
 This section will provide a description of some of these strategies in order to aid the reader, as a strategy's name is not always particularly descriptive.
 
-Several papers have been written on individual strategies.
+\subsection{TitForTat}\label{ssec:titfortat}
+TitForTat is the most well known strategy for playing Prisoner's Dilemma due to it winning both of Axelrod's first two tournaments.
+It starts with a cooperative move and proceeds to play the same as the opponent did on the previous move \cite{Axelrod1980b, Heap2003}.
+
+\subsection{Pavlov}\label{ssec:pavlov}
 In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
 Pavlov plays by repeating its previous move if it was successful (received payoff $T$ or $R$), and swapping the move if it was unsuccessful (received payoff $P$ or $S$).
 The paper explains how this allows it take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
 
+\subsection{Gradual}\label{ssec:gradual}
 The strategy Gradual is present in \cite{Beaufils1997}.
 It begins the game by cooperating, then after the first defection of the other player, it defects one time and cooperates twice.
 After the second defection of the opponent, it defects two times and cooperates twice.
 After the $n^{th}$ defection it reacts with $n$ consecutive defections and then two cooperations.
-The paper claims that Gradual performs better than TitForTat %TODO confirmed by Axelrod-Python??
+In \cite{Beaufils1997} it is claimed that Gradual outperforms TitForTat and this has been confirmed by work done through the Axelrod-Python library \cite{Knight2016}.
 
 \section{Axelrod-Python Library}
 
 The Axelrod-Python library \cite{axelrodproject} is an open source Python package for creating reproducible research into the Prisoner's Dilemma.
 The original aim was to recreate Axelrod's tournaments as described in section \ref{sec:axelrodoriginal} and verify their results.
+As the library has grown, so has the overall aim.
+The goal now, is "to provide a resource, with facilities for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies" \cite{Knight2016}.
 For many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
+
+
 
 The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
 The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
