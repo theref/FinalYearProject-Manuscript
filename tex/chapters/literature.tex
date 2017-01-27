@@ -56,21 +56,38 @@ Year & Reference & Number of Strategies & Type\\
 Throughout this report many different strategies will be discussed and used in small examples.
 This section will provide a description of some of these strategies in order to aid the reader, as a strategy's name is not always particularly descriptive.
 
-\subsection{TitForTat}\label{ssec:titfortat}
+\subsection{TitForTat}\label{ssec:stra_titfortat}
 TitForTat is the most well known strategy for playing Prisoner's Dilemma due to it winning both of Axelrod's first two tournaments.
 It starts with a cooperative move and proceeds to play the same as the opponent did on the previous move \cite{Axelrod1980b, Heap2003}.
 
-\subsection{Pavlov}\label{ssec:pavlov}
+\subsection{Pavlov}\label{ssec:strat_pavlov}
 In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
 Pavlov plays by repeating its previous move if it was successful (received payoff $T$ or $R$), and swapping the move if it was unsuccessful (received payoff $P$ or $S$).
 The paper explains how this allows it take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
 
-\subsection{Gradual}\label{ssec:gradual}
+\subsection{Gradual}\label{ssec:strat_gradual}
 The strategy Gradual is present in \cite{Beaufils1997}.
 It begins the game by cooperating, then after the first defection of the other player, it defects one time and cooperates twice.
 After the second defection of the opponent, it defects two times and cooperates twice.
 After the $n^{th}$ defection it reacts with $n$ consecutive defections and then two cooperations.
 In \cite{Beaufils1997} it is claimed that Gradual outperforms TitForTat and this has been confirmed by work done through the Axelrod-Python library \cite{Knight2016}.
+
+\subsection{Random}\label{ssec:strat_random}
+Random plays exactly as expected, by choosing randomly between whether to cooperate or defect.
+The probabilities of choosing cooperate or defect are not necessarily even, instead they could rely on some distribution.
+We will denote the strategy that chooses to cooperate with probability $p$ as Random($p$).
+For example, the strategy that randomly chooses to cooperate $20\%$ of the time and defect $80\%$ of the time would be Random($0.2$).
+
+\subsection{Cooperator/Defector}\label{ssec:strat_coop_defect}
+Cooperator and Defector are very simple.
+Cooperator will choose to cooperate at every turn, and similarly Defector will choose to defect every turn.
+
+\subsection{Cycler}\label{ssec:strat_cycler}
+The strategy Cycler($s$) will repeat a given sequence of moves $s$.
+For example Cycler(CD) would play CDCDCD... and Cycler(CDDDC) would play CDDDCCDDDCCDDDC...
+
+
+\section{Finite State Machines and Automaton}
 
 \section{Axelrod-Python Library}
 
