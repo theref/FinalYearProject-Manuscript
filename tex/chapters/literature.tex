@@ -17,7 +17,7 @@ All strategies also competed against a random strategy (that would randomly choo
 All strategies knew that the length of each game was 200 moves, and the whole tournament was repeated 5 times for reliability.
 Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
 
-TitForTat is a very simple strategy (see Section \ref{ssec:titfortat}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
+TitForTat is a very simple strategy (see Section \ref{ssec:stra_titfortat}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
 
 \begin{itemize}
     \item `Niceness' - A strategy is said to be nice if it is not the first to defect.
@@ -50,6 +50,11 @@ Year & Reference & Number of Strategies & Type\\
 \label{tab:tournament_refs}
 \caption{An overview of published tournaments}
 \end{table}
+
+The primary purpose of \cite{Bendor1991} was to discover the effect of noise on TitForTat's performance in IPD.
+As had been previously claimed its performance was significantly reduced.
+The authors of \cite{Bendor1991} suggest that this is due to the provocability mentioned earlier, which in the presence of noise, can causes it to fall into unintended vendettas with other nice, but provocable strategies.
+Strategies that outperformed TitForTat were far more forgiving, which enabled them to get back to mutual cooperation much faster after an accidental defection.
 
 
 \section{Strategies of Particular Interest}\label{sec:individual_strategies}
@@ -86,6 +91,8 @@ Cooperator will choose to cooperate at every turn, and similarly Defector will c
 The strategy Cycler($s$) will repeat a given sequence of moves $s$.
 For example Cycler(CD) would play CDCDCD... and Cycler(CDDDC) would play CDDDCCDDDCCDDDC...
 
+\subsection{Evolved Looker-Up}\label{ssec:strat_evolved_lu}
+% TODO http://mojones.net/evolving-strategies-for-an-iterated-prisoners-dilemma-tournament.html
 
 \section{Finite State Machines and Automaton}
 
@@ -134,9 +141,11 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
 
 
 \section{Fingerprinting}\label{sec:fingerprinting}
-It is easy to produce large numbers of strategies, however their analysis can be time consuming.
+It is easy to write a genetic algorithm to produce large numbers of strategies, however their analysis can be time consuming.
 Even the simple question `Are these two strategies the same?' does not always have an obvious answer.
 This is especially true when considering source code, as two identical strategies can be coded in different ways.
+For example, differentiating between Random($0.5$) and Cycler(CD) (see Section \ref{sec:individual_strategies}) isn't trivial unless you have access to their source code.
+The results of a game they play isn't necessarily enough.
 
 A method for comparing strategies is first given in ~\cite{Ashlock2004}.
 Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint.
