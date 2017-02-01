@@ -84,43 +84,6 @@ However, once this state is reached, extending the number of turns has a minimal
 The \mintinline{python}{repetitions} variable decides how many times the tournament would be repeated.
 The Axelrod-Python implementation of fingerprinting is a random process (due to the Joss-Ann) and high repetitions helps to reduce the effects of this.
 
-\begin{listing}[hbtp!]
-\begin{SourceCode}
-def fingerprint(self, turns=50, repetitions=10, step=0.01, processes=None,
-                filename=None, in_memory=False, progress_bar=True):
-    """Build and play the spatial tournament.
-
-    Creates the probes and their edges then builds a spatial tournament.
-    When the coordinates of the probe sum to more than 1, the dual of the
-    probe is taken instead and then the Joss-Ann Transformer is applied. If
-    the coordinates sum to less than 1 (or equal), then only the Joss-Ann is
-    applied, a dual is not required.
-
-    Parameters
-    ----------
-    turns : integer, optional
-        The number of turns per match
-    repetitions : integer, optional
-        The number of times the round robin should be repeated
-    step : float, optional
-        The separation between each Point. Smaller steps will
-        produce more Points that will be closer together.
-    processes : integer, optional
-        The number of processes to be used for parallel processing
-    progress_bar : bool
-        Whether or not to create a progress bar which will be updated
-
-    Returns
-    ----------
-    self.data : dictionary
-        A dictionary where the keys are coordinates of the form (x, y) and
-        the values are the mean score for the corresponding interactions.
-    """
-\end{SourceCode}
-\caption{Axelrod-Python docstring for the fingerprint function}
-\label{lst:fingerprint-docstring}
-\end{listing}
-
 
 \section{Comparison of Analytical and Numerical Plots}
 
@@ -225,62 +188,79 @@ for s in strats:
 
 \section{The Development Process}
 
-\section{Axelrod Python}
+The Axelrod-Python library aims to follow best practice at all times with regards to development.
+The source code is hosted at Github and all code is version controlled.
+Version control ensures that all changes to a code base are tracked and can be traced back to a particular author.
+It also allow different developers to make sure that they are using the same version of the software, particularly important with regards to reproducing results.
 
-The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
-The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
-In total the library now consists of 147 strategies (at the time of writing) including classical ones from the literature and and some exciting original contributions.
-It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
-The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
+The library also applies a strict review process, where any code submission is analysed by several members of the organisation before it can be included.
+This normally involves other developers requesting changes to the submission, this ensure that all source code is of the same high standard.
+Figure \ref{fig:screenshots} shows some screen shots of the discussions, requests and suggestions made during the development process of the fingerprint code.
 
-An example implementation of a strategy and a demonstration of using the library will now be given, followed by examples of some of the many plots the library can produce.
-The source code for TitForTat is shown in Listing \ref{lst:TFT}.
+\begin{figure}[htbp!]
+\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot1.png}
+\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot2.png}
+\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot3.png}
+\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot4.png}
+\caption{Screen shots of the discussion for fingerprint code submission.}
+\label{fig:screenshots}
+\end{figure}
+% \section{Axelrod Python}
 
-\begin{listing}[htbp!]
-\begin{SourceCode}
-class TitForTat(Player):
-    """
-    A player starts by cooperating and then mimics the previous action of the
-    opponent.
+% The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
+% The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
+% In total the library now consists of 147 strategies (at the time of writing) including classical ones from the literature and and some exciting original contributions.
+% It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
+% The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
 
-    Note that the code for this strategy is written in a fairly verbose
-    way. This is done so that it can serve as an example strategy for
-    those who might be new to Python.
+% An example implementation of a strategy and a demonstration of using the library will now be given, followed by examples of some of the many plots the library can produce.
+% The source code for TitForTat is shown in Listing \ref{lst:TFT}.
 
-    Names:
+% \begin{listing}[htbp!]
+% \begin{SourceCode}
+% class TitForTat(Player):
+%     """
+%     A player starts by cooperating and then mimics the previous action of the
+%     opponent.
 
-    - Rapoport's strategy: [Axelrod1980]_
-    - TitForTat: [Axelrod1980]_
-    """
+%     Note that the code for this strategy is written in a fairly verbose
+%     way. This is done so that it can serve as an example strategy for
+%     those who might be new to Python.
 
-    # These are various properties for the strategy
-    name = 'Tit For Tat'
-    classifier = {
-        'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
-        'stochastic': False,
-        'makes_use_of': set(),
-        'long_run_time': False,
-        'inspects_source': False,
-        'manipulates_source': False,
-        'manipulates_state': False
-    }
+%     Names:
 
-    def strategy(self, opponent):
-        """This is the actual strategy"""
-        # First move
-        if not self.history:
-            return C
-        # React to the opponent's last move
-        if opponent.history[-1] == D:
-            return D
-        return C
-\end{SourceCode}
-\caption{Source code for TitForTat}
-\label{lst:TFT}
-\end{listing}
+%     - Rapoport's strategy: [Axelrod1980]_
+%     - TitForTat: [Axelrod1980]_
+%     """
 
-Strategies are implemented as classes with a \mintinline{python}{strategy} method.
-The strategy method contains the logic that defines how the strategy will behave as can be seen in listing \ref{lst:TFT} lines 28 - 36.
-If the player does not have a history then it must be the first move and it chooses to play `C'.
-On all subsequent moves the player checks whether the opponent played `D' on it's previous move.
-If that statement is true the player also plays `D', otherwise it will play `C'.
+%     # These are various properties for the strategy
+%     name = 'Tit For Tat'
+%     classifier = {
+%         'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
+%         'stochastic': False,
+%         'makes_use_of': set(),
+%         'long_run_time': False,
+%         'inspects_source': False,
+%         'manipulates_source': False,
+%         'manipulates_state': False
+%     }
+
+%     def strategy(self, opponent):
+%         """This is the actual strategy"""
+%         # First move
+%         if not self.history:
+%             return C
+%         # React to the opponent's last move
+%         if opponent.history[-1] == D:
+%             return D
+%         return C
+% \end{SourceCode}
+% \caption{Source code for TitForTat}
+% \label{lst:TFT}
+% \end{listing}
+
+% Strategies are implemented as classes with a \mintinline{python}{strategy} method.
+% The strategy method contains the logic that defines how the strategy will behave as can be seen in listing \ref{lst:TFT} lines 28 - 36.
+% If the player does not have a history then it must be the first move and it chooses to play `C'.
+% On all subsequent moves the player checks whether the opponent played `D' on it's previous move.
+% If that statement is true the player also plays `D', otherwise it will play `C'.
