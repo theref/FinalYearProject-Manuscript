@@ -2,6 +2,118 @@
 
 \chapter{Theory}\label{cha:theory}
 
+Many definitions will be now be presented, with the overall aim being to have a rigorous definition for a fingerprint.
+Definitions for the Dual, Joss-Ann and Fingerprint were first presented by Ashlock in \cite{Ashlock2004} as mentioned in Section \ref{sec:fingerprinting}.
+
+\section{The Joss-Ann}
+The Joss-Ann is a basic transformation that can be applied to a strategy.
+It operates by making a probabilistic choice of cooperation, defection or the original move.
+More formally:
+
+\begin{definition}\label{def:joss-ann}
+If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy.
+Instead of the original behaviour, it makes move `C' with probablility $x$, move `D' with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
+\end{definition}
+
+The notation $\JA$ comes from the initials of the names Joss and Anne.
+Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
+Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection \cite{Ashlock2008}. %TODO - find refs from ashlock
+When $x + y = 1$, the original strategy is not used, and the resulting behaviour is a random strategy with probabilities $(x, y)$.
+In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
+
+\section{The Dual}
+The Dual is another, more complex transformation of a strategy (note that transformations can be applied over each other).
+Given a history for an opponent, the responses of the original strategy and the dual would be opposite.
+
+\begin{definition}\label{def:dual}
+Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
+\end{definition}
+
+It is important to note that this is different to taking a strategy and flipping it's responses.
+The dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not.
+This is shown in Table \ref{tab:strat-dual-flip}.
+For an outline of how Pavlov plays, see Section \ref{ssec:strat_pavlov}.
+
+%TODO - Flip
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l l l l}
+\toprule
+Opponent & Pavlov & Dual & Flip \\
+\midrule
+C & C & D & D \\
+D & C & D & C \\
+D & D & C & C \\
+C & C & D & C \\
+C & C & D & D \\
+D & C & D & C \\
+C & D & C & C \\
+D & D & C & D \\
+  & C & D & D \\
+\bottomrule
+\end{tabular}
+\caption{The different responses of Pavlov, Pavlov's Dual and Flipped Pavlov}
+\label{tab:strat-dual-flip}
+\end{table}
+
+The subtle difference between Dual and Flip can be highlighted further by inspecting each row individually.
+
+\underline{Row 1} - Pavlov always plays `C' on the first go.
+Flip will change this to `D'.
+Dual knows that Pavlov always plays `C' and so swaps to `D'.
+
+\underline{Row 2} - In the previous round for Pavlov the strategies played $(C, C)$, and so Pavlov plays `C' again.
+For Flip, the preceding interaction was $(D, C)$, in this instance Pavlov would play `D' again, so this gets flipped to `C'.
+The previous turn for Dual was $(D, C)$ so it infers that Pavlov had $(C, C)$.
+It knows that Pavlov would play `C' and so plays `D'.
+
+\underline{Row 3} - In the previous round for Pavlov the strategies played $(C, D)$, and so Pavlov would change to play `D'.
+For Flip, the preceding interaction was $(C, D)$, in this instance Pavlov would change to `D', so this gets flipped to play `C' again.
+The previous turn for Dual was $(D, D)$ so it infers that Pavlov had $(C, D)$.
+It knows that Pavlov would play `D' in this instance and so plays `C'.
+
+\section{Fingerprint and Double Fingerprint}
+The fingerprint function returns the expected score of a strategy when it plays against the Joss-Ann with varying $(x, y)$.
+The double fingerprint extends this idea to $x+y \geq 1$.
+
+\begin{definition}\label{def:fingerprint}
+A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and \textbf{probe} $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
+\end{definition}
+
+
+\begin{definition}\label{def:double-fingerprint}
+The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $\JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
+\end{definition}
+
+We now show how the double fingerprint, with an appropriate choice of probe, is equivalent to the fingerprint function over the unit square.
+
+\begin{theorem}\label{thm:fingerprint-unit-square}
+If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
+\end{theorem}
+
+A proof for this theorem will now be given which was first presented in \cite{Ashlock2004}:
+\begin{proof}\label{prf:fingerprint-unit-square}
+The Markov chain for the dual strategy $A'$ will have the same transitions as the Markov chain for the strategy $A$.
+However, each entry for $x$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose `C' when it would not normally do so.
+For strategy $A'$, this will occur whenever $\JA(A', x, y)$ does not randomly respond `D', which has probability $1 - y$.
+
+Similarly, each $y$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose `D' when it would usually respond `C'.
+For strategy $A'$, this will occur whenever $\JA(A', x, y)$ does not randomly respond `C', which has probability $1 - x$.
+
+Thus the Markov chain for $\JA(A', x, y)$ is the Markov chain for $\JA(A, x, y)$ with the mapping $(x, y) \rightarrow (1-y, 1-x)$.
+Therefore $F_{AA'}(S, x, y)$ extends to the remainder of the unit square the function given by $F_A(S, x, y)$. $\blacksquare$
+\end{proof}
+
+Theorem \ref{thm:fingerprint-unit-square} allows the fingerprint function to naturally extend over the unit square.
+Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left} region of the plot, the strategy plays against $\JA(A, x, y)$ and in the \textcolor{sol-cyan}{top right} region it plays against $\JA(A', 1-y, 1-x)$.
+
+\begin{figure}[!hbtp]
+    \begin{center}
+        \includestandalone{../img/Dual}
+        \caption{Whether the Strategy is probed by the Dual or not}\label{fig:DualProbe}
+    \end{center}
+\end{figure}
+
 \section{Finite State Machines}
 
 A formal definition of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modelled with a FSM:
