@@ -51,10 +51,35 @@ Year & Reference & Number of Strategies & Type\\
 \caption{An overview of published tournaments}
 \end{table}
 
+Axelrod continued to extend his work by considering an evolutionary version of the tournament \cite{Axelrod1981, Axelrod1984}.
+In this case, the proportion of the population playing a certain strategy depends on how the strategy performed on the previous round.
+A strategy is evolutionarily stable if a population of individuals using that strategy cannot be invaded by a rare mutant adopting a different strategy \cite{Axelrod1981}.
+
+In \cite{Nowak1992, Nowak1993, Nowak1994}, Nowak extends this further by studying Spatial Games.
+In his variation, the game is played on a 2 dimensional square lattice where the payoff for an individual is the sum over all interactions with its 8 nearest neighbours (see Figure \ref{fig:nowak_spatial}) and itself.
+In the next generation, an individual cell is occupied with the strategy that received the highest payoff among all 8 nearest neighbours and itself.
+
+\begin{figure}[hbtp!]
+\centering
+\begin{tikzpicture}
+\fill[gray] (1,1) rectangle (4,4);
+\fill[sol-magenta] (2,2) rectangle (3,3);
+\draw[step=1cm] (-0.9,-0.9) grid (5.9,5.9);
+\end{tikzpicture}
+\caption{The topology of Nowak's spatial variation}
+\label{fig:nowak_spatial}
+\end{figure}
+
+To simplify things, Nowak limited each cell to be either Cooperator or Defector.
+Thus the game is completely deterministic and the outcome depends on the initial configuration and the payoff matrix.
+One particularly interesting result is that if a single Defector invades a world of Cooperators, long (but finite) sequences of patterns emerge.
+Due to the symmetry of the game rules, all the patterns are highly symmetric and have the appearance of kaleidoscopes.
+
 The primary purpose of \cite{Bendor1991} was to discover the effect of noise on TitForTat's performance in IPD.
 As had been previously claimed its performance was significantly reduced.
 The authors of \cite{Bendor1991} suggest that this is due to the provocability mentioned earlier, which in the presence of noise, can causes it to fall into unintended vendettas with other nice, but provocable strategies.
 Strategies that outperformed TitForTat were far more forgiving, which enabled them to get back to mutual cooperation much faster after an accidental defection.
+
 
 
 \section{Strategies of Particular Interest}\label{sec:individual_strategies}
