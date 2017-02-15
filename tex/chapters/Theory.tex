@@ -4,6 +4,8 @@
 
 Many definitions will be now be presented, with the overall aim being to have a rigorous definition for a fingerprint.
 Definitions for the Dual, Joss-Ann and Fingerprint were first presented by Ashlock in \cite{Ashlock2004} as mentioned in Section \ref{sec:fingerprinting}.
+Then a definition of Finite State Machines will be given, and an explanation of how they relate to fingerprinting.
+Finally, an example of how to construct a fingerprint will be shown in Section \ref{sec:analytical-fingerprints}.
 
 \section{The Joss-Ann}
 The Joss-Ann is a basic transformation that can be applied to a strategy.
@@ -12,12 +14,12 @@ More formally:
 
 \begin{definition}\label{def:joss-ann}
 If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy.
-Instead of the original behaviour, it makes move `C' with probablility $x$, move `D' with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
+Instead of the original behaviour, it makes move `C' with probability $x$, move `D' with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
 \end{definition}
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
 Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
-Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from ashlock paper) instead of random defection \cite{Ashlock2008}. %TODO - find refs from ashlock
+Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from Ashlock paper) instead of random defection \cite{Ashlock2008}. %TODO - find refs from ashlock
 When $x + y = 1$, the original strategy is not used, and the resulting behaviour is a random strategy with probabilities $(x, y)$.
 In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
 
@@ -188,7 +190,7 @@ An outline of the steps is as follows:
     \item Find the steady state distribution.
     \item Calculate the overall expected score by taking the dot product of the steady state distribution with the payoff vector given in section \ref{sec:} to obtain the fingerprint function.
     %TODO - ref introduction
-    \item This can then be plotted as a heatmap to make it easier to visualize.
+    \item This can then be plotted as a heat map to make it easier to visualize.
 \end{enumerate}
 
 As an example, this process will now be applied to obtain a fingerprint for the strategy Win-Stay-Lose-Shift (sometimes referred to as Pavlov) when probed by Tit-For-Tat.
