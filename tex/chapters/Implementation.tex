@@ -12,23 +12,21 @@ This means the dual relies on knowledge of how the original strategy would have 
 However, the required behaviour can be achieved by having the original strategy as an attribute of the dual.
 Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should it would have made, and then flip that action.
 
-\IncMargin{1.2em}
 \begin{algorithm}[H]
- \KwData{A strategy}
- \KwResult{The d of the strategy}{}
+\While{Game is being played}{
   \If{First Turn}{
    create copy of original strategy\;}
   simulate original strategy\;
-  update original strategy's history/internal state\;
+  update original strategy's history/internal state\;}
   \Return{Flip of original strategy's move}
  \caption{The Dual of a Strategy}
-\end{algorithm}\DecMargin{1.5em}
+\end{algorithm}
 
 \section{The Joss Ann}
 
 \section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
-As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters. %TODO reference definition
+As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
 As part of this project, a numerical implementation has now been included in the Axelrod-Python library.
 It begins by taking a sample of the $x,y$ values that may define the Joss-Ann Transformer.
 The strategy then plays a match against a transformer with each of the sampled values.
@@ -198,10 +196,19 @@ This normally involves other developers requesting changes to the submission, th
 Figure \ref{fig:screenshots} shows some screen shots of the discussions, requests and suggestions made during the development process of the fingerprint code.
 
 \begin{figure}[htbp!]
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot1.png}}
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot2.png}}
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot3.png}}
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.8\textwidth]{../img/screenshots/ScreenShot4.png}}
+\ContinuedFloat
+\centering
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot1.png}}
+
+\ContinuedFloat
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot2.png}}
+
+\ContinuedFloat
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot3.png}}
+
+\ContinuedFloat
+\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot4.png}}
+
 \caption{Screen shots of the discussion for fingerprint code submission.}
 \label{fig:screenshots}
 \end{figure}

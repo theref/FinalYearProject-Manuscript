@@ -117,7 +117,26 @@ The strategy Cycler($s$) will repeat a given sequence of moves $s$.
 For example Cycler(CD) would play CDCDCD... and Cycler(CDDDC) would play CDDDCCDDDCCDDDC...
 
 \subsection{Evolved Looker-Up}\label{ssec:strat_evolved_lu}
-% TODO http://mojones.net/evolving-strategies-for-an-iterated-prisoners-dilemma-tournament.html
+The winning strategy in the version of Axelrod-Python used throughout this paper is Evolved Looker-Up.
+The author, Martin Jones, has produced a thorough explanation of how the strategy was written in \cite{MoJones}, and a brief outline will be given here.
+Quite simply, the strategy uses a lookup table to determine the action it should take.
+A lookup table is similar to a dictionary when programming, where the keys could be the opponents previous moves and the values the next action the strategy should take.
+The length of the key could be extended to include the opponents two previous moves (or more).
+It is clear that for a key length $l$, there are $n = 2^l$ keys.
+For each key the next action could be Cooperate or Defect, and so there are a total of $2^n$ possible lookup tables.
+Evolved Looker-up uses as its keys: the opponents first two moves, the opponents previous two moves, and the strategies own previous two moves.
+So we have $n = 2^6 = 64$ keys, and therefore $2^{64} \simeq 10^{18}$ possible lookup tables.
+
+An evolutionary algorithm is then used to find the best possible table.
+The operates by initially creating a population of many different lookup tables.
+Then a new lookup table is created by combining two pre existing ones together (similar to how DNA is joined in reproduction).
+There is a probability (normally low) of some of the new lookup table mutating.
+Next, several more random lookup tables are produced.
+Finally, all lookup tables are scored and poor performers are discarded.
+Then the whole process is repeated with the new generation of lookup tables.
+
+Evolved Looker-Up was produced after 200 generations, and the final lookup table can be found in the Axelrod-Python source code.
+Alternatively, the code used to produce the lookup table is given in \cite{axelrod-evolver}.
 
 \section{Finite State Machines and Automaton}
 
