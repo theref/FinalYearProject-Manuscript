@@ -71,7 +71,7 @@ In the next generation, an individual cell is occupied with the strategy that re
 \end{figure}
 
 To simplify things, Nowak limited each cell to be either Cooperator or Defector.
-Thus the game is completely deterministic and the outcome depends on the initial configuration and the payoff matrix.
+Thus the game is completely deterministic and the outcome depends only on the initial configuration and the payoff matrix.
 One particularly interesting result is that if a single Defector invades a world of Cooperators, long (but finite) sequences of patterns emerge.
 Due to the symmetry of the game rules, all the patterns are highly symmetric and have the appearance of kaleidoscopes.
 
@@ -146,7 +146,20 @@ The Axelrod-Python library \cite{axelrodproject} is an open source Python packag
 The original aim was to recreate Axelrod's tournaments as described in section \ref{sec:axelrodoriginal} and verify their results.
 As the library has grown, so has the overall aim.
 The goal now, is "to provide a resource, with facilities for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies" \cite{Knight2016}.
+
 For many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
+The library is partly motivated by a desire to improve this situation, and there is much discussion within academia currently regarding reproducible research \cite{Crick2014, Hong2015, Procter2012, Sandve2013}.
+Some key characteristics are that the library is:
+
+\begin{itemize}
+    \item Open: all code is released under an MIT license \cite{Rosen2004}
+    \item Reproducible and well-tested: at the time of writing there is an excellent level of integrated tests with 99.73\% coverage (including property based tests: \cite{Hypothesis3.6.1})
+    \item Well-documented: all features of the library are documented for ease of use and modification
+    \item Extensive: 139 strategies are included, with infinitely many available in the case of parametrised strategies
+    \item Extensible: easy to modify to include new strategies and to run new tournaments
+\end{itemize}
+
+Each of these items will be discussed in more detail in Section \ref{sec:dev_process}.
 
 In listing \ref{lst:tournament} an example of how to produce a simple tournament is shown.
 Lines 7 - 10 create two plots.
