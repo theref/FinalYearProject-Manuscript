@@ -24,6 +24,26 @@ Whenever the dual has to submit a move, it can first get the original strategy t
 
 \section{The Joss Ann}
 
+A formal definition of the Joss Ann is given in Section \ref{sec:joss-ann}.
+Given a probability distribution $(x, y)$ the Joss Ann Cooperates with probability $x$, Defects with probability $y$, and plays the original move with probability $1 -x-y$.
+This can be implemented very simply as seen in Algorithm \ref{alg:joss-ann}.
+First, a random number between 0 and 1 is generated.
+The thresholds for Cooperation, Defection and original move are then $x, x+y \text{ and } 1$ respectively.
+
+\begin{algorithm}[H]
+\While{Game is being played}{
+  p $\gets$ Random number\;
+  \uIf{p $\leq$ Cooperation Threshold}{
+   Next Move $\gets C$\;}
+  \uElseIf{p $\leq$ Defection Threshold}{
+   Next Move $\gets D$\;}
+  \Else{Next Move $\gets$ Original choice of Strategy\;}
+  }
+  \Return{Next Move}
+ \caption{The Joss Ann of a Strategy}
+ \label{alg:joss-ann}
+\end{algorithm}
+
 \section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
 As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
