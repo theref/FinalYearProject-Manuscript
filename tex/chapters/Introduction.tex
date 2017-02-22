@@ -9,7 +9,7 @@ They have the option of whether to cooperate with each other or defect and each 
 
 Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
 Furthermore, allow this process to continue repeatedly.
-This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's ~\cite{Axelrod2016}.
+This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod2016}.
 Every player in IPD will have a strategy.
 A strategy is a predetermined program of play that tells the player what actions to take in response to every possible strategy other players might use.
 
@@ -17,13 +17,13 @@ Several computer based IPD tournaments have been held over the years, but the fi
 Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
 The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
 
-Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament ~\cite{Knight2016}.
+Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
 Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
-The version of the library used in this work will be ~\cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
+The version of the library used in this work will be \cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
 
 \section{Prisoner's Dilemma}
-The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University ~\cite{Gass2005}.
-However, the idea was first formulated by the Merrils ~\cite{Flood1958} in 1950 whilst working for the RAND cooperation.
+The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
+However, the idea was first formulated by the Merrils \cite{Flood1958} in 1950 whilst working for the RAND cooperation.
 
 A description of the PD - Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
 They receive payoffs as follows:
@@ -65,7 +65,7 @@ Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
 These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
 We can now formulate the new payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
-A more detailed explanation of the Prisoner's Dilemma is given in ~\cite{Gotts2003}.
+A more detailed explanation of the Prisoner's Dilemma is given in \cite{Gotts2003}.
 
 \begin{equation}\label{eq:payoff_matrix}
 %
