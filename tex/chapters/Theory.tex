@@ -19,7 +19,7 @@ Instead of the original behaviour, it makes move `C' with probability $x$, move 
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
 Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
-Anne is the first name of A. Stanley who suggested the addition of random cooperation (refs from Ashlock paper) instead of random defection \cite{Ashlock2008}. %TODO - find refs from ashlock
+Anne is the first name of A. Stanley who suggested the addition of random cooperation instead of random defection \cite{Ashlock2008}.
 When $x + y = 1$, the original strategy is not used, and the resulting behaviour is a random strategy with probabilities $(x, y)$.
 In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
 
@@ -123,7 +123,7 @@ Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left}
     \end{center}
 \end{figure}
 
-\section{Finite State Machines}
+\section{Finite State Machines}\label{sec:fsm}
 
 A formal definition of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modelled with a FSM:
 
@@ -165,14 +165,6 @@ For example, TitForTat requires no knowledge of its own previous moves, but they
 \caption{Finite State Machine representations for TitForTat, Pavlov and Majority}
 \end{figure}
 
-
-% \begin{figure}[!hbtp]
-%     \begin{center}
-%         \includestandalone{../img/MajorityFSM}
-%         \caption{FSM for Majority in a game with 4 Turns}\label{fig:MajorityFSM}
-%     \end{center}
-% \end{figure}
-
 In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority for a game with 4 turns.
 Majority plays in the following way:
 
@@ -186,6 +178,7 @@ Clearly this means that the strategy Majority requires knowledge of all previous
 In general this implies that Majority could not be represented as a FSM.
 However if the number of turns in a game is known, any strategy can be represented as a FSM.
 
+\section{Proof of FSM for every strategy}\label{sec:fsm_proof}
 
 
 \section{Analytical Fingerprints}\label{sec:analytical-fingerprints}

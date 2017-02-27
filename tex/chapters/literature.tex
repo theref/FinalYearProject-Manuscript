@@ -139,6 +139,20 @@ Evolved Looker-Up was produced after 200 generations, and the final lookup table
 Alternatively, the code used to produce the lookup table is given in \cite{axelrod-evolver}.
 
 \section{Finite State Machines and Automaton}
+An Automaton is an abstract model of a machine that can perform operations on an input.
+A more general (and powerful) abstraction of an automaton is the famous Turing machine, which can perform any computational process carried out by present day computers \cite{Kandar2013}.
+In the case where an automaton has a finite set of set of states, it is referred to as a Finite State Machine.
+If this FSM has outputs it is called a Moore Machine \cite{Ndjountche2016}.
+A more detailed of Finite State Machines is given in Section \ref{sec:fsm}.
+
+Finite state machines have become important in game theory for several reasons.
+In the late fifties the idea of ``bounded rationality'' was explored in economics by Simon \cite{Simon1972}.
+This was then extended in \cite{Rubinstein1986} where strategies that played the IPD were implemented as Moore Machines with an extra rule that added a cost associated with the complexity of the Moore Machine.
+Complexity was defined to be the number of states in the machine and the author states that this was a ``fairly naive'' approach.
+
+In \cite{Kalai1986, Kalai1988}, proofs are given that show that every strategy can be represented by an automaton.
+However, in Section \ref{sec:fsm_proof} it is shown that if the length of a game in IPD is known, every strategy can be represented as a FSM.
+
 
 \section{Axelrod-Python Library}
 
@@ -206,8 +220,7 @@ The results of a game they play isn't necessarily enough.
 
 A method for comparing strategies is first given in \cite{Ashlock2004}.
 Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint.
-These are then followed by some examples, however they are of low quality and the only probe (see section/definition etc) used is TitForTat.
-%TODO - ref definition of probe?
+These are then followed by some examples, however they are of low quality and the only probe (see definition \ref{def:fingerprint}) used is TitForTat.
 
 Ashlock then extends his fingerprinting work further in \cite{Ashlock2008}.
 More examples are presented, and many different fingerprint functions are listed.

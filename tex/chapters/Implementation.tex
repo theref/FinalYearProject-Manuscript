@@ -7,7 +7,7 @@ Each of the definitions presented in Chapter \ref{cha:theory} directly correspon
 All strategies have an equivalent class within the library and this is demonstrated in Section \ref{sec:fingerprint-implementation}.
 
 \section{The Dual}
-The dual of a strategy is defined such that when the original strategy and the dual are presented with identical histories they will return opposite actions, as outlined in Definition \ref{def:dual}. %TODO
+The dual of a strategy is defined such that when the original strategy and the dual are presented with identical histories they will return opposite actions, as outlined in Definition \ref{def:dual}.
 This means the dual relies on knowledge of how the original strategy would have behaved in a given situation, which is impractical to infer from the source code.
 However, the required behaviour can be achieved by having the original strategy as an attribute of the dual.
 Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should it would have made, and then flip that action.
