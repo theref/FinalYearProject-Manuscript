@@ -36,7 +36,14 @@ The dual relies on knowledge of the underlying state of the original strategy, w
 This is shown in Table \ref{tab:strat-dual-flip}.
 For an outline of how Pavlov plays, see Section \ref{ssec:strat_pavlov}.
 
-%TODO - Flip
+\section{The Flip}\label{sec:flip}
+The Flip is a simple transformation that returns the opposite of the strategy.
+This is subtly different from the Dual as demonstrated below.
+
+\begin{definition}\label{def:flip}
+Strategy $A'$ is said to be the \textbf{Flip} of strategy $A$ if, $A$ and $A'$ return different actions for the same game history (includes opponent and self).
+\end{definition}
+
 \begin{table}[htbp]
 \centering
 \begin{tabular}{l l l l}
@@ -149,21 +156,22 @@ Arcs represent the choice made by the opponent at the current turn, and lead us 
 These are not necessarily the simplest FSM representation of the strategies.
 For example, TitForTat requires no knowledge of its own previous moves, but they have been included for completeness.
 
-\begin{figure}[!hbtp]
-    \begin{center}
-        \includestandalone{../img/Tit4TatFSM}
-        \caption{FSM for TitForTat}\label{fig:Tit4TatFSM}
-        \includestandalone{../img/PavlovFSM}
-        \caption{FSM for Pavlov (Win-Stay Lose-Shift)}\label{fig:PavlovFSM}
-    \end{center}
+\begin{figure}[hbtp!]
+\centering
+\subfloat[FSM for TitForTat]{\includestandalone[width = 0.5\textwidth]{../img/Tit4TatFSM}\label{fig:Tit4TatFSM}}
+\subfloat[FSM for Pavlov (Win-Stay Lose-Shift)]{\includestandalone[width = 0.5\textwidth]{../img/PavlovFSM}\label{fig:PavlovFSM}}
+\\
+\subfloat[FSM for Majority in a game with 4 Turns]{\includestandalone[width = 0.8\textwidth]{../img/MajorityFSM}\label{fig:MajorityFSM}}
+\caption{Finite State Machine representations for TitForTat, Pavlov and Majority}
 \end{figure}
 
-\begin{figure}[!hbtp]
-    \begin{center}
-        \includestandalone{../img/MajorityFSM}
-        \caption{FSM for Majority in a game with 4 Turns}\label{fig:MajorityFSM}
-    \end{center}
-\end{figure}
+
+% \begin{figure}[!hbtp]
+%     \begin{center}
+%         \includestandalone{../img/MajorityFSM}
+%         \caption{FSM for Majority in a game with 4 Turns}\label{fig:MajorityFSM}
+%     \end{center}
+% \end{figure}
 
 In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority for a game with 4 turns.
 Majority plays in the following way:
