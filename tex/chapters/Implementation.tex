@@ -48,7 +48,7 @@ The thresholds for Cooperation, Defection and original move are then $x, x+y \te
 
 As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
 As part of this project, a numerical implementation has now been included in the Axelrod-Python library.
-It begins by taking a sample of the $x,y$ values that may define the Joss-Ann Transformer.
+It begins by taking a sample of the $x,y$ values that may define a Joss-Ann Transformer.
 The strategy then plays a match against a transformer with each of the sampled values.
 The average score per turn can be calculated at the end of each match which corresponds to the expected score required by the analytical fingerprint function.
 The whole process can be repeated for reliability and the resulting scores plotted.
@@ -207,31 +207,61 @@ for s in strats:
 \section{The Development Process}\label{sec:dev_process}
 
 The Axelrod-Python library aims to follow best practice at all times with regards to development.
-The source code is hosted at Github and all code is version controlled.
+This section outlines some of these key ideas, and how they were relevant to the implementation of the ability to produce fingerprints within Axelrod-Python.
+
+Scientists face many issues when producing research in the modern world.
+One of the main reasons research can be hard to reproduce is due to the lack of access to underlying data and code, which reduces the opportunity for others to verify findings \cite{Schwab2000, Ince2012}.
+Also, two of the biggest challenges scientists and other programmers face when working with code and data are keeping track of changes (and being able to revert them if things go wrong), and collaborating on a program or dataset \cite{Wilson2013, Matthews}.
+Both of these issues can be resolved by ensuring that all code is version controlled.
+
+Version control systems give users the ability to save versions of files during development along with informative comments which are referred to as commit messages.
+Every change and accompanying notes are stored independent of the files.
+Commits serve as checkpoints where individual files or an entire project can be safely reverted to when necessary \cite{Ram2013}.
 Version control ensures that all changes to a code base are tracked and can be traced back to a particular author.
-It also allow different developers to make sure that they are using the same version of the software, particularly important with regards to reproducing results.
+There are many version control systems available and Axelrod-Python uses Git \cite{Git} with all code hosted at Github.
+One of the major benefits is that every repository (including the one on Github) contains the entire history of all changes, including authorship, and can be viewed by anyone.
 
 The library also applies a strict review process, where any code submission is analysed by several members of the organisation before it can be included.
 This normally involves other developers requesting changes to the submission, this ensure that all source code is of the same high standard.
-Figure \ref{fig:screenshots} shows some screen shots of the discussions, requests and suggestions made during the development process of the fingerprint code.
+Figures \ref{fig:screenshot1} to \ref{fig:screenshot4} shows some screen shots of the discussions, requests and suggestions made during the development process of the fingerprint code.
 
 \begin{figure}[htbp!]
-\ContinuedFloat
 \centering
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot1.png}}
-
-\ContinuedFloat
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot2.png}}
-
-\ContinuedFloat
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot3.png}}
-
-\ContinuedFloat
-\subfloat[Exact analytical fingerprint]{\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot4.png}}
-
-\caption{Screen shots of the discussion for fingerprint code submission.}
-\label{fig:screenshots}
+\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot1.png}
+\caption{A refactoring suggestion to create a new function to avoid repetition}
+\label{fig:screenshot1}
 \end{figure}
+
+\begin{figure}[htbp!]
+\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot4.png}
+\caption{Suggestion to move some code to the module level so that it is more accessible}
+\label{fig:screenshot2}
+\end{figure}
+
+Figures \ref{fig:screenshot1} and \ref{fig:screenshot2} show suggestions that have been made.
+These suggestions do not highlight errors within the code, but are merely small recommendations from experienced developers for ways to improve.
+
+\begin{figure}[htbp!]
+\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot2.png}
+\caption{Advice to use other code being developed for the library}
+\label{fig:screenshot3}
+\end{figure}
+
+Figure \ref{fig:screenshot3} is an example of the power of using git.
+Code that is being developed elsewhere can still be used as part of this project, even though it is not yet available as part of the standard library.
+This is a common occurrence when developing software; some code may rely on other parts but they are not being written by the same person.
+
+\begin{figure}[htbp!]
+\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot3.png}
+\caption{Request to remove redundant lines of code}
+\label{fig:screenshot4}
+\end{figure}
+
+Figure \ref{fig:screenshot4} is a request to move unnecessary lines of code.
+Whilst these would not cause the software to break, it is bad coding practice to have unused imports and redundant lines of code.
+This is an example of something that would have prevented the code I had written from being included in the production version of the package.
+
+
 % \section{Axelrod Python}
 
 % The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
