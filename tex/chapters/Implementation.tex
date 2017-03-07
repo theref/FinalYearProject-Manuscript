@@ -209,6 +209,7 @@ for s in strats:
 The Axelrod-Python library aims to follow best practice at all times with regards to development.
 This section outlines some of these key ideas, and how they were relevant to the implementation of the ability to produce fingerprints within Axelrod-Python.
 
+\subsection{Version Control}
 Scientists face many issues when producing research in the modern world.
 One of the main reasons research can be hard to reproduce is due to the lack of access to underlying data and code, which reduces the opportunity for others to verify findings \cite{Schwab2000, Ince2012}.
 Also, two of the biggest challenges scientists and other programmers face when working with code and data are keeping track of changes (and being able to revert them if things go wrong), and collaborating on a program or dataset \cite{Wilson2013, Matthews}.
@@ -221,6 +222,7 @@ Version control ensures that all changes to a code base are tracked and can be t
 There are many version control systems available and Axelrod-Python uses Git \cite{Git} with all code hosted at Github.
 One of the major benefits is that every repository (including the one on Github) contains the entire history of all changes, including authorship, and can be viewed by anyone.
 
+\subsection{Review Process}
 The library also applies a strict review process, where any code submission is analysed by several members of the organisation before it can be included.
 This normally involves other developers requesting changes to the submission, this ensure that all source code is of the same high standard.
 Figures \ref{fig:screenshot1} to \ref{fig:screenshot4} shows some screen shots of the discussions, requests and suggestions made during the development process of the fingerprint code.
@@ -261,63 +263,16 @@ Figure \ref{fig:screenshot4} is a request to move unnecessary lines of code.
 Whilst these would not cause the software to break, it is bad coding practice to have unused imports and redundant lines of code.
 This is an example of something that would have prevented the code I had written from being included in the production version of the package.
 
+\subsection{Testing}
+All code in Axelrod-Python must be tested and the most common example of testing is unittesting.
+A unit test is a function that tests a small pieces of code and not an entire package/module, although it sometimes can.
+They operate by observing the result for a specific input and comparing it with a known output, then returning whether they are the same.
+A result of True indicates that the code is behaving as intended, and a result of False indicates that it is not.
+Consequently any program relying on that code cannot be trusted to behave as intended \cite{Sarma2016, Williams}.
 
-% \section{Axelrod Python}
-
-% The Axelrod-Python library is equipped with an extensive tests suite and all code is comprehensively documented.
-% The documentation can be found at \url{http://axelrod.readthedocs.io/en/latest/} along with several tutorials designed to help introduce researchers to the library.
-% In total the library now consists of 147 strategies (at the time of writing) including classical ones from the literature and and some exciting original contributions.
-% It is interesting that the original winner, TitForTat, is currently ranked 49th overall.
-% The library also has the capability to run ecological simulations or construct tournaments on alternative topologies (not just the original round robin format).
-
-% An example implementation of a strategy and a demonstration of using the library will now be given, followed by examples of some of the many plots the library can produce.
-% The source code for TitForTat is shown in Listing \ref{lst:TFT}.
-
-% \begin{listing}[htbp!]
-% \begin{SourceCode}
-% class TitForTat(Player):
-%     """
-%     A player starts by cooperating and then mimics the previous action of the
-%     opponent.
-
-%     Note that the code for this strategy is written in a fairly verbose
-%     way. This is done so that it can serve as an example strategy for
-%     those who might be new to Python.
-
-%     Names:
-
-%     - Rapoport's strategy: [Axelrod1980]_
-%     - TitForTat: [Axelrod1980]_
-%     """
-
-%     # These are various properties for the strategy
-%     name = 'Tit For Tat'
-%     classifier = {
-%         'memory_depth': 1,  # Four-Vector = (1.,0.,1.,0.)
-%         'stochastic': False,
-%         'makes_use_of': set(),
-%         'long_run_time': False,
-%         'inspects_source': False,
-%         'manipulates_source': False,
-%         'manipulates_state': False
-%     }
-
-%     def strategy(self, opponent):
-%         """This is the actual strategy"""
-%         # First move
-%         if not self.history:
-%             return C
-%         # React to the opponent's last move
-%         if opponent.history[-1] == D:
-%             return D
-%         return C
-% \end{SourceCode}
-% \caption{Source code for TitForTat}
-% \label{lst:TFT}
-% \end{listing}
-
-% Strategies are implemented as classes with a \mintinline{python}{strategy} method.
-% The strategy method contains the logic that defines how the strategy will behave as can be seen in listing \ref{lst:TFT} lines 28 - 36.
-% If the player does not have a history then it must be the first move and it chooses to play `C'.
-% On all subsequent moves the player checks whether the opponent played `D' on it's previous move.
-% If that statement is true the player also plays `D', otherwise it will play `C'.
+Axelrod-Python uses several external programmes to help with testing.
+Travis \cite{Travis} provides continuous integration testing, so all tests are run automatically whenever any changes to code are made.
+Coveralls \cite{Coveralls} calculates what proportion of the code is tested, and can highlight areas that are either untested or need improvement.
+Finally, Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
+It works by generating random data matching a specification and checking that a specified guarantee still holds in that case.
+If it finds an example where it doesn’t, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
