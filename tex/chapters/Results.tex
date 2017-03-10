@@ -43,6 +43,27 @@ It is possible to observe how changing a parameter for a strategy will affect it
 As described in Section \ref{ssec:strat_random}, Random accepts a parameter that determines the probability of cooperation.
 We can vary this parameter and create a new fingerprint each time.
 
+\begin{figure}[htbp!]
+\centering
+\subfloat[Defector]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Defector.png}}\\[-2ex]
+
+\subfloat[Random(0.1) - will cooperate\protect\\10\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random01.png}}
+\subfloat[Random(0.2) - will cooperate\protect\\20\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random02.png}}
+\subfloat[Random(0.3) - will cooperate\protect\\30\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random03.png}}\\[-2ex]
+
+\subfloat[Random(0.4) - will cooperate\protect\\40\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random04.png}}
+\subfloat[Random(0.5) - will cooperate\protect\\50\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random05.png}}
+\subfloat[Random(0.6) - will cooperate\protect\\60\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random06.png}}\\[-2ex]
+
+\subfloat[Random(0.7) - will cooperate\protect\\70\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random07.png}}
+\subfloat[Random(0.8) - will cooperate\protect\\80\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random08.png}}\\
+
+\subfloat[Cooperator]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Cooperator.png}}
+
+\end{figure}
+
+
+
 \section{Alternator, Cycler(CD), Cooperator, Defector}
 
 \section{GoByMajority for different parameters}\label{sec:GBM}
@@ -66,12 +87,20 @@ For example, Random and Cycler(CDDC) produce identical fingerprints when probed 
 \begin{figure}[htbp!]
     \centering
     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TFT.png}}
-    % \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
     \label{fig:rand_cycle_tft}
 \end{figure}
 
 However, by changing the probe to TitForTwoTats, it becomes obvious that the strategies are different.
+
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
+    \label{fig:rand_cycle_tf2t}
+\end{figure}
 
 % \begin{figure}[htbp!]
 %     \centering
