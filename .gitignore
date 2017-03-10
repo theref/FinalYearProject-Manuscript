@@ -1,6 +1,10 @@
 *.DS_Store
 *checkpoint.ipynb
+<<<<<<< HEAD
 tex/_minted-main/*
+=======
+/tex/_minted-main/*
+>>>>>>> intro
 *.aux
 *.glo
 *.idx
