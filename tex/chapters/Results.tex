@@ -128,3 +128,15 @@ However, by changing the probe to TitForTwoTats, it becomes obvious that the str
 % \end{figure}
 
 \section{LSE plot and table}\label{sec:lse}
+As described several times, a fingerprint for a strategy is merely the expected score when it plays against a probe with varying parameters.
+All the fingerprint plots shown thus far are approximations of this, where the score for specific values of $x, y$ is calculated and then plotted.
+Within Axelrod-Python all these underlying scores are recorded in a \mintinline{python}{csv} file and can therefore be compared directly.
+
+For two strategies $A$ and $B$ where $s_{x, y}^{(A)}$ is the score for strategy $A$ at point $x, y$, we can compute a rudimentary value of `similarness' by calculating:
+$$
+\delta(A, B) = \sum_x \sum_y (s_{x, y}^{(A)} - s_{x, y}^{(B)})^2
+$$
+When $\delta(A, B) \approx 0$, the two strategies $A$, $B$ are very similar, and so further investigation should be carried out between them.
+After calculating $\delta(A, B)$ for all pairs of strategies, a matrix plot can then be created giving an overview of the similarity between the set of strategies.
+This is shown in Figure .%TODO
+
