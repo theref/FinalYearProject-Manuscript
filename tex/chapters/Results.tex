@@ -56,7 +56,8 @@ We can vary this parameter and create a new fingerprint each time.
 \subfloat[Random(0.6) - will cooperate\protect\\60\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random06.png}}\\[-2ex]
 
 \subfloat[Random(0.7) - will cooperate\protect\\70\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random07.png}}
-\subfloat[Random(0.8) - will cooperate\protect\\80\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random08.png}}\\
+\subfloat[Random(0.8) - will cooperate\protect\\80\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random08.png}}
+\subfloat[Random(0.8) - will cooperate\protect\\90\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random09.png}}\\
 
 \subfloat[Cooperator]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Cooperator.png}}
 
@@ -65,6 +66,14 @@ We can vary this parameter and create a new fingerprint each time.
 
 
 \section{Alternator, Cycler(CD), Cooperator, Defector}
+
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Alternator]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Alternator.png}}
+    \subfloat[Fingerprint for Cycler(CD)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CD.png}}
+    \caption{Fingerprints for Alternator and Cylcer(CD) when probed by TitForTat}
+    \label{fig:alt_cycler}
+\end{figure}
 
 \section{GoByMajority for different parameters}\label{sec:GBM}
 
@@ -86,7 +95,7 @@ For example, Random and Cycler(CDDC) produce identical fingerprints when probed 
 
 \begin{figure}[htbp!]
     \centering
-    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TFT.png}}
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05.png}}
     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
     \label{fig:rand_cycle_tft}
@@ -100,6 +109,14 @@ However, by changing the probe to TitForTwoTats, it becomes obvious that the str
     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
     \label{fig:rand_cycle_tf2t}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05_2TFT.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CDDC_2TFT.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
+    \label{fig:rand_cycle_2tft}
 \end{figure}
 
 % \begin{figure}[htbp!]
