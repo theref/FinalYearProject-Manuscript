@@ -2,27 +2,42 @@
 
 \chapter{Implementation}\label{cha:implementation}
 
-This chapter will explain how the method of fingerprinting was implemented within the Axelrod Python Library.
+This chapter will explain how the method of fingerprinting was implemented within the Axelrod-Python Library.
 Each of the definitions presented in Chapter \ref{cha:theory} directly correspond to functions which are described below.
 All strategies have an equivalent class within the library and this is demonstrated in Section \ref{sec:fingerprint-implementation}.
+% TODO What do you mean by all strategies have an equivalent class?
+
+% TODO Add a map/picture showing the various components
 
 \section{The Dual}
 The dual of a strategy is defined such that when the original strategy and the dual are presented with identical histories they will return opposite actions, as outlined in Definition \ref{def:dual}.
-This means the dual relies on knowledge of how the original strategy would have behaved in a given situation, which is impractical to infer from the source code.
+% TODO You'll need to point at the theorem (when you've added it).
+% Make a bigger deal about how in the literature (possibly say this more in
+% previous chapter): you make the DUAL by changing the FSM, but for strategies
+% without an FSM rep that's difficult, so you describe this algorithm which
+% let's you keep track of any inherent state (you're in essence creating an FSM
+% that you carry along). Might be nice to draw a picture here too.
+This means the dual relies on knowledge of how the original strategy would have
+% TODO It's not how the original strategy would have behaved but more
+% importantly what state the original FSM rep of the strategy would be in.
+behaved in a given situation, which is impossible to infer from the source code.
 However, the required behaviour can be achieved by having the original strategy as an attribute of the dual.
 Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should it would have made, and then flip that action.
+% TODO "would have made" which corresponds to gaining knowledge of what state
+% the corresponding FSM would be in.
 
 \begin{algorithm}[H]
-\While{Game is being played}{
-  \If{First Turn}{
-   create copy of original strategy\;}
-  simulate original strategy\;
-  update original strategy's history/internal state\;}
-  \Return{Flip of original strategy's move}
- \caption{The Dual of a Strategy}
+    \While{Game is being played}{
+        \If{First Turn}{
+        create copy of original strategy\;}
+        simulate original strategy\;
+    update original strategy's history/internal state\;}
+    \Return{Flip of original strategy's move}
+    \caption{The Dual of a Strategy}
 \end{algorithm}
 
 \section{The Joss Ann}
+% TODO Move this to before the DUAL?
 
 A formal definition of the Joss Ann is given in Section \ref{sec:joss-ann}.
 Given a probability distribution $(x, y)$ the Joss Ann Cooperates with probability $x$, Defects with probability $y$, and plays the original move with probability $1 -x-y$.
@@ -47,6 +62,9 @@ The thresholds for Cooperation, Defection and original move are then $x, x+y \te
 \section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
 As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
+% TODO Tweak: the fingerprint is defined as an analytical function, here it is
+% implemented as a class that will return the numerical data that represents
+% that analytical function on a given finite domain.
 As part of this project, a numerical implementation has now been included in the Axelrod-Python library.
 It begins by taking a sample of the $x,y$ values that may define a Joss-Ann Transformer.
 The strategy then plays a match against a transformer with each of the sampled values.
@@ -59,11 +77,12 @@ For an example with 9 probes, see Figure \ref{fig:spatialtourn}.
     \begin{center}
         \includestandalone{../img/spatial_tournament}
         \caption{A spatial tournament for the strategy against 9 probes}\label{fig:spatialtourn}
+        % TODO Draw this is a classic network graph.
     \end{center}
 \end{figure}
 
 
-Whether the numerical fingerprint matches the analytical one relies heavily on the choice of parameters.
+How well the numerical fingerprint matches the analytical one relies heavily on the choice of parameters.
 Specifically the \mintinline{python}{turns, repetetitons} and \mintinline{python}{step} variables.
 The \mintinline{python}{step} variable determines the number of $x,y$ values taken.
 Listing \ref{lst:create-points} shows how a grid of points is constructed over the unit square where the distance between each point is taken as \mintinline{python}{step}.
@@ -98,16 +117,22 @@ def create_points(step):
 
 The \mintinline{python}{turns} variable determines how many interactions there will be in a match.
 Enough turns must be selected to ensure that steady long term behaviour is reached otherwise the average score per turn can be wildly innacurate.
+% TODO Find a reference about simulation (Geraint has one in his office: a book
+% by Stewart)
 However, once this state is reached, extending the number of turns has a minimal effect on the accuracy of the plot.
 The \mintinline{python}{repetitions} variable decides how many times the tournament would be repeated.
 The Axelrod-Python implementation of fingerprinting is a random process (due to the Joss-Ann) and high repetitions helps to reduce the effects of this.
 
+% TODO Do you want to discuss the choice of default probe?
 
 \section{Comparison of Analytical and Numerical Plots}
 
-In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from previous literature are shown \cite{Ashlock2004, Ashlock2008}.
+In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from
+previous literature are shown \cite{Ashlock2008, Ashlock2004}.
+% TODO make sure your reference numbers appear in correct order.
 Colourings or shadings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
 The popular plotting library, matplotlib, has many options for different colour maps which are demonstrated in Appendix \ref{app:col_maps}.
+% TODO There will be a recommended way for referencing matplotlib
 
 \begin{figure}[hbtp!]
     \begin{center}
@@ -118,19 +143,19 @@ The popular plotting library, matplotlib, has many options for different colour 
 \end{figure}
 
 Using the analytical fingerprints from previous literature \cite{Ashlock2004, Ashlock2008}, and the fingerprint formulae provided alongside them, the most appropriate colour map was chosen.
-The colour map Seismic \cite{matplotlib-colormap} was selected due to its divergent properties (although all colour maps are available within the library).
+The colour map Seismic \cite{matplotlib-colormap} was selected as a default due to its divergent properties (although all colour maps are available within the library).
 With divergent colour maps, all extreme values (high or low) are coloured, whilst mid range values are left white \cite{Moreland2009}.
 This highlights areas of interest, and in Figure \ref{fig:WSLS-ashlock-comparison} it can be seen that this matches previous work well.
 
 \begin{figure}[hbtp!]
-\centering
-\subfloat[WSLS fingerprint from previous literature \cite{Ashlock2008}]{\includegraphics[width = 0.4\textwidth]{../img/WSLS-Ashlock}}
-\subfloat[Analytical WSLS fingerprint demonstrating Seismic colouring]{\includegraphics[width = 0.7\textwidth]{../img/WSLS-Analytical}}
-\caption{A comparison of a fingerprint plot from previous literature to asses the suitability of the Seismic colour map \cite{Ashlock2008}}
-\label{fig:WSLS-ashlock-comparison}
+    \centering
+    \subfloat[WSLS fingerprint from previous literature \cite{Ashlock2008}]{\includegraphics[width = 0.4\textwidth]{../img/WSLS-Ashlock}}
+    \subfloat[Analytical WSLS fingerprint demonstrating Seismic colouring]{\includegraphics[width = 0.7\textwidth]{../img/WSLS-Analytical}}
+    \caption{A comparison of a fingerprint plot from previous literature to asses the suitability of the Seismic colour map \cite{Ashlock2008}}
+    \label{fig:WSLS-ashlock-comparison}
 \end{figure}
 
-With the knowledge that the choice of colourmap is appropriate, a comparison can now be made between analytical fingerprints and numerical ones obtained via the Axelrod-Python library.
+With the knowledge that the choice of colour map is appropriate, a comparison can now be made between analytical fingerprints and numerical ones obtained via the Axelrod-Python library.
 Table \ref{tab:fingerprint-functions} gives the analytical fingerprint functions of several well known strategies that will then be used to validate the numerical versions.
 
 \begin{table}[htbp!]
@@ -139,20 +164,21 @@ Table \ref{tab:fingerprint-functions} gives the analytical fingerprint functions
 \setlength{\tabcolsep}{12pt}
 \begin{tabular}{l l}
 \toprule
-Strategy & Analytical Fingerprint Function\\
+Strategy                 & Analytical Fingerprint Function\\
 \midrule
-TitForTat &  $\displaystyle \frac{y^2 + 5xy + 3x^2}{(x + y)^2} $\\
-Psycho (Anti TitForTat& $\displaystyle \frac{4(y-1)(x-1) + 5(y-1)^2}{2(y-1)(x-1) + (x-1)^2 + (y-1)^2} $ \\
+TitForTat                & $\displaystyle \frac{y^2 + 5xy + 3x^2}{(x + y)^2} $\\
+Psycho (Anti TitForTat   & $\displaystyle \frac{4(y-1)(x-1) + 5(y-1)^2}{2(y-1)(x-1) + (x-1)^2 + (y-1)^2} $ \\
 WinStayLoseShit (Pavlov) & $\displaystyle \frac{(3x+y)(x-1) + 5y(y-1)}{(x+2y)(x-1) + y(y-1)} $\\
-AllC (Cooperator) & $\displaystyle 3 - 3y $ \\
-AllD (Defector) & $\displaystyle 4x + 1 $\\
+AllC (Cooperator)        & $\displaystyle 3 - 3y $ \\
+AllD (Defector)          & $\displaystyle 4x + 1 $\\
 \bottomrule
 \end{tabular}
 \caption{A selection of analytical fingerprint functions for well known strategies. The probe used is TitForTat.}
 \label{tab:fingerprint-functions}
 \end{table}
 
-Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison} \ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} \ref{fig:Defector-comparison} compare plots of known analytical fingerprint functions with numerical approximations obtained with the Axelrod-Python library.
+Figures \ref{fig:TFT-comparison} \ref{fig:Psycho-comparison}
+\ref{fig:WSLS-comparison} \ref{fig:Cooperator-comparison} and \ref{fig:Defector-comparison} compare plots of known analytical fingerprint functions with numerical approximations obtained with the Axelrod-Python library.
 The analytical plots were created with the code seen in listing \ref{lst:create-several-fingerprints}.
 The parameters \mintinline{python}{turns=500, repetitions=200, step=0.01} are as described in section \ref{sec:fingerprint-implementation}.
 The parameter \mintinline{python}{processes=0} ensures that the function will use the maximum number of cores available on the computer.
@@ -261,7 +287,9 @@ This is a common occurrence when developing software; some code may rely on othe
 
 Figure \ref{fig:screenshot4} is a request to move unnecessary lines of code.
 Whilst these would not cause the software to break, it is bad coding practice to have unused imports and redundant lines of code.
-This is an example of something that would have prevented the code I had written from being included in the production version of the package.
+This is an example of something that would have prevented the code written from being included in the production version of the package.
+% TODO Try (not always easy) to not use "I", "My". This is obviously not to take
+% credit away from you, but it's just a question of academic style.
 
 \subsection{Testing}
 All code in Axelrod-Python must be tested and the most common example of testing is unittesting.
@@ -272,7 +300,11 @@ Consequently any program relying on that code cannot be trusted to behave as int
 
 Axelrod-Python uses several external programmes to help with testing.
 Travis \cite{Travis} provides continuous integration testing, so all tests are run automatically whenever any changes to code are made.
+% TODO Add a screenshot of all the tests passing on the PR?
 Coveralls \cite{Coveralls} calculates what proportion of the code is tested, and can highlight areas that are either untested or need improvement.
 Finally, Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
 It works by generating random data matching a specification and checking that a specified guarantee still holds in that case.
 If it finds an example where it doesn’t, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
+% TODO Do you want to add something about documentation and doctesting too?
+% TODO Needs a conclusion etc (what was the version of Axelrod that first had
+% fingerprinting: check the twitter feed or CHANGES.md)
