@@ -4,9 +4,10 @@
 
 In this chapter several fingerprints will be examined in detail.
 In Section \ref{sec:tft} a breakdown of the fingerprint for TitForTat is given with an explanation of its appearance.
-%TOTO
+%TODO
 Section \ref{sec:GBM} shows several plots for the strategy GoByMajority, with a varying parameter.
-As the parameter changes, a continuous deformation of the plot can be observed.
+As the parameter changes, a continuous deformation of the plot of the
+fingerprint can be observed.
 Finally, in Section \ref{sec:lse} we compare the underlying data for all fingerprints of strategies within Axelrod-Python.
 This data is used to produce a heat plot of strategies similarity.
 
@@ -21,11 +22,15 @@ This expected score has been approximated as outlined in Chapter \ref{cha:implem
 \section{Interpretation of TFT}\label{sec:tft}
 TitForTat (see Section \ref{ssec:stra_titfortat} for an explanation of its behaviour) it is one of the most well known strategies for Prisoner's Dilemma.
 Also, it produces a clean and easy to understand fingerprint, shown in Figure \ref{fig:TFT}, making it an ideal place to start.
+% TODO You need to say who the probe was?
 
 \begin{figure}[hbtp!]
 \centering
 \includegraphics[width = 0.6\textwidth]{../img/Numerical/Tit_For_Tat.png}
 \caption{Fingerprint for TitForTat, with colour bar to add context}
+% TODO The colour bar is default in 2.6 right?
+% Go back and check that any fingerprints have the colour bar and that any
+% discussion makes it clear.
 \label{fig:TFT}
 \end{figure}
 
@@ -35,7 +40,9 @@ However, as $x$ increases higher scores (shown in red) quickly take over.
 This is exactly as expected, TitForTat plays well in highly cooperative environments.
 An immediate question is; why does the white stripe not follow the diagonal?
 The main diagonal is where $x=y$ and due to the random nature of the cooperation and defections, the expected average score for TitForTat would be !!!! about half the maximum.
+% TODO What is !!!!
 Due to the global minimum and maximum that TitForTat achieves, a score of !!!! is not midway, and so the white line showing the middle score is off centre.
+% TODO !!!!
 TitForTat is able to produce better than half scores in this scenario by encouraging the underlying probe strategy to cooperate.
 
 \section{Varying the parameter for Random}

@@ -2,36 +2,53 @@
 
 \chapter{Introduction}\label{cha:introduction}
 
-The Prisoner's Dilemma (PD) is a classical model in Game Theory.d
+The Prisoner's Dilemma (PD) is a classic model in Game Theory.
 It is a simple two player game where the agents must make a choice of two options without communicating.
 This is often presented as two suspects who have been arrested and are being interrogated separately.
 They have the option of whether to cooperate with each other or defect and each player receives an individual payoff that depends on the actions that have been taken.
+% TODO Not clear what cooperation/defection means at this point.
+% TODO Either explain it here or say that a formal description will be given in
+% Section ...
 
 Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
 Furthermore, allow this process to continue repeatedly.
 This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod2016}.
-Every player in IPD will have a strategy.
+% TODO Reference his original 1980s papers (there are two of them).
+Every player in IPD represents have a strategy.
 A strategy is a predetermined program of play that tells the player what actions to take in response to every possible strategy other players might use.
+% TODO This still isn't quite clear as to what a strategy is: explain it in terms of
+% indicating an action to take based on the history of plays so far.
 
-Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 (use our paper for refs). %TODO
+Several computer based IPD tournaments have been held over the years, but the
+first were held by Axelrod in 1980 (use our paper for refs). %TODO
 Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
+% TODO Stewart and Plotkin isn't really worth noting to be honest (it's a small
+% tournament on a small set of strategies).
 The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
+% TODO Discuss general state of reproducible research etc (see the SSI website,
+% you can also take similar references from the library paper).
 
-Recently, a group of scientists have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
+Recently, a group of researchers have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
 Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
 The version of the library used in this work will be \cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
+% TODO I believe you're using v2.6 (to have the state to actions rates) and if
+% I'm not mistaken that has more than 139 strategies.
 
 \section{Prisoner's Dilemma}\label{sec:intro_pd}
-The first formal definition of PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
+The first formal definition of the PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
 However, the idea was first formulated by the Merrils \cite{Flood1958} in 1950 whilst working for the RAND cooperation.
+% TODO don't use `the Merrils`, grab the authors name (or first author et al.)
+% OR (my preference) would be to simply say: "formulated in 1950 \cite{...}."
+% (The RAND cooperation is not at all important at this stage).
 
-A description of the PD - Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
-They receive payoffs as follows:
+The PD can be described as follows. Two players simultaneously decide whether to
+Cooperate $(C)$ or Defect $(D)$, without exchanging information.  They receive
+payoffs as follows:
 
 \begin{itemize}
-\item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
-\item They both choose $D$ (mutual defection) and receive a payoff $P$ (Punish)
-\item One player chooses $C$ and the other chooses $D$. The cooperator receives a payoff $S$ (Sucker) and the defector receives a payoff $T$ (Temptation).
+    \item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
+    \item They both choose $D$ (mutual defection) and receive a payoff $P$ (Punish)
+    \item One player chooses $C$ and the other chooses $D$. The cooperator receives a payoff $S$ (Sucker) and the defector receives a payoff $T$ (Temptation).
 \end{itemize}
 
 Figure \ref{eq:payoff_matrix_symb} shows the payoff matrix.
@@ -50,6 +67,7 @@ Secondly, there is no communication between them.
 It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
 Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
 Additionally, to ensure this behaviour occurs, the payoffs must satisfy the following inequalities:
+% TODO You need to move this assumption to before the description of the NE.
 
 \begin{equation}\label{eq:intuitive}
 S < D < C < T
@@ -65,7 +83,11 @@ Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
 These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
 We can now formulate the new payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
+% TODO This is not a new payoff matrix. It is just the same payoff matrix with a
+% given set of parameters.
 A more detailed explanation of the Prisoner's Dilemma is given in \cite{Gotts2003}.
+% TODO Why now point at the more detailed explanation? Simply move this
+% reference to the start of your explanation (which is plenty detailed enough).
 
 \begin{equation}\label{eq:payoff_matrix}
 %
@@ -77,20 +99,30 @@ P = \bordermatrix{~ & C & D \cr
 
 \section{Problem Description}
 
-As previously mentioned, the Axelrod-Python library contains 139 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments.
+As previously mentioned, the Axelrod-Python library contains 139 strategies,
+significantly more than the 13 and 64 strategies submitted to Axelrod's first
+and second tournaments.  % TODO Repeat the references for Axelrod's 1st and 2nd
+% TODO Get right number of strategies for the given version and say here "the
+% version of the Axelrod-Python library used in this report has {{N}} strategies"
 This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
-Currently the only known approach to this problem in literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
+Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
+% TODO Find reference.
 
 The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
-In this paper an algorithm is presented that allows the construction of a fingerprint for any strategy.
-Example code is also given that shows how this has been implemented within the Axelrod library.
+Secondly, although the fingerprinting method is described and used at length in
+\cite{} there is no source code readily available. This project will document an
+% TODO Go to town here: grab each and everyone.
+Implementation of fingerprinting that is at present available in the
+Axelrod-Python library (Chapter \ref{}) and also consider a statistical approach to identifying
+similar strategies (Chapter \ref{}).  % TODO Add pointers to chapters.
 
-%TODO - a new way of telling strategies apart...signiture?
+% TODO Don't use paper for this report: use manuscript or report
 
 \section{Structure}
 
 Throughout this paper examples and demonstrations of code will be given.
 Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this paper.
+% TODO s/paper/{report/manuscript}
 In order to help the reader differentiate between each scenario, two different colour schemes have been used.
 The first, for Axelrod-Python source code is shown in listing \ref{lst:examplesourcecode} and the second, for any bespoke code, is shown in listing \ref{lst:exampleexamplecode}.
 
@@ -127,5 +159,6 @@ This report is organized into several chapters. Continuing from this introductio
     \item Chapter \ref{cha:theory} an example analytical fingerprint is constructed
     \item Chapter \ref{cha:results} example code, the algorithm and comparison of fingerprints
     \item Chapter \ref{cha:conclusion}
+        % TODO I think this will need to be updated right?.
 \end{itemize}
 

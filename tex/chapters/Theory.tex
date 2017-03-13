@@ -6,6 +6,8 @@ Many definitions will be now be presented, with the overall aim being to have a 
 Definitions for the Dual, Joss-Ann and Fingerprint were first presented by Ashlock in \cite{Ashlock2004} as mentioned in Section \ref{sec:fingerprinting}.
 Then a definition of Finite State Machines will be given, and an explanation of how they relate to fingerprinting.
 Finally, an example of how to construct a fingerprint will be shown in Section \ref{sec:analytical-fingerprints}.
+In essence this chapter presents a detailed review of the work of
+\cite{Ashlock...}  % TODO Grab a bunch of references.
 
 \section{The Joss-Ann}\label{sec:joss-ann}
 The Joss-Ann is a basic transformation that can be applied to a strategy.
@@ -13,30 +15,37 @@ It operates by making a probabilistic choice of cooperation, defection or the or
 More formally:
 
 \begin{definition}\label{def:joss-ann}
-If $A$ is a strategy for playing the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A}, $\JA(A, x, y)$ is a transformation of that strategy.
-Instead of the original behaviour, it makes move `C' with probability $x$, move `D' with probability $y$, and otherwise uses the response appropriate to strategy $A$ (if $x+y < 1$).
+If $A$ is a strategy for the iterated prisoner's dilemma, then the
+\textbf{Joss-Anne of A} denoted by $\JA(A, x, y)$ is a transformation of that strategy.
+Instead of the original behaviour, it makes move `C' with probability $x$, move
+`D' with probability $y$, and otherwise uses the response appropriate to
+strategy $A$ (assuming $x+y < 1$).
 \end{definition}
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
 Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
 Anne is the first name of A. Stanley who suggested the addition of random cooperation instead of random defection \cite{Ashlock2008}.
-When $x + y = 1$, the original strategy is not used, and the resulting behaviour is a random strategy with probabilities $(x, y)$.
-In more general terms, a $\JA$ strategy is an alteration of a strategy $A$ that causes the strategy to be played with random noise inserted into the responses.
+When $x + y = 1$, the original strategy is not used, and the resulting behaviour
+is a random strategy with probabilities $(x, y)$. Note that this corresponds to
+Random($x$) as described in Section~\ref{}.  % TODO Add the target
+In more general terms, a $\JA$ strategy is an alteration of $A$ that causes the strategy to be played with random noise inserted into the responses.
 
 \section{The Dual}\label{sec:dual}
-The Dual is another, more complex transformation of a strategy (note that transformations can be applied over each other).
-Given a history for an opponent, the responses of the original strategy and the dual would be opposite.
+The Dual is another, more complex transformation of a strategy (note that both
+these transformations can be applied commutatively).
 
 \begin{definition}\label{def:dual}
 Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
 \end{definition}
 
-It is important to note that this is different to taking a strategy and flipping it's responses.
+It is important to note that this is different to taking a strategy and flipping its responses.
 The dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not.
 This is shown in Table \ref{tab:strat-dual-flip}.
 For an outline of how Pavlov plays, see Section \ref{ssec:strat_pavlov}.
+% TODO Why the pointer to Pavlov here? It's out of place as is.
 
 \section{The Flip}\label{sec:flip}
+% TODO This is simpler than the dual, should you present it first?
 The Flip is a simple transformation that returns the opposite of the strategy.
 This is subtly different from the Dual as demonstrated below.
 
@@ -45,29 +54,30 @@ Strategy $A'$ is said to be the \textbf{Flip} of strategy $A$ if, $A$ and $A'$ r
 \end{definition}
 
 \begin{table}[htbp]
-\centering
-\begin{tabular}{l l l l}
-\toprule
-Opponent & Pavlov & Dual & Flip \\
-\midrule
-C & C & D & D \\
-D & C & D & C \\
-D & D & C & C \\
-C & C & D & C \\
-C & C & D & D \\
-D & C & D & C \\
-C & D & C & C \\
-D & D & C & D \\
-  & C & D & D \\
-\bottomrule
-\end{tabular}
-\caption{The different responses of Pavlov, Pavlov's Dual and Flipped Pavlov}
-\label{tab:strat-dual-flip}
+    \centering
+    \begin{tabular}{l l l l}
+        \toprule
+        Opponent history & Pavlov & Dual & Flip \\
+        \midrule
+        C & C & D & D \\
+        D & C & D & C \\
+        D & D & C & C \\
+        C & C & D & C \\
+        C & C & D & D \\
+        D & C & D & C \\
+        C & D & C & C \\
+        D & D & C & D \\
+          & C & D & D \\
+        \bottomrule
+    \end{tabular}
+    \caption{The different responses of Pavlov, Pavlov's Dual and Flipped Pavlov}
+    \label{tab:strat-dual-flip}
 \end{table}
 
 The subtle difference between Dual and Flip can be highlighted further by inspecting each row individually.
 
 \underline{Row 1} - Pavlov always plays `C' on the first go.
+% TODO More mixing of `C', `C` and $C$. Choose and stick to it.
 Flip will change this to `D'.
 Dual knows that Pavlov always plays `C' regardless of the opponents history and so swaps to `D'.
 
@@ -93,6 +103,11 @@ The double fingerprint extends this idea to $x+y \geq 1$.
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and \textbf{probe} $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
 \end{definition}
 
+% TODO I think you need to point out that $F_A$ is an analytical expression. So
+% a fingerprint is an analytical function. In a way that's very important when
+% it comes to probing with strategies that are not representable as FSM. You
+% should also include a discussion here about how Ashlock is constrained by
+% their choice of probe. Quote something they say about FSM reps.
 
 \begin{definition}\label{def:double-fingerprint}
 The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $\JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
@@ -124,9 +139,14 @@ Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left}
     \begin{center}
         \includestandalone{../img/Dual}
         \caption{Where the Strategy plays against the Joss-Ann of the probe or the Joss-Ann of the dual of the probe}\label{fig:DualProbe}
+        % TODO Add some labels to this figure: it's just a square with funky
+        % colors in.
     \end{center}
 \end{figure}
 
+% TODO Introduce the next section and highlight why FSMs are important. Although
+% I wonder if you should move the defeinition of an FSM to before your
+% definition of a DUAL.
 \section{Finite State Machines}\label{sec:fsm}
 
 A formal definition of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modelled with a FSM:
@@ -159,6 +179,8 @@ Arcs represent the choice made by the opponent at the current turn, and lead us 
 
 These are not necessarily the simplest FSM representation of the strategies.
 For example, TitForTat requires no knowledge of its own previous moves, but they have been included for completeness.
+% TODO It's not just for completeness, if they were omitted than the FSM would not
+% indicate to us what TfT does right?
 
 \begin{figure}[hbtp!]
 \centering
@@ -181,11 +203,17 @@ Majority plays in the following way:
 Clearly this means that the strategy Majority requires knowledge of all previous states.
 In general this implies that Majority could not be represented as a FSM.
 However if the number of turns in a game is known, any strategy can be represented as a FSM.
+% TODO This needs to be stated as a theorem etc.
 
 \section{Proof of FSM for every strategy}\label{sec:fsm_proof}
 
+% TODO
+
 
 \section{Analytical Fingerprints}\label{sec:analytical-fingerprints}
+
+% TODO This should be before the theorem about FSMs for any strategy.
+
 There are several steps to constructing the Fingerprint of a strategy and basic knowledge of Markov Chains is required.
 An outline of the steps is as follows:
 
@@ -247,6 +275,8 @@ F = \pi \cdot
 \end{equation}
 
 \textbf{Step 5} - Plot the resulting function, shown in Figure \ref{fig:pavlov_fing_ex}
+% TODO This is not technically part of the fingerprinting process. The
+% fingerprint is the analytic function.
 
 \begin{figure}[htbp!]
 \centering
@@ -270,3 +300,8 @@ S = \bigcup_{i=0}^{n+1} \{C, D\}^i \times \{C, D\}^i
 \]
 
 \end{proof}
+
+% TODO There is a bit more missing here. The theorem and the fact that we CAN
+% probe with any strategy is missed out. You should also point to the relevant
+% implementation sections.
+% TODO Finally, you also need a conclusion.
