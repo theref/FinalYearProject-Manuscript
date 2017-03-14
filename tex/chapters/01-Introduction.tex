@@ -13,7 +13,6 @@ Furthermore, allow this process to continue repeatedly.
 This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod1980a, Axelrod1980b}.
 Every player in IPD represents a strategy. A strategy is a predetermined program that tells the player what actions to take in response to the history of plays so far.
 
-
 Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 \cite{Axelrod1980a, Axelrod1980b}.
 Some much smaller tournaments are the two anniversary tournaments held in 2004 and the Stewart and Plotkin 2012 tournament.
 The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
@@ -75,7 +74,6 @@ Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and d
 These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
 We can now explicitly state the payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
 
-
 \begin{equation}\label{eq:payoff_matrix}
 %
 P = \bordermatrix{~ & C & D \cr
@@ -86,30 +84,20 @@ P = \bordermatrix{~ & C & D \cr
 
 \section{Problem Description}
 
-As previously mentioned, the Axelrod-Python library contains 139 strategies,
-significantly more than the 13 and 64 strategies submitted to Axelrod's first
-and second tournaments.  % TODO Repeat the references for Axelrod's 1st and 2nd
-% TODO Get right number of strategies for the given version and say here "the
-% version of the Axelrod-Python library used in this report has {{N}} strategies"
+As previously mentioned, the version of the Axelrod-Python library used in this report has 181 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments \cite{Axelrod1980a, Axelrod1980b}.
 This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
 Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
 % TODO Find reference.
 
 The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
-Secondly, although the fingerprinting method is described and used at length in
-\cite{} there is no source code readily available. This project will document an
-% TODO Go to town here: grab each and everyone.
-Implementation of fingerprinting that is at present available in the
-Axelrod-Python library (Chapter \ref{}) and also consider a statistical approach to identifying
-similar strategies (Chapter \ref{}).  % TODO Add pointers to chapters.
+Secondly, although the fingerprinting method is described and used at length in \cite{Ashlock2010, Ashlock2008, Ashlock2004, Ashlock2006, Ashlock2005, Ashlock2009} there is no source code readily available, it must be requested from the original author.
+This project will document an implementation of fingerprinting that is at present available in the Axelrod-Python library (Chapter \ref{cha:implementation}) and also consider a statistical approach to identifying similar strategies (Chapter \ref{cha:machinelearning}).
 
-% TODO Don't use paper for this report: use manuscript or report
 
 \section{Structure}
 
-Throughout this paper examples and demonstrations of code will be given.
-Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this paper.
-% TODO s/paper/{report/manuscript}
+Throughout this report examples and demonstrations of code will be given.
+Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this report.
 In order to help the reader differentiate between each scenario, two different colour schemes have been used.
 The first, for Axelrod-Python source code is shown in listing \ref{lst:examplesourcecode} and the second, for any bespoke code, is shown in listing \ref{lst:exampleexamplecode}.
 
