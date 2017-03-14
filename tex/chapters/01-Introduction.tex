@@ -2,56 +2,39 @@
 
 \chapter{Introduction}\label{cha:introduction}
 
-The Prisoner's Dilemma (PD) is a classic model in Game Theory. It is a simple
-two player game where the agents must make a choice of two options without
-communicating. This is often presented as two suspects who have been arrested
-and are being interrogated separately. They have the option of whether to
-cooperate with each other or defect and each player receives an individual
-payoff that depends on the actions that have been taken. This may appear quite
-abstract, so a more formal definition is given in Section \ref{sec:intro_pd}.
+The Prisoner's Dilemma (PD) is a classic model in Game Theory.
+It is a simple two player game where the agents must make a choice of two options without communicating.
+This is often presented as two suspects who have been arrested and are being interrogated separately.
+They have the option of whether to cooperate with each other or defect and each player receives an individual payoff that depends on the actions that have been taken.
+This may appear quite abstract, so a more formal definition is given in Section \ref{sec:intro_pd}.
 
-Consider the situation that both prisoners return to their cells each night, to
-be presented with the same choice the next day. Furthermore, allow this process
-to continue repeatedly. This is called the Iterated Prisoner's Dilemma (IPD) and
-has been an object of interest ever since the 1950's but became more popular
-after Robert Axelrod's work in the 1980's \cite{Axelrod1980a, Axelrod1980b}.
-Every player in IPD represents a strategy. A strategy is a predetermined program
-that tells the player what actions to take in response to the history of plays
-so far.
+Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
+Furthermore, allow this process to continue repeatedly.
+This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod1980a, Axelrod1980b}.
+Every player in IPD represents a strategy. A strategy is a predetermined program that tells the player what actions to take in response to the history of plays so far.
 
 
-Several computer based IPD tournaments have been held over the years, but the
-first were held by Axelrod in 1980 \cite{Axelrod1980a, Axelrod1980b}. Some much
-smaller tournaments are the two anniversary tournaments held in 2004 and the
-Stewart and Plotkin 2012 tournament. The original source code of these is only
-available for Axelrod's second tournament (in FORTRAN) and it is not well
-documented, tested or easily re-usable.
+Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 \cite{Axelrod1980a, Axelrod1980b}.
+Some much smaller tournaments are the two anniversary tournaments held in 2004 and the Stewart and Plotkin 2012 tournament.
+The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
 
 % TODO Discuss general state of
 % reproducible research etc (see the SSI website, % you can also take similar
 % references from the library paper).
 
-Recently, a group of researchers have been working to improve this situation by
-producing an open source version of Axelrod's original tournament
-\cite{Knight2016}. Referred to as the Axelrod-Python library, it aims to provide
-a resource for the design of new strategies and interactions between them, as
-well as conducting tournaments and ecological simulations for populations of
-strategies. The version of the library used in this work will be
-\cite{axelrodproject}, the library currently has 181 strategies implemented with
-the capability to run evolutionary tournaments and tournaments on different
-topologies.
+Recently, a group of researchers have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
+Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
+The version of the library used in this work will be \cite{axelrodproject}, the library currently has 181 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
 
 
 \section{Prisoner's Dilemma}\label{sec:intro_pd}
-The first formal definition of the PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
-However, the idea was first formulated by the Merrils \cite{Flood1958} in 1950 whilst working for the RAND cooperation.
-% TODO don't use `the Merrils`, grab the authors name (or first author et al.)
-% OR (my preference) would be to simply say: "formulated in 1950 \cite{...}."
-% (The RAND cooperation is not at all important at this stage).
 
-The PD can be described as follows. Two players simultaneously decide whether to
-Cooperate $(C)$ or Defect $(D)$, without exchanging information.  They receive
-payoffs as follows:
+The first formal definition of the PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
+However, the idea was first formulated in 1950 \cite{Flood1958}.
+A more detailed explanation of the Prisoner's Dilemma is given in \cite{Gotts2003}.
+
+The PD can be described as follows. Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
+They receive payoffs as follows:
 
 \begin{itemize}
     \item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
@@ -69,13 +52,10 @@ P = \bordermatrix{~ & C & D \cr
 %
 \end{equation}
 
-There are also two assumptions that need to be stated.
+There are also three assumptions that need to be stated.
 Firstly, both players are rational.
 Secondly, there is no communication between them.
-It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
-Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
-Additionally, to ensure this behaviour occurs, the payoffs must satisfy the following inequalities:
-% TODO You need to move this assumption to before the description of the NE.
+Finally, that the payoffs satisfy the following inequalities:
 
 \begin{equation}\label{eq:intuitive}
 S < D < C < T
@@ -87,15 +67,14 @@ and
 (S + T) < 2 C
 \end{equation}
 
+It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
+Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
+
 Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
 These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
-We can now formulate the new payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
-% TODO This is not a new payoff matrix. It is just the same payoff matrix with a
-% given set of parameters.
-A more detailed explanation of the Prisoner's Dilemma is given in \cite{Gotts2003}.
-% TODO Why now point at the more detailed explanation? Simply move this
-% reference to the start of your explanation (which is plenty detailed enough).
+We can now explicitly state the payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
+
 
 \begin{equation}\label{eq:payoff_matrix}
 %
