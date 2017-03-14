@@ -2,42 +2,45 @@
 
 \chapter{Introduction}\label{cha:introduction}
 
-The Prisoner's Dilemma (PD) is a classic model in Game Theory.
-It is a simple two player game where the agents must make a choice of two options without communicating.
-This is often presented as two suspects who have been arrested and are being interrogated separately.
-They have the option of whether to cooperate with each other or defect and each player receives an individual payoff that depends on the actions that have been taken.
-% TODO Not clear what cooperation/defection means at this point.
-% TODO Either explain it here or say that a formal description will be given in
-% Section ...
+The Prisoner's Dilemma (PD) is a classic model in Game Theory. It is a simple
+two player game where the agents must make a choice of two options without
+communicating. This is often presented as two suspects who have been arrested
+and are being interrogated separately. They have the option of whether to
+cooperate with each other or defect and each player receives an individual
+payoff that depends on the actions that have been taken. This may appear quite
+abstract, so a more formal definition is given in Section \ref{sec:intro_pd}.
 
-Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
-Furthermore, allow this process to continue repeatedly.
-<<<<<<< HEAD:tex/chapters/Introduction.tex
-This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod1980a}.
-Every player in IPD will have a strategy.
-=======
-This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod2016}.
-% TODO Reference his original 1980s papers (there are two of them).
-Every player in IPD represents have a strategy.
->>>>>>> a44888f7ccc464e21502dd2c24a165a0d349b12b:tex/chapters/01-Introduction.tex
-A strategy is a predetermined program of play that tells the player what actions to take in response to every possible strategy other players might use.
-% TODO This still isn't quite clear as to what a strategy is: explain it in terms of
-% indicating an action to take based on the history of plays so far.
+Consider the situation that both prisoners return to their cells each night, to
+be presented with the same choice the next day. Furthermore, allow this process
+to continue repeatedly. This is called the Iterated Prisoner's Dilemma (IPD) and
+has been an object of interest ever since the 1950's but became more popular
+after Robert Axelrod's work in the 1980's \cite{Axelrod1980a, Axelrod1980b}.
+Every player in IPD represents a strategy. A strategy is a predetermined program
+that tells the player what actions to take in response to the history of plays
+so far.
+
 
 Several computer based IPD tournaments have been held over the years, but the
-first were held by Axelrod in 1980 (use our paper for refs). %TODO
-Others worth noting are the two anniversary tournaments  held in 2004 and the Stewart and Plotkin 2012 tournament.
-% TODO Stewart and Plotkin isn't really worth noting to be honest (it's a small
-% tournament on a small set of strategies).
-The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
-% TODO Discuss general state of reproducible research etc (see the SSI website,
-% you can also take similar references from the library paper).
+first were held by Axelrod in 1980 \cite{Axelrod1980a, Axelrod1980b}. Some much
+smaller tournaments are the two anniversary tournaments held in 2004 and the
+Stewart and Plotkin 2012 tournament. The original source code of these is only
+available for Axelrod's second tournament (in FORTRAN) and it is not well
+documented, tested or easily re-usable.
 
-Recently, a group of researchers have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
-Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
-The version of the library used in this work will be \cite{axelrodproject}, the library currently has 139 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
-% TODO I believe you're using v2.6 (to have the state to actions rates) and if
-% I'm not mistaken that has more than 139 strategies.
+% TODO Discuss general state of
+% reproducible research etc (see the SSI website, % you can also take similar
+% references from the library paper).
+
+Recently, a group of researchers have been working to improve this situation by
+producing an open source version of Axelrod's original tournament
+\cite{Knight2016}. Referred to as the Axelrod-Python library, it aims to provide
+a resource for the design of new strategies and interactions between them, as
+well as conducting tournaments and ecological simulations for populations of
+strategies. The version of the library used in this work will be
+\cite{axelrodproject}, the library currently has 181 strategies implemented with
+the capability to run evolutionary tournaments and tournaments on different
+topologies.
+
 
 \section{Prisoner's Dilemma}\label{sec:intro_pd}
 The first formal definition of the PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
