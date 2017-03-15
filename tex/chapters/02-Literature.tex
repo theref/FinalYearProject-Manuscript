@@ -15,13 +15,10 @@ similar strategies) and some necessary definitions and theorems are given at the
 The political scientist Robert Axelrod held the first IPD tournament in 1980 \cite{Axelrod1980a}.
 Many well-known game theorists were invited to submit strategies that would compete against each other in a round robin style format.
 All strategies also competed against a random strategy (that would randomly choose between $C$ and $D$) and a copy of themselves.
-% TODO In intro you've used $C$ and $D$, choose.
 All strategies knew that the length of each game was 200 moves, and the whole tournament was repeated 5 times for reliability.
-Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto.
-% TODO Reference Rapoport paper (there is one on TfT I believe)
+Out of the 13 strategies that were entered, TitForTat was announced as the winner and was submitted by Professor Anatol Rapoport from the Department of Psychology of the University of Toronto \cite{Rapoport2015}.
 
-TitForTat is a very simple strategy (see Section \ref{ssec:stra_titfortat}) and
-as explained in \cite{Axelrod1980b}, Axelrod surmised that it won because of three defining characteristics:
+TitForTat is a very simple strategy (see Section \ref{ssec:stra_titfortat}) and as explained in \cite{Axelrod1980b}, it won because of three defining characteristics:
 
 \begin{itemize}
     \item `Niceness' - A strategy is said to be nice if it is not the first to defect.
@@ -81,9 +78,8 @@ Thus the game is completely deterministic and the outcome depends only on the in
 One particularly interesting result is that if a single Defector invades a world of Cooperators, long (but finite) sequences of patterns emerge.
 Due to the symmetry of the game rules, all the patterns are highly symmetric and have the appearance of kaleidoscopes.
 
-The primary purpose of \cite{Bendor1991} was to discover the effect of noise on
+The primary purpose of \cite{Bendor1991} was to discover the effect of noise on TitForTat's performance in an IPD.
 % TODO Introduce this paragraph better, it is not related to the previous one.
-TitForTat's performance in an IPD.
 As had been previously claimed its performance was significantly reduced.
 The authors of \cite{Bendor1991} suggest that this is due to the provocability mentioned earlier, which in the presence of noise, can causes it to fall into unintended vendettas with other nice, but provocable strategies.
 Strategies that outperformed TitForTat were far more forgiving, which enabled them to get back to mutual cooperation much faster after an accidental defection.
@@ -109,17 +105,13 @@ The strategy Gradual is present in \cite{Beaufils1997}.
 It begins the game by cooperating, then after the first defection of the other player, it defects one time and cooperates twice.
 After the second defection of the opponent, it defects two times and cooperates twice.
 After the $n^{th}$ defection it reacts with $n$ consecutive defections and then two cooperations.
-In \cite{Beaufils1997} it is claimed that Gradual outperforms TitForTat and this has been confirmed by work done through the Axelrod-Python library \cite{Knight2016}.
-% TODO Careful with the confirmation by the library. How is this confirmed? Is
-% it just that that's what we've seen in some tournaments or is it always the
-% case.
+In \cite{Beaufils1997} it is claimed that Gradual outperforms TitForTat and this has been observed in similar tournaments run through Axelrod-Python \cite{axelrodproject}.
+
 
 \subsection{Random}\label{ssec:strat_random}
 Random plays  by choosing randomly between whether to cooperate or defect.
-The probabilities of choosing cooperate or defect are not necessarily even, instead they could rely on some distribution.
-% TODO The probabilities do not rely on some distribution, they are the
-% distribution
-We will denote the strategy that chooses to cooperate with probability $p$ as Random($p$).
+The probabilities of choosing cooperate or defect are not necessarily even, instead they are a distribution which can be specified.
+The strategy that chooses to cooperate with probability $p$ will be denoted as Random($p$).
 For example, the strategy that randomly chooses to cooperate $20\%$ of the time and defect $80\%$ of the time would be Random($0.2$).
 
 \subsection{Cooperator/Defector}\label{ssec:strat_coop_defect}
@@ -128,35 +120,43 @@ Cooperator will choose to cooperate at every turn, and similarly Defector will c
 
 \subsection{Cycler}\label{ssec:strat_cycler}
 The strategy Cycler($s$) will repeat a given sequence of moves $s$.
-For example Cycler(CD) would play CDCDCD\dots and Cycler(CDDDC) would play CDDDCCDDDCCDDDC...
+For example Cycler($CD$) would play $CDCDCD$\dots and Cycler($CDDDC$) would play $CDDDCCDDDCCDDDC$\dots
 
 \subsection{Evolved Looker-Up}\label{ssec:strat_evolved_lu}
-The winning strategy in the version of Axelrod-Python used throughout this paper is Evolved Looker-Up.
-% TODO Be clear what you mean by "winning": it only makes sense to describes in
-% terms of the environment in which it plays right?
+The winner of the round robin tournament in the version of Axelrod-Python (see Section \ref{sec:axelrod-python}) used throughout this paper is Evolved Looker-Up.
 
-The author, Martin Jones, has produced a thorough explanation of how the strategy was written in \cite{MoJones}, and a brief outline will be given here.
+The author, Martin Jones, has produced a thorough explanation of how the strategy was created in \cite{MoJones}, and a brief outline will be given here.
 The strategy uses a lookup table to determine the action it should take.
-A lookup table is similar to a hash table when programming, where the keys could be the opponents previous moves and the values the next action the strategy should take.
-% TODO A picture would be nice here.
-The length of the key could be extended to include the opponents two previous moves (or more).
-% TODO It is not the length of the key that is extend but the key itself
-It is clear that for a key length $l$, there are $n = 2^l$ keys.
-% TODO length is ambiguous, you mean "l parameters"
+A lookup table is similar to a hash table when programming, where the keys could be the opponents previous two moves and the values the next action the strategy should take, see Table \ref{tab:lookup_table} for an example of this.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{l l}
+        \toprule
+        Key & Next action \\
+        \midrule
+        $CC$ & $C$ \\
+        $CD$ & $D$ \\
+        $DC$ & $C$ \\
+        $DD$ & $D$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{An example look up table that used the opponents previous 2 moves as the key}
+    \label{tab:lookup_table}
+\end{table}
+
+The key could then be extended to include the opponents first two moves (or more).
+It is clear that for a key with $l$ parameters, there are $n = 2^l$ keys, because there are two options for each parameter, $C$ or $D$.
 For each key the next action could be Cooperate or Defect, and so there are a total of $2^n$ possible lookup tables.
-% TODO You've used `C`, $C$ and Cooperate. Be consistent.
-If a Looker-up uses as its keys: the opponents first two moves, the opponents previous two moves, and the strategies own previous two moves.
-% TODO Have a check on the version of the library used, there are a number of
-% LookerUp strategies now.
-Then we have $n = 2^6 = 64$ keys, and therefore $2^{64} \simeq 10^{18}$ possible lookup tables.
+For example, a Looker-up uses as its keys: the opponents first two moves, the opponents previous two moves, and the strategies own previous two moves.
+In this case there are $n = 2^6 = 64$ keys, and therefore $2^{64} \simeq 10^{18}$ possible lookup tables.
 
 An evolutionary algorithm is then used to find the best possible table.
 The operates by initially creating a population of many different lookup tables.
-Then a new lookup table is created by combining two pre existing ones together
-(similar to how DNA is joined in sexual reproduction).
+Then a new lookup table is created by combining two pre existing ones together (similar to how DNA is joined in sexual reproduction).
 % Reproduction is a general term and has nothing to do with DNA (a photo copier
 % does not use DNA).
-There is a probability (normally low) of some of the new lookup table mutating.
+There is a probability (normally low) of some section of the new lookup table mutating.
 Next, several more random lookup tables are produced.
 % TODO A picture would be nice here.
 Finally, all lookup tables are scored and poor performers are discarded.
@@ -169,8 +169,7 @@ Alternatively, the code used to produce the lookup table is given in \cite{axelr
 
 \section{Finite State Machines and Automatons}
 An Automaton is an abstract model of a machine that can perform operations on an input.
-A more general (and powerful) abstraction of an automaton is the famous Turing machine, which can perform any computational process carried out by present day computers \cite{Kandar2013}.
-% TODO Find a nice (old) reference for Turing machines
+A more general (and powerful) abstraction of an automaton is the famous Turing machine, which can perform any computational process carried out by present day computers \cite{Turing1936, Kandar2013}.
 In the case where an automaton has a finite set of set of states, it is referred to as a Finite State Machine.
 If this FSM has outputs it is called a Moore Machine \cite{Ndjountche2016}.
 A more detailed of Finite State Machines is given in Section \ref{sec:fsm}.
@@ -187,12 +186,9 @@ However, in Section \ref{sec:fsm_proof} it is shown that if the length of a game
 
 % TODO Add a transition sentence, introduce what the section is.
 
-\section{Axelrod-Python Library}
-% TODO I wonder if this section should be moved to before your description of
-% LookerUp strategies (or at least you should put a pointer from there to here).
+\section{Axelrod-Python Library}\label{sec:axelrod-python}
 
-The Axelrod-Python library \cite{axelrodproject} is an open source Python
-package for carrying out reproducible research into the Prisoner's Dilemma.
+The Axelrod-Python library \cite{axelrodproject} is an open source Python package for carrying out reproducible research into the Prisoner's Dilemma.
 
 The original aim was to recreate Axelrod's tournaments as described in Section~\ref{sec:axelrodoriginal} and verify their results.
 As the library has grown, so has the overall aim.
@@ -201,8 +197,6 @@ The goal now, is "to provide a resource, with facilities for the design of new s
 As mentioned in Chapter \ref{cha:introduction} for many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
 % TODO Add pointer
 The library is partly motivated by a desire to improve this situation, and there is much discussion within academia currently regarding reproducible research \cite{Crick2014, Hong2015, Procter2012, Sandve2013}.
-% TODO These were the references I think I wanted you to add in the previous
-% chapter. You're repeating yourself: perhaps remove one of the discussions.
 Some key characteristics are that the library is:
 
 \begin{itemize}
@@ -224,7 +218,7 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
     \begin{ExampleCode}
         >>> import axelrod as axl
         >>> axl.seed(0)  # Set a seed
-        >>> players = [s() for s in axl.strategies]  # Create players
+        >>> players = [axl.TitForTat, axl.Cooperator, axl.Random, axl.Gradual]  # Create players
         >>> tournament = axl.Tournament(players)  # Create a tournament
         >>> results = tournament.play()  # Play the tournament
         >>> plot = axl.Plot(results)
@@ -236,20 +230,19 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
     \caption{Example code to produce a simple tournament}
     \label{lst:tournament}
 \end{listing}
-% TODO Perhaps nicer to use the strategies you've described at the beginning of
-% this chapter.
 
-\begin{figure}
-%TODO
-\begin{center}
+\begin{figure}[hbtp!]
+\centering
+\includegraphics[width = 0.5\textwidth]{../img/examples/small_violin.png}
 \caption{Ranked violin plot of the mean payoff for each player}
 \label{fig:violinplot}
-\end{center}
+\end{figure}
 
-\begin{center}
+\begin{figure}
+\centering
+\includegraphics[width = 0.5\textwidth]{../img/examples/small_payoff.png}
 \caption{Matrix plot of pair wise payoffs for each player}
 \label{fig:matrixplot}
-\end{center}
 \end{figure}
 
 % TODO Add a transition sentence.
