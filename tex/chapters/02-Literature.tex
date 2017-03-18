@@ -91,12 +91,10 @@ This section will provide a description of some of these strategies in order to 
 \subsection{TitForTat}\label{ssec:stra_titfortat}
 TitForTat is the most well known strategy for playing Prisoner's Dilemma due to it winning both of Axelrod's first two tournaments.
 It starts with a cooperative move and proceeds to play the same as the opponent did on the previous move \cite{Axelrod1980b, Heap2003}.
-% TODO Why do you need Heap2003 here? (I don't know what that is, seems random).
+
 
 \subsection{Pavlov}\label{ssec:strat_pavlov}
-In \cite{Nowak1993}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift).
-% TODO I'm almost certain this strategy occurred earlier. (See the strategy
-% index on the Axelrod docs). Do the same for others.
+In \cite{Kraines1989}, the strategy Pavlov is introduced (sometimes referred to as Win-Stay Lose-Shift) and discussed further in \cite{Nowak1993}.
 Pavlov plays by repeating its previous move if it was successful (received payoff $T$ or $R$), and swapping the move if it was unsuccessful (received payoff $P$ or $S$).
 The paper explains how this allows it to take advantage of strategies that cooperate unconditionally and can also correct occasional mistakes.
 
@@ -153,9 +151,7 @@ In this case there are $n = 2^6 = 64$ keys, and therefore $2^{64} \simeq 10^{18}
 
 An evolutionary algorithm is then used to find the best possible table.
 The operates by initially creating a population of many different lookup tables.
-Then a new lookup table is created by combining two pre existing ones together (similar to how DNA is joined in sexual reproduction).
-% Reproduction is a general term and has nothing to do with DNA (a photo copier
-% does not use DNA).
+Then a new lookup table is created by combining two pre existing ones together.
 There is a probability (normally low) of some section of the new lookup table mutating.
 Next, several more random lookup tables are produced.
 % TODO A picture would be nice here.
@@ -164,8 +160,7 @@ Then the whole process is repeated with the new generation of lookup tables.
 
 Evolved Looker-Up was produced after 200 generations, and the final lookup table can be found in the Axelrod-Python source code.
 Alternatively, the code used to produce the lookup table is given in \cite{axelrod-evolver}.
-% TODO Check this against the version you're using. There's an axelrod-dojo repo
-% that was used to train the latest bunch of strategies.
+
 
 \section{Finite State Machines and Automatons}
 An Automaton is an abstract model of a machine that can perform operations on an input.
@@ -216,16 +211,16 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
 
 \begin{listing}[htbp!]
     \begin{ExampleCode}
-        >>> import axelrod as axl
-        >>> axl.seed(0)  # Set a seed
-        >>> players = [axl.TitForTat, axl.Cooperator, axl.Random, axl.Gradual]  # Create players
-        >>> tournament = axl.Tournament(players)  # Create a tournament
-        >>> results = tournament.play()  # Play the tournament
-        >>> plot = axl.Plot(results)
-        >>> p = plot.boxplot()
-        >>> p.show()
-        >>> q = plot.payoff()
-        >>> q.show()
+>>> import axelrod as axl
+>>> axl.seed(0)  # Set a seed
+>>> players = [axl.TitForTat, axl.Cooperator, axl.Random, axl.Gradual]  # Create players
+>>> tournament = axl.Tournament(players)  # Create a tournament
+>>> results = tournament.play()  # Play the tournament
+>>> plot = axl.Plot(results)
+>>> p = plot.boxplot()
+>>> p.show()
+>>> q = plot.payoff()
+>>> q.show()
     \end{ExampleCode}
     \caption{Example code to produce a simple tournament}
     \label{lst:tournament}
@@ -254,10 +249,8 @@ It is easy to write a genetic algorithm to produce large numbers of strategies, 
 Even the simple question `Are these two strategies the same?' does not always have an obvious answer.
 % TODO What do you mean?
 This is especially true when considering source code, as two identical strategies can be coded in different ways.
-For example, differentiating between Random($0.5$) and Cycler(CD) (see Section \ref{sec:individual_strategies}) isn't trivial unless you have access to their source code.
+For example, differentiating between Alternator and Cycler(CD) (see Section \ref{sec:individual_strategies}) isn't trivial unless you have access to their source code.
 The results of a game they play isn't necessarily enough.
-% TODO Not a good example, simply seed two plays and you'll immediately see the
-% difference. Go for Cycler(CD) and Alternator perhaps?
 
 A method for comparing strategies is first given in \cite{Ashlock2004}.
 Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint.

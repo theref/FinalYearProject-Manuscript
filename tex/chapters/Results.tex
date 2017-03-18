@@ -27,10 +27,7 @@ Also, it produces a clean and easy to understand fingerprint, shown in Figure \r
 \begin{figure}[hbtp!]
 \centering
 \includegraphics[width = 0.6\textwidth]{../img/Numerical/Tit_For_Tat.png}
-\caption{Fingerprint for TitForTat, with colour bar to add context}
-% TODO The colour bar is default in 2.6 right?
-% Go back and check that any fingerprints have the colour bar and that any
-% discussion makes it clear.
+\caption{Fingerprint for TitForTat, with TitForTat also as the probe}
 \label{fig:TFT}
 \end{figure}
 
@@ -92,7 +89,7 @@ We can vary this parameter and create a new fingerprint each time.
 \subfloat[GoByMajority with memory depth 40]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_40.png}}\\
 \\
 \subfloat[GoByMajority with memory depth 75]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_75.png}}
-\subfloat[GoByMajority with memory depth infinite]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority00.png}}
+\subfloat[GoByMajority with memory depth infinite]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority0.png}}
 \end{figure}
 
 \section{Random and Cycler(CDDC) with probes TFT and T42T}
@@ -125,14 +122,6 @@ However, by changing the probe to TitForTwoTats, it becomes obvious that the str
     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
     \label{fig:rand_cycle_2tft}
 \end{figure}
-
-% \begin{figure}[htbp!]
-%     \centering
-%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
-%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
-%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
-%     \label{fig:rrand_cycle_tf2t}
-% \end{figure}
 
 \section{LSE plot and table}\label{sec:lse}
 As described several times, a fingerprint for a strategy is merely the expected score when it plays against a probe with varying parameters.
