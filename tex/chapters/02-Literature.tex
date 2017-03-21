@@ -84,9 +84,13 @@ As had been previously claimed its performance was significantly reduced.
 The authors of \cite{Bendor1991} suggest that this is due to the provocability mentioned earlier, which in the presence of noise, can causes it to fall into unintended vendettas with other nice, but provocable strategies.
 Strategies that outperformed TitForTat were far more forgiving, which enabled them to get back to mutual cooperation much faster after an accidental defection.
 
+
+
 \section{Strategies of Particular Interest}\label{sec:individual_strategies}
 Throughout this report many different strategies will be discussed and used in small examples.
 This section will provide a description of some of these strategies in order to aid the reader, as a strategy's name is not always descriptive.
+
+
 
 \subsection{TitForTat}\label{ssec:stra_titfortat}
 TitForTat is the most well known strategy for playing Prisoner's Dilemma due to it winning both of Axelrod's first two tournaments.
@@ -127,7 +131,7 @@ The author, Martin Jones, has produced a thorough explanation of how the strateg
 The strategy uses a lookup table to determine the action it should take.
 A lookup table is similar to a hash table when programming, where the keys could be the opponents previous two moves and the values the next action the strategy should take, see Table \ref{tab:lookup_table} for an example of this.
 
-\begin{table}[htbp]
+\begin{table}[htbp!]
     \centering
     \begin{tabular}{l l}
         \toprule
@@ -227,17 +231,17 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
 \end{listing}
 
 \begin{figure}[hbtp!]
-\centering
-\includegraphics[width = 0.5\textwidth]{../img/examples/small_violin.png}
-\caption{Ranked violin plot of the mean payoff for each player}
-\label{fig:violinplot}
+    \centering
+    \includegraphics[width=0.5\textwidth]{../img/examples/small_violin.png}
+    \caption{Ranked violin plot of the mean payoff for each player}
+    \label{fig:violinplot}
 \end{figure}
 
 \begin{figure}
-\centering
-\includegraphics[width = 0.5\textwidth]{../img/examples/small_payoff.png}
-\caption{Matrix plot of pair wise payoffs for each player}
-\label{fig:matrixplot}
+    \centering
+    \includegraphics[width=0.5\textwidth]{../img/examples/small_payoff.png}
+    \caption{Matrix plot of pair wise payoffs for each player}
+    \label{fig:matrixplot}
 \end{figure}
 
 % TODO Add a transition sentence.
