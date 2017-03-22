@@ -1,0 +1,64 @@
+%!TEX root = ../tex/main.tex
+
+\begin{tikzpicture}
+    \tikzstyle{probe}=[fill=sol-base1, ellipse, draw];
+    \tikzstyle{strategy}=[ellipse, draw];
+
+    \node (strategy1) at (0, 3.5) [strategy, fill=sol-violet] {};
+    \node (strategy2) at (0, 2.5) [strategy, fill=sol-red] {};
+    \node (strategy3) at (0, 1.5) [strategy, fill=sol-green] {};
+    \node (strategy4) at (0, 0.5) [strategy, fill=sol-blue] {};
+
+    \node (01) at (1.5, 0) [probe] {};
+    \node (02) at ($(01)+(0, 0.5)$) [probe] {};
+    \node (03) at ($(01)+(0,1)$) [probe] {};
+
+    \node (11) at ($(01)+(0, 1.5)$) [probe] {};
+    \node (12) at ($(01)+(0, 2)$) [probe] {};
+    \node (13) at ($(01)+(0,2.5)$) [probe] {};
+
+    \node (21) at ($(01)+(0, 3)$) [probe] {};
+    \node (22) at ($(01)+(0, 3.5)$) [probe] {};
+    \node (23) at ($(01)+(0,4)$) [probe] {};
+
+    \draw (strategy1.east) edge[->] (01.west);
+    \draw (strategy1.east) edge[->] (02.west);
+    \draw (strategy1.east) edge[->] (03.west);
+    \draw (strategy1.east) edge[->] (11.west);
+    \draw (strategy1.east) edge[->] (12.west);
+    \draw (strategy1.east) edge[->] (13.west);
+    \draw (strategy1.east) edge[->] (21.west);
+    \draw (strategy1.east) edge[->] (22.west);
+    \draw (strategy1.east) edge[->] (23.west);
+
+    \draw (strategy2.east) edge[->] (01.west);
+    \draw (strategy2.east) edge[->] (02.west);
+    \draw (strategy2.east) edge[->] (03.west);
+    \draw (strategy2.east) edge[->] (11.west);
+    \draw (strategy2.east) edge[->] (12.west);
+    \draw (strategy2.east) edge[->] (13.west);
+    \draw (strategy2.east) edge[->] (21.west);
+    \draw (strategy2.east) edge[->] (22.west);
+    \draw (strategy2.east) edge[->] (23.west);
+
+    \draw (strategy3.east) edge[->] (01.west);
+    \draw (strategy3.east) edge[->] (02.west);
+    \draw (strategy3.east) edge[->] (03.west);
+    \draw (strategy3.east) edge[->] (11.west);
+    \draw (strategy3.east) edge[->] (12.west);
+    \draw (strategy3.east) edge[->] (13.west);
+    \draw (strategy3.east) edge[->] (21.west);
+    \draw (strategy3.east) edge[->] (22.west);
+    \draw (strategy3.east) edge[->] (23.west);
+
+    \draw (strategy4.east) edge[->] (01.west);
+    \draw (strategy4.east) edge[->] (02.west);
+    \draw (strategy4.east) edge[->] (03.west);
+    \draw (strategy4.east) edge[->] (11.west);
+    \draw (strategy4.east) edge[->] (12.west);
+    \draw (strategy4.east) edge[->] (13.west);
+    \draw (strategy4.east) edge[->] (21.west);
+    \draw (strategy4.east) edge[->] (22.west);
+    \draw (strategy4.east) edge[->] (23.west);
+
+\end{tikzpicture}

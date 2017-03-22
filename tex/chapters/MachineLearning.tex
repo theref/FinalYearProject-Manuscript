@@ -6,9 +6,33 @@ In this chapter a new approach to identifying strategies that are the same will 
 A new type of tournament will be presented, and the summary of the results of this tournament will then be used to train a Machine Learning model.
 The model is then able to predict whether new strategies are the same as ones already implemented within Axelrod-Python.
 
+
+
 \section{Ashlock Tournament}\label{sec:ashlock_tourn}
+
 In an Ashlock tournament, all strategies entered play against a probe strategy for a range of parameters, and do not play each other.
-A results file is then created with information about how the strategies performed and behaved in the tournament.
+This is similar to how a numerical approximation of a fingerprint is constructed in Chapter \ref{cha:implementation}.
+The benefit of this approach is that much more data is collected than just the score of the strategy involved.
+Currently in Axelrod-Python, a results file for a tournament includes:
+
+\begin{itemize}
+    \item Strategy Name
+    \item Rank - Where the strategy ranked overall in the tournament
+    \item Median Score
+    \item Cooperation Rating
+    \item Wins
+    \item Initial C rate
+    \item CC rate
+    \item CD rate
+    \item DC rate
+    \item DD rate
+    \item CC to C rate
+    \item CD to C rate
+    \item DC to C rate
+    \item DD to C rate
+\end{itemize}
+
+An example of this for strategies that have been played in an Ashlock Tournament is given in Table \ref{tab:ash_results}.
 
 \begin{sidewaystable}[htbp!]
 \begin{tabular}{llllllllllHHH}
@@ -34,7 +58,8 @@ Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 
  Tit For Tat & 0.43360 & 0.5144 & 0.0 & 1.0 & 0.3680 & 0.1464 & 0.1446 & 0.3410 & 1.0 & 0.0 & 1.0 & 0.0 \\
 \bottomrule
 \end{tabular}
-\caption{table 1}
+\caption{Results of an Ashlock Tournament}
+\label{tab:ash_results}
 
 \bigskip
 
@@ -60,24 +85,38 @@ Name\_A & Name\_B & Median\_score\_r & Cooperation\_rating\_r & Wins\_r & Initia
  Defector & Tit For Tat & 0.728299 & 0.0 &  0.000000 & 0.0 & 0.0 & 0.0 & 0.292594 & 0.674180 & 0.0 & 1.0 & 0.0 & 1.0 \\
 \bottomrule
 \end{tabular}
-\caption{table 2}
+\caption{Comparison of the results of an Ashlock Tournament}
+\label{tab:ash_comparison}
 \end{sidewaystable}
 
 
 
 \section{Training the model}\label{sec:training_model}
 
-To train the model, all strategies available in Axelrod-Python were entered into an Ashlock tournament.
-T
+To train the model, all strategies available in Axelrod-Python were entered into an Ashlock Tournament and a results file was generated, as described in Section \ref{sec:ashlock_tourn}.
+Multiple copies of each strategy where included to compensate for the Ashlock Tournament being a stochastic process.
+Each copy of a strategy was treated separately and thus had an individual line in the results file.
 
-A new table can then be produced where the results of each strategies are compared.
-Given two strategies $A$ and $B$, they have a set of variables $\{x_1^{(A)}, x_2^{(A)}, \dots, x_n^{(A)}\}$ or $\{x_1^{(B)}, x_2^{(B)}, \dots, x_n^{(B)}\}$ which are taken from the results file.
-To compare the strategies, a new set of variables $\{r_1, r_2, \dots, r_n \}$ is created where:
+Once the results had been obtained, a new set of data was created that compared all strategies against each other.
+For two strategies $A, B$ with variables $x_i^{(A)}, x_i^{(B)}$, a ratio $r_i^{(A, B)}$ is calculated for each possible variable $x_i$ where:
 $$
-r_k = \frac{\min(x_k^{(A)}, x_k^{(B)})}{\max(x_k^{(A)}, x_k^{(B)})}.
+r_i^{(A, B)} = \frac{\min(x_i^{(A)}, x_i^{(B)})}{\max(x_i^{(A)}, x_i^{(B)})}
 $$
-In the case where $x_k^{(A)} = x_k^{(B)} = 0$, the ratio $r_k$ is set to 1 as the two variables are equal.
+In the case where both variable equal zero, instead of the ratio being undefined it is set to 1 to demonstrate that the original variables were equal.
+The resulting data is shown in Table \ref{tab:ash_comparison}.
 By comparing the names of the two strategies, a new column can be added to the data containing a boolean variable where a value of 1 implies that the two strategies are the same, and 0 if they are different.
+This ensures that different copies of the same strategy will still be considered equal.
+
+\begin{sidewaysfigure}[tb]
+    \centering
+    \subfloat[The Ashlock Tournament]{\includestandalone[width=0.15\textwidth]{../img/AshlockTournament}\label{fig:ashlock_tourn}}
+    \subfloat[Training the Model]{\includestandalone[width=0.85\textwidth]{../img/MachineLearningProcess}\label{fig:model_training}}
+    \caption{The process for training the Machine Learning Model}
+    \label{fig:ml_process}
+\end{sidewaysfigure}
+
+
+The actual Machine Learning was done using the python library \mintinline{python}{sk-learn} \cite{scikit-learn}.
 
 
 \section{Initial Results}
