@@ -32,7 +32,7 @@ Currently in Axelrod-Python, a results file for a tournament includes:
     \item DD to C rate
 \end{itemize}
 
-An example of this for strategies that have been played in an Ashlock Tournament is given in Table \ref{tab:ash_results}.
+An example of the results file for strategies that have been played in an Ashlock Tournament is given in Table \ref{tab:ash_results}.
 
 \begin{sidewaystable}[htbp!]
 \begin{tabular}{llllllllllHHH}
@@ -40,7 +40,7 @@ An example of this for strategies that have been played in an Ashlock Tournament
 Name &  Median\_score &  Cooperation\_rating &  Wins &  Initial\_C\_rate &  CC\_rate &  CD\_rate &  DC\_rate &  DD\_rate &  CC\_to\_C\_rate &  CD\_to\_C\_rate &  DC\_to\_C\_rate &  DD\_to\_C\_rate \\
 \midrule
 Defector & 0.59536 & 0.0000 & 22.0 & 0.0 & 0.0000 & 0.0000 & 0.4942 & 0.5058 & 0.0 & 0.0 & 0.0 & 0.0 \\
-Win-Stay Lose-Shift & 0.46868 & 0.5528 & 7.0 & 1.0 & 0.3302 & 0.2226 & 0.2264 & 0.2208 & 1.0 & 0.0 & 0.0 &           1.0 \\
+Win-Stay Lose-Shift & 0.46868 & 0.5528 & 7.0 & 1.0 & 0.3302 & 0.2226 & 0.2264 & 0.2208 & 1.0 & 0.0 & 0.0 & 1.0 \\
 Bully & 0.46388 & 0.5024 & 11.0 & 0.0 & 0.1606 & 0.3418 & 0.3350 & 0.1626 & 0.0 & 1.0 & 0.0 & 1.0 \\
 Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 & 0.0 & 0.0 & 1.0 & 1.0 \\
  Tit For Tat & 0.43360 & 0.5144 & 0.0 & 1.0 & 0.3680 & 0.1464 & 0.1446 & 0.3410 & 1.0 & 0.0 & 1.0 & 0.0 \\
@@ -52,7 +52,7 @@ Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 
 Name &  Median\_score &  Cooperation\_rating &  Wins &  Initial\_C\_rate &  CC\_rate &  CD\_rate &  DC\_rate &  DD\_rate &  CC\_to\_C\_rate &  CD\_to\_C\_rate &  DC\_to\_C\_rate &  DD\_to\_C\_rate \\
 \midrule
 Defector & 0.59536 & 0.0000 & 22.0 & 0.0 & 0.0000 & 0.0000 & 0.4942 & 0.5058 & 0.0 & 0.0 & 0.0 & 0.0 \\
-Win-Stay Lose-Shift & 0.46868 & 0.5528 & 7.0 & 1.0 & 0.3302 & 0.2226 & 0.2264 & 0.2208 & 1.0 & 0.0 & 0.0 &           1.0 \\
+Win-Stay Lose-Shift & 0.46868 & 0.5528 & 7.0 & 1.0 & 0.3302 & 0.2226 & 0.2264 & 0.2208 & 1.0 & 0.0 & 0.0 & 1.0 \\
 Bully & 0.46388 & 0.5024 & 11.0 & 0.0 & 0.1606 & 0.3418 & 0.3350 & 0.1626 & 0.0 & 1.0 & 0.0 & 1.0 \\
 Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 & 0.0 & 0.0 & 1.0 & 1.0 \\
  Tit For Tat & 0.43360 & 0.5144 & 0.0 & 1.0 & 0.3680 & 0.1464 & 0.1446 & 0.3410 & 1.0 & 0.0 & 1.0 & 0.0 \\
@@ -107,7 +107,20 @@ The resulting data is shown in Table \ref{tab:ash_comparison}.
 By comparing the names of the two strategies, a new column can be added to the data containing a boolean variable where a value of 1 implies that the two strategies are the same, and 0 if they are different.
 This ensures that different copies of the same strategy will still be considered equal.
 
-\begin{sidewaysfigure}[tb]
+Figure \ref{fig:ml_process} gives an overview of this process with every colour of \textcolor{sol-violet}{Purple}, \textcolor{sol-red}{Red}, \textcolor{sol-green}{Green} and \textcolor{sol-blue}{Blue} representing a different strategy.
+As mentioned previously several copies of each strategy are used which would produce several nodes of the same colour in Figure \ref{fig:ashlock_tourn}, but these have been omitted for clarity.
+Likewise, in Figure \ref{fig:model_training} there should be far more rows for each colour but these would clutter the diagram.
+
+Following the diagram from left to right, it begins by playing an Ashlock Tournament as described in Section \ref{sec:ashlock_tourn}.
+The results of the the tournament are collected in the next step, and an example of this is given in Table \ref{tab:ash_results}.
+In the following stage a new table is created that compares the results of each strategy, again an example is given in Table \ref{tab:ash_comparison}.
+Once this table has been created, a sample is taken from all the strategies included in the initial Ashlock Tournament.
+Rows from the table containing \textbf{only} these strategies are then used to train the model.
+In Figure \ref{fig:ml_process}, the \textcolor{sol-red}{Red} and \textcolor{sol-blue}{Blue} strategies were selected, resulting in rows being selected that contained information relating exclusively to the \textcolor{sol-red}{Red} and \textcolor{sol-blue}{Blue} strategies.
+Finally, all remaining rows that were not involved in training the model are collected.
+The model is then scored against this unseen data.
+
+\begin{sidewaysfigure}[htbp!]
     \centering
     \subfloat[The Ashlock Tournament]{\includestandalone[width=0.15\textwidth]{../img/AshlockTournament}\label{fig:ashlock_tourn}}
     \subfloat[Training the Model]{\includestandalone[width=0.85\textwidth]{../img/MachineLearningProcess}\label{fig:model_training}}
@@ -116,7 +129,22 @@ This ensures that different copies of the same strategy will still be considered
 \end{sidewaysfigure}
 
 
+
+\section{Assessing the Model}\label{sec:assessing_model}
+
 The actual Machine Learning was done using the python library \mintinline{python}{sk-learn} \cite{scikit-learn}.
+A choice of two models were implemented, Logistic Regression \cite{Schmidt2016, Yu2011} and Support Vector Classification \cite{Smola2004, Vandewalle1999}.
+The process for training the models is outlined in Section \ref{sec:training_model} and it is mentioned that a sample must be taken from the strategies used in the initial Ashlock Tournament.
+Clearly the larger the sample size, the better the model should perform as it has more data to learn from.
+In order to decide whether to use Logistic Regression or SVC, both models were trained/tested against many samples of varying sizes.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[]{..img/ML/score_against_sample_size_LR}\\
+    \includegraphics[]{..img/ML/score_against_sample_size_SVC}
+    \caption{Caption here}
+    \label{fig:figure1}
+\end{figure}
 
 
 \section{Initial Results}
