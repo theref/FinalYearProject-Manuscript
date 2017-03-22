@@ -71,7 +71,7 @@ Therefore we have a pure Nash Equilibrium where both players defect, despite the
 
 Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
 Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
-These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature (find references). %TODO
+These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature \cite{Axelrod1984, Axelrod1980a, Axelrod1980a}.
 We can now explicitly state the payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
 
 \begin{equation}\label{eq:payoff_matrix}
@@ -86,8 +86,14 @@ P = \bordermatrix{~ & C & D \cr
 
 As previously mentioned, the version of the Axelrod-Python library used in this report has 181 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments \cite{Axelrod1980a, Axelrod1980b}.
 This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
-Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure. %TODO
-% TODO Find reference.
+Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure \ref{fig:example_fing}.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../img/Numerical/Random05}
+    \caption{A plot of the fingerprint function for Random(0.5) when probed by TitForTat}
+    \label{fig:example_fing}
+\end{figure}
 
 The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
 Secondly, although the fingerprinting method is described and used at length in \cite{Ashlock2010, Ashlock2008, Ashlock2004, Ashlock2006, Ashlock2005, Ashlock2009} there is no source code readily available, it must be requested from the original author.

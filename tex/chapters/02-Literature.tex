@@ -26,8 +26,7 @@ TitForTat is a very simple strategy (see Section \ref{ssec:stra_titfortat}) and 
     \item `Forgiveness' - The strategy is willing to continue with mutual cooperation even after some defections.
 \end{itemize}
 
-Axelrod's second tournament \cite{Axelrod1980b} saw a dramatic increase in terms of size, with 62 strategies being entered from 6 different countries.
-% TODO It was actually 64 I believe (63 + 1)
+Axelrod's second tournament \cite{Axelrod1980b} saw a dramatic increase in terms of size, with 62 strategies being entered from 6 different countries (the strategy Random was also included).
 The contestants ranged from a 10-year-old computer hobbyist to professors of computer science, economics, psychology, mathematics, sociology, political science and evolutionary biology.
 The countries represented were the United States, Canada, Great Britain, Norway, Switzerland, and New Zealand.
 Despite the fact that all contestants had full knowledge of the previous tournament, TitForTat was the overall winner once again.
@@ -49,14 +48,20 @@ This parameter was chosen so that the median length of a game would be 200 moves
         2012 & \cite{Stewart2012} & 13 & Standard\\
         \bottomrule
     \end{tabular}
-    \label{tab:tournament_refs}
     \caption{An overview of published tournaments}
+    \label{tab:tournament_refs}
 \end{table}
 
 Axelrod continued to extend his work by considering an evolutionary version of the tournament \cite{Axelrod1981, Axelrod1984}.
 In this case, the proportion of the population playing a certain strategy depends on how the strategy performed on the previous round.
-A strategy is evolutionarily stable if a population of individuals using that strategy cannot be invaded by a rare mutant adopting a different strategy \cite{Axelrod1981}.
-% TODO Draw a nice picture here.
+A strategy is evolutionarily stable if a population of individuals using that strategy cannot be invaded by a rare mutant adopting a different strategy \cite{Axelrod1981}, see Figure \ref{fig:evol_stable}.
+
+\begin{figure}[tb]
+    \centering
+    \includestandalone[width=0.8\textwidth]{../img/EvolutionarilyStable}
+    \caption{When a populations of \textcolor{gray}{Gray Strategies}} is invaded by a small population of \textcolor{sol-cyan}{Cyan Strategies}.
+    \label{fig:evol_stable}
+\end{figure}
 
 In \cite{Nowak1992, Nowak1993, Nowak1994}, Nowak extends this further by studying Spatial Games.
 In his variation, the game is played on a 2 dimensional square lattice where the payoff for an individual is the sum over all interactions with its 8 nearest neighbours (see Figure \ref{fig:nowak_spatial}) and itself.
@@ -78,8 +83,9 @@ Thus the game is completely deterministic and the outcome depends only on the in
 One particularly interesting result is that if a single Defector invades a world of Cooperators, long (but finite) sequences of patterns emerge.
 Due to the symmetry of the game rules, all the patterns are highly symmetric and have the appearance of kaleidoscopes.
 
-The primary purpose of \cite{Bendor1991} was to discover the effect of noise on TitForTat's performance in an IPD.
-% TODO Introduce this paragraph better, it is not related to the previous one.
+The perfect rules of Prisoner's Dilemma rarely apply in reality.
+Instead, mistakes are made or information misinterpreted, ie the environment is noisy.
+The primary purpose of \cite{Bendor1991} was to discover the effect of noise on TitForTat's performance in an IPD by randomly flipping the plays of players.
 As had been previously claimed its performance was significantly reduced.
 The authors of \cite{Bendor1991} suggest that this is due to the provocability mentioned earlier, which in the presence of noise, can causes it to fall into unintended vendettas with other nice, but provocable strategies.
 Strategies that outperformed TitForTat were far more forgiving, which enabled them to get back to mutual cooperation much faster after an accidental defection.
@@ -133,7 +139,7 @@ A lookup table is similar to a hash table when programming, where the keys could
 
 \begin{table}[htbp!]
     \centering
-    \begin{tabular}{l l}
+    \begin{tabular}{l c}
         \toprule
         Key & Next action \\
         \midrule
@@ -178,12 +184,13 @@ In the late fifties the idea of ``bounded rationality'' was explored in economic
 This was then extended in \cite{Rubinstein1986} where strategies that played the IPD were implemented as Moore Machines with an extra rule that added a cost associated with the complexity of the Moore Machine.
 Complexity was defined to be the number of states in the machine and the author states that this was a ``fairly naive'' approach.
 
-In \cite{Kalai1986, Kalai1988}, proofs are given that show that every strategy can be represented by an automaton.
+In \cite{Kalai1986, Kalai1988}, proofs are given that show that every strategy can be represented by an automaton (which has infinite internal states).
 However, in Section \ref{sec:fsm_proof} it is shown that if the length of a game in IPD is known, every strategy can be represented as a FSM.
-% TODO What are these two sentences trying to say/do? It reads like the work in
-% `fsm_proof` is actually a weaker version of the work done by Kalai.
 
-% TODO Add a transition sentence, introduce what the section is.
+In order to continue with IPD research, a mechanism for running tournaments is required, exactly as Axelrod and others did in Table \ref{tab:tournament_refs}.
+The next section introduces a library for implementing IPD strategies on a computer and playing them against each other in tournaments.
+
+
 
 \section{Axelrod-Python Library}\label{sec:axelrod-python}
 

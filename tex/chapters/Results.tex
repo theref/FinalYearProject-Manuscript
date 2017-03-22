@@ -4,7 +4,6 @@
 
 In this chapter several fingerprints will be examined in detail.
 In Section \ref{sec:tft} a breakdown of the fingerprint for TitForTat is given with an explanation of its appearance.
-%TODO
 Section \ref{sec:GBM} shows several plots for the strategy GoByMajority, with a varying parameter.
 As the parameter changes, a continuous deformation of the plot of the
 fingerprint can be observed.
@@ -19,10 +18,10 @@ The colour at point $\hat{x}, \hat{y}$ on the plot indicates the expected value 
 This expected score has been approximated as outlined in Chapter \ref{cha:implementation}.
 
 
+
 \section{Interpretation of TFT}\label{sec:tft}
 TitForTat (see Section \ref{ssec:stra_titfortat} for an explanation of its behaviour) it is one of the most well known strategies for Prisoner's Dilemma.
 Also, it produces a clean and easy to understand fingerprint, shown in Figure \ref{fig:TFT}, making it an ideal place to start.
-% TODO You need to say who the probe was?
 
 \begin{figure}[hbtp!]
 \centering
@@ -36,22 +35,24 @@ The blue area corresponds to low scores and it can be seen that this occurs for 
 However, as $x$ increases higher scores (shown in red) quickly take over.
 This is exactly as expected, TitForTat plays well in highly cooperative environments.
 An immediate question is; why does the white stripe not follow the diagonal?
-The main diagonal is where $x=y$ and due to the random nature of the cooperation and defections, the expected average score for TitForTat would be !!!! about half the maximum.
-% TODO What is !!!!
-Due to the global minimum and maximum that TitForTat achieves, a score of !!!! is not midway, and so the white line showing the middle score is off centre.
-% TODO !!!!
-TitForTat is able to produce better than half scores in this scenario by encouraging the underlying probe strategy to cooperate.
+The main diagonal is where $x=y$ and due to the random nature of the cooperation and defections, the expected average score for TitForTat would be 2.25, slightly half the maximum possible score.
+Due to the global minimum and maximum that TitForTat achieves, a score of 2.25 is not midway, and so the white line showing the middle score is off centre.
+
+
 
 \section{Varying the parameter for Random}
 It is possible to observe how changing a parameter for a strategy will affect its behaviour by comparing the fingerprints for each parameter.
 As described in Section \ref{ssec:strat_random}, Random accepts a parameter that determines the probability of cooperation.
-We can vary this parameter and create a new fingerprint each time.
+We can vary this parameter and create a new fingerprint each time.{}
+In Figures \ref{fig:random0.1} to \ref{fig:random0.9} the variable is increased from 0.1 to 0.9 in steps of 0.1.
+When the parameter equal 0 or 1, Random is equivalent to the strategy Defector or Cooperator respectively.
+Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:rand_coop}.
 
 \begin{figure}[htbp!]
 \centering
-\subfloat[Defector]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Defector.png}}\\[-2ex]
+\subfloat[Defector]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Defector.png}\label{fig:rand_defect}}\\[-2ex]
 
-\subfloat[Random(0.1) - will cooperate\protect\\10\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random01.png}}
+\subfloat[Random(0.1) - will cooperate\protect\\10\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random01.png}\label{fig:random0.1}}
 \subfloat[Random(0.2) - will cooperate\protect\\20\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random02.png}}
 \subfloat[Random(0.3) - will cooperate\protect\\30\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random03.png}}\\[-2ex]
 
@@ -61,9 +62,9 @@ We can vary this parameter and create a new fingerprint each time.
 
 \subfloat[Random(0.7) - will cooperate\protect\\70\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random07.png}}
 \subfloat[Random(0.8) - will cooperate\protect\\80\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random08.png}}
-\subfloat[Random(0.8) - will cooperate\protect\\90\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random09.png}}\\
+\subfloat[Random(0.8) - will cooperate\protect\\90\% of the time]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Random09.png}\label{fig:random0.9}}\\
 
-\subfloat[Cooperator]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Cooperator.png}}
+\subfloat[Cooperator]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Cooperator.png}\label{fig:rand_coop}}
 
 \end{figure}
 
@@ -132,16 +133,16 @@ As described several times, a fingerprint for a strategy is merely the expected 
 All the fingerprint plots shown thus far are approximations of this, where the score for specific values of $x, y$ is calculated and then plotted.
 Within Axelrod-Python all these underlying scores are recorded in a \mintinline{python}{csv} file and can therefore be compared directly.
 
-For two strategies $A$ and $B$ where $s_{x, y}^{(A)}$ is the score for strategy $A$ at point $x, y$, we can compute a rudimentary value of `similarity' by calculating:
+For two strategies $A$ and $B$ where $s_{x, y}^{(A)}$ is the score for strategy $A$ at point $x, y$ and $P_x, P_y$ are the set of points taken by $x, y$, we can compute a rudimentary value of `similarity' by calculating the Mean Square Error:
 $$
-\delta(A, B) = \sum_x \sum_y (s_{x, y}^{(A)} - s_{x, y}^{(B)})^2
+\text{MSE}(A, B) = \sum_{x \in P_x} \sum_{y \in P_y} \frac{(s_{x, y}^{(A)} - s_{x, y}^{(B)})^2}{|P_x|\times|P_y|}
 $$
-When $\delta(A, B) \approx 0$, the two strategies $A$, $B$ are very similar, and so further investigation should be carried out between them.
+When $\text{MSE}(A, B) \approx 0$, the two strategies $A$, $B$ are very similar, and so further investigation should be carried out between them.
 After calculating $\delta(A, B)$ for all pairs of strategies, a matrix plot can then be created giving an overview of the similarity between the set of strategies.
-This is shown in Figure \ref{fig:sum_squares}.
+This is shown in Figure \ref{fig:mean_squares}.
 
 \begin{figure}[htbp!]
-    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{../img/sum_squares.png}}
+    \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{../img/mean_squares.png}}
     \caption{Caption here}
-    \label{fig:sum_squares}
+    \label{fig:mean_squares}
 \end{figure}
