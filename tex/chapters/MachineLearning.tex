@@ -138,13 +138,70 @@ The process for training the models is outlined in Section \ref{sec:training_mod
 Clearly the larger the sample size, the better the model should perform as it has more data to learn from.
 In order to decide whether to use Logistic Regression or SVC, both models were trained/tested against many samples of varying sizes.
 
+Figure \ref{fig:score_4_sample_size} shows how both models performed when trained on increasing sample sizes.
+50 different samples were taken for each sample size and the models were re-trained and re-scored for each sample.
+The violin plots in Figure \ref{fig:score_4_sample_size} show the distributions of those scores.
+
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[]{..img/ML/score_against_sample_size_LR}\\
-    \includegraphics[]{..img/ML/score_against_sample_size_SVC}
-    \caption{Caption here}
-    \label{fig:figure1}
+    \subfloat[Model performance against sample size for Linear Regression]{\includegraphics[width=\linewidth]{../img/ML/score_against_sample_size_LR.png}\label{fig:lr-samplesize}}\\
+    \subfloat[Model performance against sample size for SVC]{\includegraphics[width=\linewidth]{../img/ML/score_against_sample_size_SVC.png}\label{fig:svc-samplesize}}
+    \caption{Violin Plots for both models}
+    \label{fig:score_4_sample_size}
 \end{figure}
+
+It can be seen that the violins in Figure \ref{fig:svc-samplesize} reach a maximum score faster the those in Figure \ref{fig:lr-samplesize}.
+Those is Figure \ref{fig:svc-samplesize} also show far less variance, and so the decision was made to use SVC as the model in any future work.
+A sample size of 30 was also chosen, due to a good balance between high score, low variance and computational cost.
+At this point, a specific sample set was also determined.
+
+The sample was chosen by analysing the results of the Round Robin Tournament in Axelrod-Python.
+The strategies were ordered by their ranking in the tournament and every 5th one was selected.
+This gave a balance of strategies that were similar (close ranking) and those that were very different (large difference in ranking).
+Order by ranking, the chosen strategies to train the model where:
+
+\begin{multicols}{3}
+\begin{enumerate}
+  \item Evolved HMM 5
+  \item Evolved ANN
+  \item Evolved ANN 5 Noise 05
+  \item PSO Gambler 2\_2\_2 Noise 05
+  \item Nice Meta Winner Ensemble
+  \item NMWE Long Memory
+  \item EvolvedLookerUp1\_1\_1
+  \item Shubik
+  \item Retaliate (0.05)
+  \item Soft Joss: 0.9
+  \item GTFT: 0.3
+  \item ShortMem
+  \item Adaptive Pavlov 2011
+  \item Punisher
+  \item Grumpy
+  \item Hard Tit For Tat
+  \item Appeaser
+  \item Meta Majority Finite Memory
+  \item Average Copier
+  \item Random Hunter
+  \item Meta Hunter Aggressive
+  \item Worse and Worse 2
+  \item Predator
+  \item Stochastic Cooperator
+  \item Knowledgeable Worse and Worse
+  \item Meta Winner Finite Memory
+  \item Cautious QLearner
+  \item Random: 0.1
+  \item Meta Mixer
+  \item EasyGo
+  \item Hard Go By Majority: 40
+  \item ZD-Extort-2 v2
+  \item Opposite Grudger
+  \item Alternator
+  \item Tricky Defector
+  \item Negation
+  \item Gradual Killer
+  \item Cycler CCCCCD
+\end{enumerate}
+\end{multicols}
 
 
 \section{Initial Results}
