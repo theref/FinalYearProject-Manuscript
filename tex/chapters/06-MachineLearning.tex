@@ -3,17 +3,16 @@
 \chapter{Machine Learning}\label{cha:machinelearning}
 
 In this chapter a new approach to identifying strategies that are the same will be presented.
-A new type of tournament will be presented, and the summary of the results of this tournament will then be used to train a Machine Learning model.
-The model is then able to predict whether new strategies are the same as ones already implemented within Axelrod-Python.
+An Ashlock Tournament will be created for many strategies, and the summary of the results of this tournament will then be used to train a Machine Learning model.
 
 
 
-\section{Ashlock Tournament}\label{sec:ashlock_tourn}
+\section{Utilising the Ashlock Tournament}\label{sec:ashlock_tourn}
 
-In an Ashlock tournament, all strategies entered play against a probe strategy for a range of parameters, and do not play each other.
-This is similar to how a numerical approximation of a fingerprint is constructed in Chapter \ref{cha:implementation}.
-The benefit of this approach is that much more data is collected than just the score of the strategy involved.
-Currently in Axelrod-Python, a results file for a tournament includes:
+As described in Section \ref{sec:fingerprint-implementation}, in an Ashlock tournament all strategies entered play against a probe strategy for a range of parameters and do not play each other.
+In Chapter \ref{cha:implementation} the average scores from this tournament are used to approximate the analytical Fingerprint function.
+However, more information is available than just the score.
+For the purposes of the machine learning approach, the following statistics are collected from the Ashlock tournament (these are automatically calculated within Axelrod-Python):
 
 \begin{itemize}
     \item Strategy Name
@@ -60,9 +59,25 @@ Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 
 \end{tabular}
 \caption{Results of an Ashlock Tournament}
 \label{tab:ash_results}
+\end{sidewaystable}
 
-\bigskip
 
+
+\section{Training the model}\label{sec:training_model}
+
+To train the model, all strategies were entered into an Ashlock Tournament and a results file was generated, as described in Section \ref{sec:ashlock_tourn}.
+Multiple copies of each strategy where included to compensate for the Ashlock Tournament being a stochastic process.
+Each copy of a strategy was treated separately and thus had an individual line in the results file.
+
+Once the results had been obtained, a new set of data was created that compared all strategies against each other.
+For two strategies $A, B$ with variables $x_i^{(A)}, x_i^{(B)}$, a ratio $r_i^{(A, B)}$ is calculated for each possible variable $x_i$ where:
+$$
+r_i^{(A, B)} = \frac{\min(x_i^{(A)}, x_i^{(B)})}{\max(x_i^{(A)}, x_i^{(B)})}
+$$
+In the case where both variable equal zero, instead of the ratio being undefined it is set to 1 to demonstrate that the original variables were equal.
+The resulting data is shown in Table \ref{tab:ash_comparison}.
+
+\begin{sidewaystable}[htbp!]
 \begin{tabular}{lllllllllHHHHH}
 \toprule
 Name\_A & Name\_B & Median\_score\_r & Cooperation\_rating\_r & Wins\_r & Initial\_C\_rate\_r & CC\_rate\_r & CD\_rate\_r & DC\_rate\_r & DD\_rate\_r & CC\_to\_C\_rate\_r & CD\_to\_C\_rate\_r & DC\_to\_C\_rate\_r & DD\_to\_C\_rate\_r \\
@@ -89,21 +104,6 @@ Name\_A & Name\_B & Median\_score\_r & Cooperation\_rating\_r & Wins\_r & Initia
 \label{tab:ash_comparison}
 \end{sidewaystable}
 
-
-
-\section{Training the model}\label{sec:training_model}
-
-To train the model, all strategies available in Axelrod-Python were entered into an Ashlock Tournament and a results file was generated, as described in Section \ref{sec:ashlock_tourn}.
-Multiple copies of each strategy where included to compensate for the Ashlock Tournament being a stochastic process.
-Each copy of a strategy was treated separately and thus had an individual line in the results file.
-
-Once the results had been obtained, a new set of data was created that compared all strategies against each other.
-For two strategies $A, B$ with variables $x_i^{(A)}, x_i^{(B)}$, a ratio $r_i^{(A, B)}$ is calculated for each possible variable $x_i$ where:
-$$
-r_i^{(A, B)} = \frac{\min(x_i^{(A)}, x_i^{(B)})}{\max(x_i^{(A)}, x_i^{(B)})}
-$$
-In the case where both variable equal zero, instead of the ratio being undefined it is set to 1 to demonstrate that the original variables were equal.
-The resulting data is shown in Table \ref{tab:ash_comparison}.
 By comparing the names of the two strategies, a new column can be added to the data containing a boolean variable where a value of 1 implies that the two strategies are the same, and 0 if they are different.
 This ensures that different copies of the same strategy will still be considered equal.
 

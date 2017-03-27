@@ -64,22 +64,21 @@ The thresholds for Cooperation, Defection and original move are then $x, x+y \te
 
 \section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
-As defined in section a fingerprint function is merely the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
-% TODO Tweak: the fingerprint is defined as an analytical function, here it is
-% implemented as a class that will return the numerical data that represents
-% that analytical function on a given finite domain.
-As part of this project, a numerical implementation has now been included in the Axelrod-Python library.
+As defined in Section \ref{sec:fingerprinting} a Fingerprint is merely a function for the expected score of a strategy when played against a Joss-Ann transformer of a probe with varying parameters (see definition \ref{def:fingerprint}).
+As part of this project, a numerical approximation has now been included in the Axelrod-Python library.
+This was implemented as a class that will return the numerical data that represents that analytical function on a given finite domain.
 It begins by taking a sample of the $x,y$ values that may define a Joss-Ann Transformer.
 The strategy then plays a match against a transformer with each of the sampled values.
 The average score per turn can be calculated at the end of each match which corresponds to the expected score required by the analytical fingerprint function.
 The whole process can be repeated for reliability and the resulting scores plotted.
 The player interactions have been modelled as a spatial tournament within Axelrod-Python, where the strategy plays all of the probes and a probe only plays the strategy.
-For an example with 9 probes, see Figure \ref{fig:spatialtourn}.
+Throughout the rest of this project, this type of spatial tournament will be referred to as an Ashlock Tournament.
+For an example Ashlock tournament with 9 probes, see Figure \ref{fig:spatialtourn}.
 
 \begin{figure}[!hbtp]
     \begin{center}
         \includestandalone{../img/spatial_tournament}
-        \caption{A spatial tournament for the strategy against 9 probes}\label{fig:spatialtourn}
+        \caption{An example Ashlock tournament for a strategy against 9 probes}\label{fig:spatialtourn}
         % TODO Draw this is a classic network graph.
     \end{center}
 \end{figure}
@@ -119,9 +118,7 @@ def create_points(step):
 \end{listing}
 
 The \mintinline{python}{turns} variable determines how many interactions there will be in a match.
-Enough turns must be selected to ensure that steady long term behaviour is reached otherwise the average score per turn can be wildly inaccurate.
-% TODO Find a reference about simulation (Geraint has one in his office: a book
-% by Stewart)
+Enough turns must be selected to ensure that steady long term behaviour is reached otherwise the average score per turn can be wildly inaccurate \cite{Robinson2004}.
 However, once this state is reached, extending the number of turns has a minimal effect on the accuracy of the plot.
 The \mintinline{python}{repetitions} variable decides how many times the tournament would be repeated.
 The Axelrod-Python implementation of fingerprinting is a random process (due to the Joss-Ann) and high repetitions helps to reduce the effects of this.
@@ -131,11 +128,9 @@ The Axelrod-Python implementation of fingerprinting is a random process (due to 
 \section{Comparison of Analytical and Numerical Plots}
 
 In figure \ref{fig:ashlock-fingerprints}, several analytical fingerprints from
-previous literature are shown \cite{Ashlock2008, Ashlock2004}.
-% TODO make sure your reference numbers appear in correct order.
+previous literature are shown \cite{Ashlock2004, Ashlock2008}.
 Colourings or shadings are used to make certain features stand out, and an attempt to replicate this behaviour was implemented in Axelrod-Python.
 The popular plotting library, matplotlib, has many options for different colour maps which are demonstrated in Appendix \ref{app:col_maps}.
-% TODO There will be a recommended way for referencing matplotlib
 
 \begin{figure}[hbtp!]
     \begin{center}
@@ -301,8 +296,18 @@ Consequently any program relying on that code cannot be trusted to behave as int
 
 Axelrod-Python uses several external programmes to help with testing.
 Travis \cite{Travis} provides continuous integration testing, so all tests are run automatically whenever any changes to code are made.
-% TODO Add a screenshot of all the tests passing on the PR?
+AppVeyor \cite{AppVeyor} offers a similar service, but specialises in testing on Windows operating systems.
 Coveralls \cite{Coveralls} calculates what proportion of the code is tested, and can highlight areas that are either untested or need improvement.
+
+\begin{figure}[htbp!]
+\includegraphics[width = \textwidth]{../img/screenshots/ScreenShot5.png}
+\caption{A status report for Travis, AppVeyor and Coveralls}
+\label{fig:screenshot5}
+\end{figure}
+
+Figure \ref{fig:screenshot5} shows that at the point the submission was included into the main code base, all tests where passing on Travis and AppVeyor.
+Also, Coveralls showed that the overall test coverage had increased slightly.
+
 Finally, Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
 It works by generating random data matching a specification and checking that a specified guarantee still holds in that case.
 If it finds an example where it doesn’t, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
