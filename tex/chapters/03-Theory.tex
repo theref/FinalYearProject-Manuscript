@@ -12,7 +12,7 @@ In essence this chapter presents a detailed review of the work of \cite{Ashlock2
 
 
 
-\section{Finite State Machines}\label{sec:fsm}
+\section{Finite State Machines (FSM)}\label{sec:fsm}
 
 A formal definition of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modelled with a FSM:
 
@@ -24,10 +24,10 @@ A formal definition of a Finite State Machine is given by Definition \ref{def:fs
  \item The system has a particular initial state.
 \end{itemize}
 
-We can make the above bullet points rigorous for deterministic cases with the following definition:
+We can make the above bullet points rigorous with the following definition:
 
 \begin{definition}\label{def:fsm}
-A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta, s_0, F)$ where
+A \textbf{Finite State Machine} $M$ is a tuple $(S, \sigma, \delta, s_0, F)$ where
 \begin{itemize}
  \item $\sigma$ is the set of symbols representing the input of $M$.
  \item $S$ is the set of states of $M$.
@@ -39,7 +39,7 @@ A \textbf{Deterministic Finite State Machine} $M$ is a tuple $(S, \sigma, \delta
 %TODO - Add a little paragraph here that shows how this definition matches up with the previous examples.
 
 Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show FSM representations for TitForTat and Pavlov respectively (see Sections \ref{ssec:stra_titfortat} and \ref{ssec:strat_pavlov} for an explanation of how these strategies operate).
-Here nodes represent the previous action taken by the strategy and the opponent, ie. node $(D, C)$ implies that on the preceding turn, the strategy chose to Defect and the opponent chose to Co-operate.
+Here nodes represent the previous action taken by the strategy and the opponent, ie. node $(D, C)$ implies that on the preceding turn, the strategy chose to Defect and the opponent chose to Cooperate.
 Arcs represent the choice made by the opponent at the current turn, and lead us to the state for the next turn.
 
 \begin{figure}[hbtp!]
@@ -49,12 +49,15 @@ Arcs represent the choice made by the opponent at the current turn, and lead us 
 \caption{Finite State Machine representations for TitForTat, Pavlov and Majority}
 \end{figure}
 
+The next few Sections (\ref{sec:joss-ann} to \ref{sec:dual}) outline some transformations that can be applied to strategies.
+In particular, Section \ref{sec:dual} relies on the strategy to be represented as a FSM as has just been defined.
+Once the transformations had been presented, a formal definition of a Fingerprint can be given.
 
 
 
 \section{The Joss-Ann}\label{sec:joss-ann}
-The Joss-Ann is a basic transformation that can be applied to a strategy.
-It operates by making a probabilistic choice of cooperation, defection or the original move.
+The Joss-Ann is a basic transformation that can be applied to a strategy \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006}.
+It operates by making a probabilistic choice of Cooperation, Defection or the original move.
 More formally:
 
 \begin{definition}\label{def:joss-ann}
@@ -66,8 +69,8 @@ strategy $A$ (assuming $x+y < 1$).
 \end{definition}
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
-Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally defect without provocation in the hopes of a slight improvement in score.
-Anne is the first name of A. Stanley who suggested the addition of random cooperation instead of random defection \cite{Ashlock2008}.
+Joss was a strategy submitted to one of Axelrod’s original tournaments and it would occasionally Defect without provocation in the hopes of a slight improvement in score.
+Anne is the first name of A. Stanley who suggested the addition of random Cooperation instead of random Defection \cite{Ashlock2008}.
 When $x + y = 1$, the original strategy is not used, and the resulting behaviour
 is a random strategy with probabilities $(x, y)$. Note that this corresponds to
 Random($x$) as described in Section~\ref{ssec:strat_random}.
@@ -81,19 +84,20 @@ The Flip is a simple transformation that returns the opposite of the strategy.
 This is subtly different from the Dual as demonstrated in Table \ref{tab:strat-dual-flip}.
 
 \begin{definition}\label{def:flip}
-Strategy $A'$ is said to be the \textbf{Flip} of strategy $A$ if, $A$ and $A'$ return different actions for the same game history (includes opponent and self).
+Strategy $A'$ is said to be the \textbf{Flip} of strategy $A$ if, $A$ and $A'$ return different actions for the same game history (all moves made by both players).
 \end{definition}
-
 
 
 
 \section{The Dual}\label{sec:dual}
-The Dual is another, more complex transformation of a strategy (note that both
-these transformations can be applied commutatively).
+The Dual is another, more complex transformation of a strategy \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006} (and these transformations can be applied commutatively).
+Traditionally, the Dual is only defined on a strategy with an FSM representation.
 
 \begin{definition}\label{def:dual}
 Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
 \end{definition}
+
+In Section \ref{sec:ext-dual} this definition will be extended to allow for the Dual to be calculated for any strategy, even ones without a natural FSM representation.
 
 It is important to note that this is different to taking a strategy and flipping its responses.
 The dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not.
@@ -140,18 +144,13 @@ By following this procedure we can see that the Dual responses and Pavlov's resp
 This is achieved by the Dual inferring what the original strategy must have played and then reacting appropriately.
 In the above example, Pavlov's memory is only one turn deep, so the Dual only has to infer the preceding turn, however, for more complex strategies, it may need to infer the entire history of the original strategy in order to proceed correctly.
 
-% can now extend the definition of the dual to any strategy to a finite horizon, move algorithm
-% the definition is strategy obtained by applying this algorithm
-% example - table for majority dual, similar to pavlov
-% extended dual is still the dual
-% in implementation chapter state that we implement the extended dual
-
-
+Using the definitions presented in Sections \ref{sec:joss-ann} to \ref{sec:dual}, the Fingerprint and Double Fingerprint functions can be defined.
+This provides the tools to produce a visual representation for a strategy.
 
 
 \section{Fingerprint and Double Fingerprint}
-The fingerprint function returns the expected score of a strategy when it plays against the Joss-Ann with varying $(x, y)$.
-The double fingerprint extends this idea to $x+y \geq 1$.
+The Fingerprint is a function that returns the expected score of a strategy when it plays against the Joss-Ann with varying $(x, y)$.
+The double fingerprint extends this idea to $x+y \geq 1$ \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006}.
 
 \begin{definition}\label{def:fingerprint}
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and \textbf{probe} $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
@@ -169,13 +168,14 @@ The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ retu
 
 $A$ is referred to as the \textbf{lower probe} and $B$ is referred to as the \textbf{upper probe}.
 This is shown in Figure \ref{fig:DualProbe}.
-It will now be shown how the double fingerprint, with an appropriate choice of lower and upper probe, is equivalent to the fingerprint function over the unit square.
+In \cite{Ashlock2004} it is shown that the Double Fingerprint, with an appropriate choice of lower and upper probe, is equivalent to the Fingerprint function over the unit square.
+The proof in that paper will now be considered here.
 
 \begin{theorem}\label{thm:fingerprint-unit-square}
 If $A$ and $A'$ are dual strategies, then $F_{AA'}(S, x, y)$ is identical to the function $F_A(S, x, y)$ extended over the unit square.
 \end{theorem}
 
-A proof for this theorem will now be given (first presented in \cite{Ashlock2004}):
+
 \begin{proof}\label{prf:fingerprint-unit-square}
 The Markov chain for the dual strategy $A'$ will have the same transitions as the Markov chain for the strategy $A$.
 However, each entry for $x$ corresponds to the probability that the strategy $\JA(A, x, y)$ will randomly choose $C$ when it would not normally do so.
@@ -188,7 +188,7 @@ Thus the Markov chain for $\JA(A', x, y)$ is the Markov chain for $\JA(A, x, y)$
 Therefore $F_{AA'}(S, x, y)$ extends to the remainder of the unit square the function given by $F_A(S, x, y)$. $\blacksquare$
 \end{proof}
 
-Theorem \ref{thm:fingerprint-unit-square} allows the fingerprint function to naturally extend over the unit square.
+Theorem \ref{thm:fingerprint-unit-square} allows the Fingerprint function to naturally extend over the unit square and subsequently, the phrases Fingerprint and Double Fingerprint will be used interchangeably.
 Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left} region of the plot, the strategy plays against $\JA(A, x, y)$ and in the \textcolor{sol-cyan}{top right} region it plays against $\JA(A', 1-y, 1-x)$.
 
 \begin{figure}[!hbtp]
@@ -201,13 +201,13 @@ Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left}
 \end{figure}
 
 In the next section, it is shown that any strategy can be represented as a Finite State Machine.
-This allows the definition of the Dual to be extended and therefore any strategy can be used as a probe.
+This \textbf{original} result allows the definition of the Dual to be extended and therefore any strategy can be used as a probe.
 
 
 
 \section{Proof of FSM for every strategy}\label{sec:fsm_proof}
 \begin{theorem}\label{thm:fsm}
-Given a deterministic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in \mathbb{N}$ there exists a FSM $M$ such that $\alpha(h_1, h_2)$ can be obtained from it.
+Given a deterministic strategy $\alpha$ and 2 histories $h_1, h_2$, then for all games of length $n \in \mathbb{N}$ there exists an FSM $M$ such that $\alpha(h_1, h_2)$ can be obtained from it.
 \end{theorem}
 
 
@@ -221,7 +221,7 @@ Then the transition function $\delta: S \times \sigma \rightarrow S$ which maps 
 $$
 \delta((h_1, h_2), a) = (h_1 \alpha(h_1, h_2), h_2a).
 $$
-where $a$ is the opponents move.
+where $a$ is the opponent's move.
 Thus the 2 histories $h_1, h_2$ and an opponents action, $a$, are mapped to a new state $(h_1 \alpha(h_1, h_2), h_2a)$.
 Here $h_1 \alpha(h_1, h_2)$ is the concatenation of the history, $h_1$, and the action specified by the strategy, $\alpha$.
 Similarly $h_2a$ is the concatenation of the history, $h_2$, and the opponents action, $a$.
@@ -238,19 +238,18 @@ Finally the final states of $M$ denoted by $F$ is just $F = \{C, D\}^{n} \times 
 \label{fig:MajorityFSM}
 \end{figure}
 
-In figure \ref{fig:MajorityFSM} we have a more complex FSM for the strategy Majority for a game with 4 turns.
+In Figure \ref{fig:MajorityFSM} a more complex FSM for the strategy Majority for a game with 4 turns is presented.
 Majority plays in the following way:
 
 \begin{itemize}
-  \item If the opponent has cooperated the majority of the time, Majority will cooperate
-  \item If the opponent has defected the majority of the time, Majority will defect
-  \item Note - the strategy shown is technically Soft Majority, if the opponents cooperations and defections are equal it will cooperate. Hard Majority would defect in this situation.
+  \item If the opponent has Cooperated the majority of the time, Majority will Cooperate.
+  \item If the opponent has Defected the majority of the time, Majority will Defect
+  \item Note - the strategy shown is technically Soft Majority, if the opponents Cooperations and Defections are equal it will Cooperate. Hard Majority would Defect in this situation.
 \end{itemize}
 
-Clearly this means that the strategy Majority requires knowledge of all previous states.
-In general this implies that Majority could not be represented as a FSM.
-However if the number of turns in a game is known, any strategy can be represented as a FSM.
-% TODO This needs to be stated as a theorem etc.
+This implies that the strategy Majority requires knowledge of all previous states.
+Therefore, in general the strategy Majority could not be represented as an FSM.
+However, as shown in Theorem \ref{thm:fsm}, if the number of turns in a game is known, any strategy can be represented as an FSM.
 
 
 
