@@ -12,22 +12,10 @@ All strategies have an equivalent class within the library and this is demonstra
 
 
 
-\section{The Dual}\label{sec:ext-dual}
-The dual of a strategy is defined such that when the original strategy and the dual are presented with identical histories they will return opposite actions, as outlined in Definition \ref{def:dual}.
-% TODO You'll need to point at the theorem (when you've added it).
-% Make a bigger deal about how in the literature (possibly say this more in
-% previous chapter): you make the DUAL by changing the FSM, but for strategies
-% without an FSM rep that's difficult, so you describe this algorithm which
-% let's you keep track of any inherent state (you're in essence creating an FSM
-% that you carry along). Might be nice to draw a picture here too.
-This means the dual relies on knowledge of how the original strategy would have
-% TODO It's not how the original strategy would have behaved but more
-% importantly what state the original FSM rep of the strategy would be in.
-behaved in a given situation, which is impossible to infer from the source code.
-However, the required behaviour can be achieved by having the original strategy as an attribute of the dual.
-Whenever the dual has to submit a move, it can first get the original strategy to suggest what move should it would have made, and then flip that action.
-% TODO "would have made" which corresponds to gaining knowledge of what state
-% the corresponding FSM would be in.
+\section{The Dual}
+The Dual of a strategy is defined such that when the original strategy and the Dual are presented with identical histories they will return opposite actions, as outlined in Definition \ref{def:dual}.
+In previous literature this has only applied to strategies with FSM representations \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006} and the transformation was applied by changing the FSM.
+However in Section \ref{sec:extend-dual} this is extended to include all possible strategies, and an algorithm for achieving this will now be given.
 
 \begin{algorithm}[H]
     \While{Game is being played}{
@@ -38,6 +26,13 @@ Whenever the dual has to submit a move, it can first get the original strategy t
     \Return{Flip of original strategy's move}
     \caption{The Dual of a Strategy}
 \end{algorithm}
+
+Due to the way it operates, the Dual relies on knowledge of the internal state of the original strategy.
+This is not something that can be inferred from source code, but the result can be produced by having the original strategy as an attribute of the Dual.
+In effect, the Dual `carries' a copy of the original strategy.
+Whenever the Dual has to submit a move, it can obtain the state of the original strategy, then compute the next move for the origin strategy, and finally flip that move.
+
+
 
 \section{The Joss Ann}
 % TODO Move this to before the DUAL?
