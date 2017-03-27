@@ -19,6 +19,7 @@
 *.ilg
 *.ind
 *.lof
+*.auxlock
 *.lot
 *.maf
 *.mtc
