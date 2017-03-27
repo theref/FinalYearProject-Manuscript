@@ -78,8 +78,7 @@ For an example Ashlock tournament with 9 probes, see Figure \ref{fig:spatialtour
 \begin{figure}[!hbtp]
     \begin{center}
         \includestandalone{../img/spatial_tournament}
-        \caption{An example Ashlock tournament for a strategy against 9 probes}\label{fig:spatialtourn}
-        % TODO Draw this is a classic network graph.
+        \caption{An example Ashlock Tournament for a strategy against 9 probes}\label{fig:spatialtourn}
     \end{center}
 \end{figure}
 
@@ -309,8 +308,8 @@ Figure \ref{fig:screenshot5} shows that at the point the submission was included
 Also, Coveralls showed that the overall test coverage had increased slightly.
 
 Finally, Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
-It works by generating random data matching a specification and checking that a specified guarantee still holds in that case.
-If it finds an example where it doesn’t, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
+It works by generating random data matching a specification, and checking that a specified guarantee still holds in that case.
+If it finds an example where the guarantee does not hold, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
 % TODO Do you want to add something about documentation and doctesting too?
 % TODO Needs a conclusion etc (what was the version of Axelrod that first had
 % fingerprinting: check the twitter feed or CHANGES.md)
