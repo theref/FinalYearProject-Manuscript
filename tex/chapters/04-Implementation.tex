@@ -312,7 +312,7 @@ If it finds an example where the guarantee does not hold, it takes that example 
 
 Axelrod-Python also has extensive documentation \cite{axelroddocs} which benefits both developers and end users.
 For end users, the documentation is often presented as a tutorial to guide them through correct usage.
-For example, the Fingerprint documentation in Axelrod-Python (\url{http://axelrod.readthedocs.io/en/latest/tutorials/further_topics/fingerprinting.html}) contains short code snippets beside a preview of the expected output.
+For example, the Fingerprint documentation in Axelrod-Python (see Appendix \url{http://axelrod.readthedocs.io/en/latest/tutorials/further_topics/fingerprinting.html}) contains short code snippets beside a preview of the expected output.
 An example is shown in Figure \ref{fig:screenshot-documentation}.
 
 \begin{figure}[htbp!]
@@ -324,7 +324,7 @@ An example is shown in Figure \ref{fig:screenshot-documentation}.
 The documentation is written in reStructuredText (RST), a plain text markup system \cite{rst}.
 The original RST code for producing Figure \ref{fig:screenshot-documentation} is given in Listing \ref{lst:rst-documentation}.
 These examples also act as tests, referred to as doctests.
-All lines beginning with \mintinline{rst}{>>>} are executed as python code and the result is checked against the next line.
+All lines beginning with \mintinline{python}{>>>} are executed as Python code and the result is checked against the next line.
 This ensures that the examples in the documentation always match the source code, otherwise the doctests would fail.
 
 \begin{listing}[hbtp!]
@@ -358,16 +358,6 @@ We can then plot the above to get::
 \label{lst:rst-documentation}
 \end{listing}
 
-% TODO Do you want to add something about documentation and doctesting too?
+
 % TODO Needs a conclusion etc (what was the version of Axelrod that first had
-% fingerprinting: check the twitter feed or CHANGES.md)
-% That's equivalent to describing your code contribution as "we have it and it's awesome".
-
-% I suggest showing snippets of http://axelrod.readthedocs.io/en/latest/tutorials/further_topics/fingerprinting.html (both the rendered html and the rst, saying what rst is etc...).
-
-% Discuss the doctests (in the same way that you've discussed the unit tests).
-
-% You could also download a pdf version of the docs: http://readthedocs.org/projects/axelrod/downloads/pdf/latest and grab the one page corresponding to fingerprinting and include that as an appendix.
-
-% You could possibly also find a comment/requests on the PR (if one exists) about the documentation perhaps?
 

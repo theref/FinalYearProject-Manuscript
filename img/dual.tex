@@ -5,6 +5,12 @@
 \begin{tikzpicture}
     \fill [draw=none, fill=sol-violet] \BottomLeft;
     \fill [draw=none, fill=sol-cyan] \TopRight;
-    \node (01) at (-1, 2) {Lower Probe};
+    \node (01) at (-1.5, 2) {Lower Probe};
+    \node (02) at (1, 1) {};
+    \draw (01) edge[->] (02);
+
+    \node (03) at (5.5, 2) {Upper Probe};
+    \node (04) at (3, 3) {};
+    \draw (03) edge[->] (04);
 \end{tikzpicture}
 
