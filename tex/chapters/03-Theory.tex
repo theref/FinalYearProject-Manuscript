@@ -190,14 +190,8 @@ Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left}
     \end{center}
 \end{figure}
 
-% TODO I think you need to point out that $F_A$ is an analytical expression. So
-% a fingerprint is an analytical function. In a way that's very important when
-% it comes to probing with strategies that are not representable as FSM. You
-% should also include a discussion here about how Ashlock is constrained by
-% their choice of probe. Quote something they say about FSM reps.
-
 It is important to note that a Fingerprint is an \textbf{analytical} function for the expected score of the strategy.
-If a probe is used that cannot be represented as an FSM, the Dual of the probe cannot be constructed and the Fingerprint function cannot be computed.
+If the probe cannot be represented as an FSM, the Dual of the probe cannot be constructed and the Fingerprint function cannot be computed.
 
 
 
@@ -337,8 +331,8 @@ However, Theorem \ref{sec:fsm} states that every strategy can be represented as 
 Strategy $A'$ is said to be the \textbf{Extended Dual} of strategy $A$ if, for a game of finite length $n \in N$, $A$ and $A'$ can be written as finite-state machines that are identical except that their responses are reversed.
 \end{definition}
 
-This allows all the Dual transformation to be applied to all strategies and therefore, any strategy can be used as the Probe in a Fingerprint (see Definition \ref{def:fingerprint}).
+This allows the Dual transformation to be applied to all strategies and therefore, any strategy can be used as the Probe in a Fingerprint (see Definition \ref{def:fingerprint}).
 
-
-% TODO Finally, you also need a conclusion.
+The definitions presented throughout this Chapter will now be used to develop code to Fingerprint any strategy with any probe.
+This is explained in detail in Chapter \ref{cha:implementation}.
 

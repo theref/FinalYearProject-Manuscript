@@ -118,7 +118,10 @@ However, once this state is reached, extending the number of turns has a minimal
 The \mintinline{python}{repetitions} variable decides how many times the tournament would be repeated.
 The Axelrod-Python implementation of fingerprinting is a random process (due to the Joss-Ann) and high repetitions helps to reduce the effects of this.
 
-% TODO Do you want to discuss the choice of default probe?
+Whilst Axelrod-Python has the ability to use any strategy as a probe, the default is set to TitForTat.
+This has been done in order to align with previous research \cite{ Ashlock2004,  Ashlock2005, Ashlock2006}.
+
+
 
 \section{Comparison of Analytical and Numerical Plots}
 
@@ -282,11 +285,11 @@ Figure \ref{fig:screenshot4} is a request to move unnecessary lines of code.
 Whilst these would not cause the software to break, it is bad coding practice to have unused imports and redundant lines of code.
 This is an example of something that would have prevented the code written from being included in the production version of the package.
 
-\subsection{Testing}
+\subsection{Testing and Documentation}
 All code in Axelrod-Python must be tested and the most common example of testing is unittesting.
 A unit test is a function that tests a small pieces of code and not an entire package/module, although it sometimes can.
 They operate by observing the result for a specific input and comparing it with a known output, then returning whether they are the same.
-A result of True indicates that the code is behaving as intended, and a result of False indicates that it is not.
+A result of \mintinline{python}{True} indicates that the code is behaving as intended, and a result of \mintinline{python}{False} indicates that it is not.
 Consequently any program relying on that code cannot be trusted to behave as intended \cite{Sarma2016, Williams}.
 
 Axelrod-Python uses several external programmes to help with testing.
@@ -303,9 +306,68 @@ Coveralls \cite{Coveralls} calculates what proportion of the code is tested, and
 Figure \ref{fig:screenshot5} shows that at the point the submission was included into the main code base, all tests where passing on Travis and AppVeyor.
 Also, Coveralls showed that the overall test coverage had increased slightly.
 
-Finally, Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
+Hypothesis \cite{Hypothesis3.6.1} is a library for property testing.
 It works by generating random data matching a specification, and checking that a specified guarantee still holds in that case.
 If it finds an example where the guarantee does not hold, it takes that example and cuts it down to size, simplifying it until it finds a much smaller example that still causes the problem \cite{HypothesisDocs}.
+
+Axelrod-Python also has extensive documentation \cite{axelroddocs} which benefits both developers and end users.
+For end users, the documentation is often presented as a tutorial to guide them through correct usage.
+For example, the Fingerprint documentation in Axelrod-Python (\url{http://axelrod.readthedocs.io/en/latest/tutorials/further_topics/fingerprinting.html}) contains short code snippets beside a preview of the expected output.
+An example is shown in Figure \ref{fig:screenshot-documentation}.
+
+\begin{figure}[htbp!]
+\includegraphics[width = \textwidth]{../img/screenshots/Documentation.png}
+\caption{An example of how to generate a Fingerprint, taken from the Axelrod-Python documentation}
+\label{fig:screenshot-documentation}
+\end{figure}
+
+The documentation is written in reStructuredText (RST), a plain text markup system \cite{rst}.
+The original RST code for producing Figure \ref{fig:screenshot-documentation} is given in Listing \ref{lst:rst-documentation}.
+These examples also act as tests, referred to as doctests.
+All lines beginning with \mintinline{rst}{>>>} are executed as python code and the result is checked against the next line.
+This ensures that the examples in the documentation always match the source code, otherwise the doctests would fail.
+
+\begin{listing}[hbtp!]
+\begin{SourceDocs}
+Here is how to create a fingerprint of :code:`WinStayLoseShift` using
+:code:`TitForTat` as a probe::
+
+    >>> import axelrod as axl
+    >>> axl.seed(0)  # Fingerprinting is a random process
+    >>> strategy = axl.WinStayLoseShift
+    >>> probe = axl.TitForTat
+    >>> af = axl.AshlockFingerprint(strategy, probe)
+    >>> data = af.fingerprint(turns=10, repetitions=2, step=0.2)
+    >>> data
+    {...
+    >>> data[(0, 0)]
+    3.0
+
+The :code:`fingerprint` method returns a dictionary mapping coordinates of the
+form :code:`(x, y)` to the mean score for the corresponding interactions.
+We can then plot the above to get::
+
+    >>> p = af.plot()
+    >>> p.show()
+
+.. image:: _static/fingerprinting/WSLS_small.png
+     :width: 100%
+     :align: center
+\end{SourceDocs}
+\caption{Documentation for generating a Fingerprint, written in RST}
+\label{lst:rst-documentation}
+\end{listing}
+
 % TODO Do you want to add something about documentation and doctesting too?
 % TODO Needs a conclusion etc (what was the version of Axelrod that first had
 % fingerprinting: check the twitter feed or CHANGES.md)
+% That's equivalent to describing your code contribution as "we have it and it's awesome".
+
+% I suggest showing snippets of http://axelrod.readthedocs.io/en/latest/tutorials/further_topics/fingerprinting.html (both the rendered html and the rst, saying what rst is etc...).
+
+% Discuss the doctests (in the same way that you've discussed the unit tests).
+
+% You could also download a pdf version of the docs: http://readthedocs.org/projects/axelrod/downloads/pdf/latest and grab the one page corresponding to fingerprinting and include that as an appendix.
+
+% You could possibly also find a comment/requests on the PR (if one exists) about the documentation perhaps?
+
