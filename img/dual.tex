@@ -5,12 +5,20 @@
 \begin{tikzpicture}
     \fill [draw=none, fill=sol-violet] \BottomLeft;
     \fill [draw=none, fill=sol-cyan] \TopRight;
-    \node (01) at (-1.5, 2) {Lower Probe};
+    \node (01) at (-1.5, 1.5) {Lower Probe};
     \node (02) at (1, 1) {};
     \draw (01) edge[->] (02);
 
-    \node (03) at (5.5, 2) {Upper Probe};
+    \node (03) at (5.5, 2.5) {Upper Probe};
     \node (04) at (3, 3) {};
     \draw (03) edge[->] (04);
+
+    \node (05) at (2, -0.3) {$x$};
+    \node (06) at (-0.3, 2) {$y$};
+
+    \node (07) at (-0.3, -0.3) {0};
+    \node (08) at (-0.3, 4) {1};
+    \node (09) at (4, -0.3) {1};
+
 \end{tikzpicture}
 

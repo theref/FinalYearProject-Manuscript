@@ -7,6 +7,10 @@
     \node (CD) at ($(CC)+(3,0)$) [state] {$(C,D)$};
     \node (DC) at ($(CC)+(0,-3)$) [state] {$(D,C)$};
     \node (DD) at ($(DC)+(3,0)$) [state] {$(D,D)$};
+    % \node (initial) at (1.5, 3) [state] {(Initial)};
+
+    % \draw (initial) edge[out=-135, in=45, ->, thick] node [left] {$C$} (CC);
+    % \draw (initial) edge[out=-45, in=135, ->, thick] node [right] {$D$} (CD);
 
     \draw (CC) edge[out=45, in=135, loop, thick] node [below] {$C$} (CC);
     \draw (CC) edge[out=45, in=135, ->, thick] node [above] {$D$} (CD);
