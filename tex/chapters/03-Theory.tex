@@ -11,10 +11,9 @@ In essence this chapter presents a detailed review of the work of \cite{Ashlock2
 
 
 
-
 \section{Finite State Machines (FSM)}\label{sec:fsm}
 
-A formal definition of a Finite State Machine is given by Definition \ref{def:fsm} but first we will outline some motivating key characteristics of a system that can be modelled with a FSM:
+A formal definition of a Finite State Machine is given by Definition \ref{def:fsm}, but first, some motivating key characteristics of a system that can be modelled with a FSM:
 
 \begin{itemize}
  \item The system must be describable by a finite set of states.
@@ -61,11 +60,8 @@ It operates by making a probabilistic choice of Cooperation, Defection or the or
 More formally:
 
 \begin{definition}\label{def:joss-ann}
-If $A$ is a strategy for the iterated prisoner's dilemma, then the
-\textbf{Joss-Anne of A} denoted by $\JA(A, x, y)$ is a transformation of that strategy.
-Instead of the original behaviour, it makes move $C$ with probability $x$, move
-$D$ with probability $y$, and otherwise uses the response appropriate to
-strategy $A$ (assuming $x+y < 1$).
+If $A$ is a strategy for the iterated prisoner's dilemma, then the \textbf{Joss-Anne of A} denoted by $\JA(A, x, y)$ is a transformation of that strategy.
+Instead of the original behaviour, it makes move $C$ with probability $x$, move $D$ with probability $y$, and otherwise uses the response appropriate to strategy $A$ (assuming $x+y < 1$).
 \end{definition}
 
 The notation $\JA$ comes from the initials of the names Joss and Anne.
@@ -75,7 +71,6 @@ When $x + y = 1$, the original strategy is not used, and the resulting behaviour
 is a random strategy with probabilities $(x, y)$. Note that this corresponds to
 Random($x$) as described in Section~\ref{ssec:strat_random}.
 In more general terms, a $\JA$ strategy is an alteration of $A$ that causes the strategy to be played with random noise inserted into the responses.
-
 
 
 
@@ -157,12 +152,6 @@ The double fingerprint extends this idea to $x+y \geq 1$ \cite{Ashlock2008, Ashl
 A \textbf{Fingerprint} $F_A(S, x, y)$ with $0 \leq x, y \leq 1$, $x+y \leq 1$ for strategy $S$ and \textbf{probe} $A$, is the function that returns the expected score of strategy $S$ against $\JA(A, x, y)$ for each possible $(x, y)$.
 \end{definition}
 
-% TODO I think you need to point out that $F_A$ is an analytical expression. So
-% a fingerprint is an analytical function. In a way that's very important when
-% it comes to probing with strategies that are not representable as FSM. You
-% should also include a discussion here about how Ashlock is constrained by
-% their choice of probe. Quote something they say about FSM reps.
-
 \begin{definition}\label{def:double-fingerprint}
 The \textbf{Double Fingerprint} $F_{AB}(S, x, y)$ with $0 \leq x, y \leq 1$ returns the expected score of strategy $S$ against $\JA(A, x, y)$ if $x+y \leq 1$, and $\JA(B, 1-y, 1-x)$ if $x+y \geq 1$.
 \end{definition}
@@ -195,11 +184,20 @@ Figure \ref{fig:DualProbe} shows that in the \textcolor{sol-violet}{bottom left}
 \begin{figure}[!hbtp]
     \begin{center}
         \includestandalone{../img/Dual}
-        \caption{Where the Strategy plays against the Joss-Ann of the probe or the Joss-Ann of the dual of the probe}\label{fig:DualProbe}
+        \caption{Where the Strategy plays against the Joss-Ann of the probe or the Joss-Ann of the Dual of the probe}\label{fig:DualProbe}
         % TODO Add some labels to this figure: it's just a square with funky
         % colors in.
     \end{center}
 \end{figure}
+
+% TODO I think you need to point out that $F_A$ is an analytical expression. So
+% a fingerprint is an analytical function. In a way that's very important when
+% it comes to probing with strategies that are not representable as FSM. You
+% should also include a discussion here about how Ashlock is constrained by
+% their choice of probe. Quote something they say about FSM reps.
+
+It is important to note that a Fingerprint is an \textbf{analytical} function for the expected score of the strategy.
+If a probe is used that cannot be represented as an FSM, the Dual of the probe cannot be constructed and the Fingerprint function cannot be computed.
 
 
 
@@ -269,7 +267,7 @@ Whilst not technically part of the Fingerprinting process, it is now useful to p
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width = 0.3\textwidth]{../img/Numerical/Win-Stay-Lose-Shift}
+\includegraphics[width = 0.3\textwidth]{../img/Numerical/Win_Stay_Lose_Shift.png}
 \caption{Fingerprint example for Pavlov}
 \label{fig:pavlov_fing_ex}
 \end{figure}

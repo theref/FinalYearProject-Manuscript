@@ -198,10 +198,9 @@ The Axelrod-Python library \cite{axelrodproject} is an open source Python packag
 
 The original aim was to recreate Axelrod's tournaments as described in Section~\ref{sec:axelrodoriginal} and verify their results.
 As the library has grown, so has the overall aim.
-The goal now, is "to provide a resource, with facilities for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies" \cite{Knight2016}.
+The goal now, is ``to provide a resource, with facilities for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies'' \cite{Knight2016}.
 
 As mentioned in Chapter \ref{cha:introduction} for many of the tournaments that have been described the original source code is not available, and in the few cases where access was available there were no tests and minimal documentation.
-% TODO Add pointer
 The library is partly motivated by a desire to improve this situation, and there is much discussion within academia currently regarding reproducible research \cite{Crick2014, Hong2015, Procter2012, Sandve2013}.
 Some key characteristics are that the library is:
 
@@ -209,7 +208,7 @@ Some key characteristics are that the library is:
     \item Open: all code is released under an MIT license \cite{Rosen2004}
     \item Reproducible and well-tested: at the time of writing there is an excellent level of integrated tests with 99.73\% coverage (including property based tests: \cite{Hypothesis3.6.1})
     \item Well-documented: all features of the library are documented for ease of use and modification
-    \item Extensive: 139 strategies are included, with infinitely many available in the case of parametrised strategies
+    \item Extensive: 181 strategies are included, with infinitely many available in the case of parametrised strategies
     \item Extensible: easy to modify to include new strategies and to run new tournaments
 \end{itemize}
 
@@ -251,26 +250,23 @@ These plots can be seen in figures \ref{fig:violinplot} and \ref{fig:matrixplot}
     \label{fig:matrixplot}
 \end{figure}
 
-% TODO Add a transition sentence.
+The difference in scores in Figure \ref{fig:violinplot} imply that the strategies included are all different from each other.
+However, as more strategies are included it becomes harder to establish when they might be equivalent.
 
 \section{Fingerprinting}\label{sec:fingerprinting}
-It is easy to write a genetic algorithm to produce large numbers of strategies, however their analysis can be time consuming.
-% TODO What do you mean by analysis?
-% TODO What do you mean by "easy to write"? Include a reference for this claim.
-Even the simple question `Are these two strategies the same?' does not always have an obvious answer.
-% TODO What do you mean?
-This is especially true when considering source code, as two identical strategies can be coded in different ways.
-For example, differentiating between Alternator and Cycler(CD) (see Section \ref{sec:individual_strategies}) isn't trivial unless you have access to their source code.
-The results of a game they play isn't necessarily enough.
 
-A method for comparing strategies is first given in \cite{Ashlock2004}.
-Ashlock outlines several definitions, theorems and proofs concerning the construction of a fingerprint.
+The method of Fingerprinting is a technique for generating a functional signature for a strategy \cite{Ashlock2008}.
+Fingerprint functions can then be compared to allow for easier identification of similar strategies.
+It was first given in \cite{Ashlock2004} and has been extended in \cite{Ashlock2008, Ashlock2010,  Ashlock2005, Ashlock2009, Ashlock2006}.
+
+In \cite{Ashlock2004} Ashlock outlines several definitions, theorems and proofs concerning the construction of a Fingerprint.
 These are then followed by some examples, however they are of low quality and the only probe (see definition \ref{def:fingerprint}) used is TitForTat.
 
-Ashlock then extends his fingerprinting work further in \cite{Ashlock2008}.
-More examples are presented, and many different fingerprint functions are listed.
-Also, a large number of the analytical fingerprint functions use a probe that is not TitForTat.
+A large extension to the work is made in \cite{Ashlock2008}.
+More examples are presented using 4 different probes instead of solely TitForTat, and a catalogue of several Fingerprint functions is given.
 Fingerprinting is then used to to assess how three evolutionary algorithms produce different populations.
 The evolutionary methods are used to train finite-state machines, lookup tables and feed forward neural nets.
+Fingerprinting demonstrates that all three representations sample the strategy space in a radically different manner.
 
-% TODO This chapter/section ends rather abruptly?
+A recount of Ashlock's work in \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006} will now be given in Chapter \ref{cha:theory}.
+This culminates in an \textbf{original} result allowing his work to be broadened and applied to strategies without an FSM representation.

@@ -75,7 +75,7 @@ Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:
 \begin{figure}[htbp!]
     \centering
     \subfloat[Fingerprint for Alternator]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Alternator.png}}
-    \subfloat[Fingerprint for Cycler(CD)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler-CD-Numerical.png}}
+    \subfloat[Fingerprint for Cycler(CD)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CD.png}}
     \caption{Fingerprints for Alternator and Cylcer(CD) when probed by TitForTat}
     \label{fig:alt_cycler}
 \end{figure}
@@ -95,36 +95,36 @@ Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:
 
 
 
-\section{Random and Cycler(CDDC) with probes TFT and T42T}
-The importance of probe selection will now be demonstrated.
-Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
-For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in
+% \section{Random and Cycler(CDDC) with probes TFT and T42T}
+% The importance of probe selection will now be demonstrated.
+% Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
+% For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in
 
-\begin{figure}[htbp!]
-    \centering
-    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05.png}}
-    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
-    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
-    \label{fig:rand_cycle_tft}
-\end{figure}
+% \begin{figure}[htbp!]
+%     \centering
+%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05.png}}
+%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
+%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
+%     \label{fig:rand_cycle_tft}
+% \end{figure}
 
-However, by changing the probe to TitForTwoTats, it becomes obvious that the strategies are different.
+% However, by changing the probe to TitForTwoTats, it becomes obvious that the strategies are different.
 
-\begin{figure}[htbp!]
-    \centering
-    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
-    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
-    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
-    \label{fig:rand_cycle_tf2t}
-\end{figure}
+% \begin{figure}[htbp!]
+%     \centering
+%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
+%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
+%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
+%     \label{fig:rand_cycle_tf2t}
+% \end{figure}
 
-\begin{figure}[htbp!]
-    \centering
-    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05_2TFT.png}}
-    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CDDC_2TFT.png}}
-    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
-    \label{fig:rand_cycle_2tft}
-\end{figure}
+% \begin{figure}[htbp!]
+%     \centering
+%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05_2TFT.png}}
+%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CDDC_2TFT.png}}
+%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
+%     \label{fig:rand_cycle_2tft}
+% \end{figure}
 
 
 

@@ -4,12 +4,36 @@
 
 This chapter will explain how the method of fingerprinting was implemented within the Axelrod-Python Library.
 Each of the definitions presented in Chapter \ref{cha:theory} directly correspond to functions which are described below.
-All strategies have an equivalent class within the library and this is demonstrated in Section \ref{sec:fingerprint-implementation}.
-% TODO What do you mean by all strategies have an equivalent class?
 
 % TODO Add a map/picture showing the various components
 % flow chart of how the functions link up
 
+
+
+\section{The Joss-Ann}
+
+A formal definition of the Joss-Ann is given in Section \ref{sec:joss-ann}.
+Given a probability distribution $(x, y)$ the Joss-Ann Cooperates with probability $x$, Defects with probability $y$, and plays the original move with probability $1 -x-y$.
+This can be implemented very simply as seen in Algorithm \ref{alg:joss-ann}.
+First, a random number between 0 and 1 is generated.
+The thresholds for Cooperation, Defection and original move are then $x, x+y \text{ and } 1$ respectively.
+
+\begin{algorithm}[H]
+\While{Game is being played}{
+  p $\gets$ Random number\;
+  \uIf{p $\leq$ Cooperation Threshold}{
+   Next Move $\gets C$\;}
+  \uElseIf{p $\leq$ Defection Threshold}{
+   Next Move $\gets D$\;}
+  \Else{Next Move $\gets$ Original choice of Strategy\;}
+  }
+  \Return{Next Move}
+ \caption{The Joss-Ann of a Strategy}
+ \label{alg:joss-ann}
+\end{algorithm}
+
+It is possible to apply a strategy transformation to a strategy that has already been transformed.
+When fingerprinting, the Joss-Ann must be applied over the Dual.
 
 
 \section{The Dual}
@@ -33,29 +57,6 @@ In effect, the Dual `carries' a copy of the original strategy.
 Whenever the Dual has to submit a move, it can obtain the state of the original strategy, then compute the next move for the origin strategy, and finally flip that move.
 
 
-
-\section{The Joss Ann}
-% TODO Move this to before the DUAL?
-
-A formal definition of the Joss Ann is given in Section \ref{sec:joss-ann}.
-Given a probability distribution $(x, y)$ the Joss Ann Cooperates with probability $x$, Defects with probability $y$, and plays the original move with probability $1 -x-y$.
-This can be implemented very simply as seen in Algorithm \ref{alg:joss-ann}.
-First, a random number between 0 and 1 is generated.
-The thresholds for Cooperation, Defection and original move are then $x, x+y \text{ and } 1$ respectively.
-
-\begin{algorithm}[H]
-\While{Game is being played}{
-  p $\gets$ Random number\;
-  \uIf{p $\leq$ Cooperation Threshold}{
-   Next Move $\gets C$\;}
-  \uElseIf{p $\leq$ Defection Threshold}{
-   Next Move $\gets D$\;}
-  \Else{Next Move $\gets$ Original choice of Strategy\;}
-  }
-  \Return{Next Move}
- \caption{The Joss Ann of a Strategy}
- \label{alg:joss-ann}
-\end{algorithm}
 
 \section{Implementation of Fingerprinting}\label{sec:fingerprint-implementation}
 
@@ -193,31 +194,31 @@ for s in strats:
 
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/TFT-Analytical.pdf}}
-\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/TitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Tit_For_Tat.png}}
 \caption{A comparison of the analytical fingerprint of TitForTat and the numerical version produced by Axelrod-Python library.}
 \label{fig:TFT-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Psycho-Analytical.pdf}}
-\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/AntiTitForTat.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Anti_Tit_For_Tat.png}}
 \caption{A comparison of the analytical fingerprint of Psycho and the numerical version produced by Axelrod-Python library.}
 \label{fig:Psycho-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/WSLS-Analytical.pdf}}
-\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Win-Stay-Lose-Shift.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Win_Stay_Lose_Shift.png}}
 \caption{A comparison of the analytical fingerprint of WinStayLoseShit and the numerical version produced by Axelrod-Python library.}
 \label{fig:WSLS-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllC-Analytical.pdf}}
-\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cooperator.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cooperator.png}}
 \caption{A comparison of the analytical fingerprint of Cooperator and the numerical version produced by Axelrod-Python library.}
 \label{fig:Cooperator-comparison}
 \end{figure}
 \begin{figure}[htbp!]
 \subfloat[Exact analytical fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/AllD-Analytical.pdf}}
-\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Defector.pdf}}
+\subfloat[Numerical Fingerprint]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Defector.png}}
 \caption{A comparison of the analytical fingerprint of Defector and the numerical version produced by Axelrod-Python library.}
 \label{fig:Defector-comparison}
 \end{figure}
