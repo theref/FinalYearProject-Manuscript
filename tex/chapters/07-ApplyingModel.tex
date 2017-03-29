@@ -3,7 +3,7 @@
 \chapter{Application of the Model}\label{cha:applying-model}
 
 In this Chapter a method for assessing the sensitivity of the model will be outlined.
-This is done by making small changes to the parameters of strategies and observing whether the model can discriminate between the original strategy and the altered version.
+This is done by making several small changes to the parameters of strategies and observing whether the model can discriminate between the new altered vectors.
 The size of the change made to the strategy will be varied and the models performance recorded for each deviation.
 It is expected that there is a cut-off where the model changes from performing well to performing badly, and this gives an approximation of it's sensitivity.
 Finally, model will be applied to the Axelrod-Python library to determine if it contains any duplicate strategies.
@@ -25,6 +25,42 @@ See Section \ref{sec:individual_strategies} for explanations of how these strate
 
 \section{Determining the sensitivity of the Model}
 
+All possible MemoryOne strategies are defined by the space $S = [0, 1]^4$.
+For a vector $s \in S$ and a deviation $\delta \in (0, 1)$, 16 new deviated vectors are created by taking the sum of $s$ with all possible $(\pm \delta, \pm \delta, \pm \delta, \pm \delta)$, but bounding each element in the range $[0, 1]$.
+For example, with $s = (0.2, 0, 0.5, 0.95)$ and $\delta = 0.1$, the 16 vectors produced are:
+
+\begin{itemize}
+\begin{multicols}{4}
+  \item $(0.3, 0.1, 0.6, 1.0)$
+  \item $(0.3, 0.1, 0.6, 0.85)$
+  \item $(0.3, 0.1, 0.4, 1.0)$
+  \item $(0.3, 0.1, 0.4, 0.85)$
+  \item $(0.3, 0.0, 0.6, 1.0)$
+  \item $(0.3, 0.0, 0.6, 0.85)$
+  \item $(0.3, 0.0, 0.4, 1.0)$
+  \item $(0.3, 0.0, 0.4, 0.85)$
+  \item $(0.1, 0.1, 0.6, 1.0)$
+  \item $(0.1, 0.1, 0.6, 0.85)$
+  \item $(0.1, 0.1, 0.4, 1.0)$
+  \item $(0.1, 0.1, 0.4, 0.85)$
+  \item $(0.1, 0.0, 0.6, 1.0)$
+  \item $(0.1, 0.0, 0.6, 0.85)$
+  \item $(0.1, 0.0, 0.4, 1.0)$
+  \item $(0.1, 0.0, 0.4, 0.85)$
+\end{multicols}
+\end{itemize}
+
+The 16 deviated vectors are then entered into an Ashlock tournament to produce the corresponding results table where all strategies are compared (as described in Section \ref{sec:ashlock_tourn}).
+The model is then be applied to this set of results, and the proportion of comparisons predicted correctly is recorded.
+As all the strategies have been defined by unique vectors, it is known that all the strategies are different and so the model should predict that they all different.
+By repeating this process for different vectors $s \in S$ whilst also varying $\delta$, Figure \ref{fig:m1_correct} is produced.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../img/ML/proportion-correct.png}
+    \caption{Caption here}
+    \label{fig:m1_correct}
+\end{figure}
 
 
 
