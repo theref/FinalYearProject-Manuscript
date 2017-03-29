@@ -2,7 +2,26 @@
 
 \chapter{Application of the Model}\label{cha:applying-model}
 
-\section{Memory1 Strategies}
+In this Chapter a method for assessing the sensitivity of the model will be outlined.
+This is done by making small changes to the parameters of strategies and observing whether the model can discriminate between the original strategy and the altered version.
+The size of the change made to the strategy will be varied and the models performance recorded for each deviation.
+It is expected that there is a cut-off where the model changes from performing well to performing badly, and this gives an approximation of it's sensitivity.
+Finally, model will be applied to the Axelrod-Python library to determine if it contains any duplicate strategies.
+
+
+
+\section{MemoryOne Strategies}
+
+A MemoryOne strategy bases its decision entirely on the the last round of play.
+In Axelrod-Python they are defined by a vector $v$ of length 4 that determines the probability of Cooperation given the previous rounds history, ie:
+$$
+v = (P(C|CC), P(C|CD), P(C|DC), P(C|DD))
+$$
+For example, a MemoryOne strategy defined by the vector $v=(1, 1, 1, 1)$ is equivalent to Cooperator.
+TitForTat can be implemented as a MemoryOne player with the vector $v=(1, 0, 1, 0)$, Pavlov as the MemoryOne player with $v=(1, 0, 0, 1)$ and Random as the MemoryOne player with $v=(0.5, 0.5, 0.5, 0.5)$.
+See Section \ref{sec:individual_strategies} for explanations of how these strategies operate.
+
+
 
 \section{Determining the sensitivity of the Model}
 
