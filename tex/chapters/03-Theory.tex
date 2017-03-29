@@ -44,8 +44,8 @@ Arcs represent the choice made by the opponent at the current turn, and lead us 
 \begin{figure}[hbtp!]
 \centering
 \subfloat[FSM for TitForTat]{\includestandalone[width = 0.5\textwidth]{../img/Tit4TatFSM}\label{fig:Tit4TatFSM}}
-\subfloat[FSM for Pavlov (Win-Stay Lose-Shift)]{\includestandalone[width = 0.5\textwidth]{../img/PavlovFSM}\label{fig:PavlovFSM}}
-\caption{Finite State Machine representations for TitForTat, Pavlov and Majority}
+\subfloat[FSM for Pavlov]{\includestandalone[width = 0.5\textwidth]{../img/PavlovFSM}\label{fig:PavlovFSM}}
+\caption{Finite State Machine representations for TitForTat and Pavlov}
 \end{figure}
 
 The next few Sections (\ref{sec:joss-ann} to \ref{sec:dual}) outline some transformations that can be applied to strategies.
@@ -93,9 +93,19 @@ Strategy $A'$ is said to be the \textbf{Dual} of strategy $A$ if $A$ and $A'$ ca
 \end{definition}
 
 In Section \ref{sec:extend-dual} this definition will be extended to allow for the Dual to be calculated for any strategy, even ones without a natural FSM representation.
+FSM representations for the Dual of TitForTat and Pavlov are given in Figures \ref{fig:Tit4TatDualFSM} and \ref{fig:PavlovDualFSM}.
+The FSM representation of the Dual of Pavlov is exactly the same as the original except that the initial move has changed.
+For TitForTat, the Dual plays in entirely the opposite way and all moves have been changed.
 
-It is important to note that this is different to taking a strategy and flipping its responses.
-The dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not.
+\begin{figure}[hbtp!]
+\centering
+\subfloat[FSM for the Dual of TitForTat]{\includestandalone[width = 0.5\textwidth]{../img/Tit4TatDualFSM}\label{fig:Tit4TatDualFSM}}
+\subfloat[FSM for the Dual of Pavlov]{\includestandalone[width = 0.5\textwidth]{../img/PavlovDualFSM}\label{fig:PavlovDualFSM}}
+\caption{Finite State Machine representations for the Duals of TitForTat and Pavlov}
+\end{figure}
+
+It is important to note in general the Dual is different to taking a strategy and flipping its responses.
+The Dual relies on knowledge of the underlying state of the original strategy, whereas the flip does not.
 This is shown in Table \ref{tab:strat-dual-flip}.
 
 \begin{table}[htbp]
