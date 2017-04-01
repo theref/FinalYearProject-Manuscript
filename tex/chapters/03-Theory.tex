@@ -35,7 +35,6 @@ A \textbf{Finite State Machine} $M$ is a tuple $(S, \sigma, \delta, s_0, F)$ whe
  \item $\delta: S \times \sigma \rightarrow S$ is the transition function.
 \end{itemize}
 \end{definition}
-%TODO - Add a little paragraph here that shows how this definition matches up with the previous examples.
 
 Figure \ref{fig:Tit4TatFSM} and figure \ref{fig:PavlovFSM} show FSM representations for TitForTat and Pavlov respectively (see Sections \ref{ssec:stra_titfortat} and \ref{ssec:strat_pavlov} for an explanation of how these strategies operate).
 Here nodes represent the previous action taken by the strategy and the opponent, ie. node $(D, C)$ implies that on the preceding turn, the strategy chose to Defect and the opponent chose to Cooperate.
@@ -47,6 +46,11 @@ Arcs represent the choice made by the opponent at the current turn, and lead us 
 \subfloat[FSM for Pavlov]{\includestandalone[width = 0.5\textwidth]{../img/PavlovFSM}\label{fig:PavlovFSM}}
 \caption{Finite State Machine representations for TitForTat and Pavlov}
 \end{figure}
+
+Figures \ref{fig:Tit4TatFSM} and \ref{fig:PavlovFSM} are merely pictorial representations of Definition \ref{def:fsm}.
+The set of input symbols is given by $\sigma = \{C, D\}$.
+Nodes are the possible states $S$, including the initial state $s_0$.
+Whilst not given explicitly, the transition function $\delta$ can be inferred from the edges of the Figures.
 
 The next few Sections (\ref{sec:joss-ann} to \ref{sec:dual}) outline some transformations that can be applied to strategies.
 In particular, Section \ref{sec:dual} relies on the strategy to be represented as a FSM as has just been defined.
