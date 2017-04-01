@@ -82,15 +82,20 @@ Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:
 
 \section{GoByMajority for different parameters}\label{sec:GBM}
 
+Figures \ref{fig:GBM5} to \ref{fig:GBMoo} show fingerprints for the strategy GoByMajority (see section \ref{sec:fsm_proof}) with increasing memory depth when probed by TitForTat
+Whilst the intricate nature of the fingerprints is hard to interpret, one major observation can be made.
+As the memory depth increases, a region in the middle of the right hand side of the plot transitions from red to blue.
+Blue areas correspond to lower scores, and so the strategy actually performs worse in this area when it has a larger memory.
+This reason for this is not immediately apparent, and would be interesting to investigate in further research.
+
 \begin{figure}[htbp!]
-\subfloat[GoByMajority with memory depth 5]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_5.png}}
-\subfloat[GoByMajority with memory depth 10]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_10.png}}\\
+\subfloat[GoByMajority with memory \newline depth 5]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_5.png}\label{fig:GBM5}}
+\subfloat[GoByMajority with memory \newline depth 10]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_10.png}}
+\subfloat[GoByMajority with memory \newline depth 20]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_20.png}}\\
 \\
-\subfloat[GoByMajority with memory depth 20]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_20.png}}
-\subfloat[GoByMajority with memory depth 40]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_40.png}}\\
-\\
-\subfloat[GoByMajority with memory depth 75]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority_75.png}}
-\subfloat[GoByMajority with memory depth infinite]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Go_By_Majority0.png}}
+\subfloat[GoByMajority with memory \newline depth 40]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_40.png}}
+\subfloat[GoByMajority with memory \newline depth 75]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_75.png}}
+\subfloat[GoByMajority with memory \newline depth infinite]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority0.png}\label{fig:GBMoo}}
 \end{figure}
 
 

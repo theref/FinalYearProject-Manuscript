@@ -164,7 +164,6 @@ The strategies were ordered by their ranking in the tournament and every 5th one
 This gave a balance of strategies that were similar (close ranking) and those that were very different (large difference in ranking).
 Ordered by ranking, the 38 strategies chosen to train the model where:
 
-
 \begin{multicols}{3}
 \begin{enumerate}
   \item Evolved HMM 5
@@ -208,7 +207,6 @@ Ordered by ranking, the 38 strategies chosen to train the model where:
 \end{enumerate}
 \end{multicols}
 
-
 In order to properly assess the model's performance, more information is required regarding what it can accurately predict and what mistakes are made.
 To do this a Confusion Matrix is constructed, as shown in Figure \ref{fig:conf_matrix}.
 
@@ -227,9 +225,14 @@ This is encouraging, as due to the assumption it is known that all strategies as
 However, the model did predict that some strategies were equivalent, despite being assumed different.
 Again, this is to be expected as no allowance was made for identical strategies with different names.
 
-\begin{figure}[htbp!]
+Finally, it is useful to obtain a measure of the significance of each of the variables used to train the model.
+The Python package \mintinline{python}{sk-learn} provides utilities for obtaining p Values for the features used within the model.
+In the package documentation, the $\chi^2$ test is recommended for categorical data \cite{scikit-learn-docs}, and this has been used to obtain the p Values shown in Table .
+This shows that all of the variables used are statistically significant and should be included in model training.
+
+\begin{table}[htbp!]
     \centering
     \includestandalone[]{../img/p-values}
     \caption{p Vales for all variables the model was trained on}
-    \label{fig:pvalues}
-\end{figure}
+    \label{tab:pvalues}
+\end{table}
