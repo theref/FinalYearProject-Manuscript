@@ -57,12 +57,15 @@ By repeating this process for different vectors $s \in S$ whilst also varying $\
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=\textwidth]{../img/ML/proportion-correct.png}
-    \caption{Caption here}
+    \includegraphics[width=0.9\textwidth]{../img/ML/proportion-correct.png}
+    \caption{Performance of model for increasing $\delta$}
     \label{fig:m1_correct}
 \end{figure}
 
-
+The model appears to reach a reasonable level of accuracy when $\delta > 0.3$.
+However, there is a large amount of variance for all $\delta$ used.
+This suggests that the original vector has a significant effect on how the model performs.
+For some MemoryOne strategies even very small deviations will be noticed by the model, but for other MemoryOne strategies it takes a much larger change before the model will recognise the difference.
 
 \section{Applying Model to Axelrod-Python}
 

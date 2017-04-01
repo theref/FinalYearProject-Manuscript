@@ -41,6 +41,7 @@ Due to the global minimum and maximum that TitForTat achieves, a score of 2.25 i
 
 
 \section{Varying the parameter for Random}
+
 It is possible to observe how changing a parameter for a strategy will affect its behaviour by comparing the fingerprints for each parameter.
 As described in Section \ref{ssec:strat_random}, Random accepts a parameter that determines the probability of cooperation.
 We can vary this parameter and create a new fingerprint each time.{}
@@ -70,16 +71,6 @@ Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:
 
 
 
-% \section{Alternator, Cycler(CD), Cooperator, Defector}
-
-% \begin{figure}[htbp!]
-%     \centering
-%     \subfloat[Fingerprint for Alternator]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Alternator.png}}
-%     \subfloat[Fingerprint for Cycler(CD)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CD.png}}
-%     \caption{Fingerprints for Alternator and Cylcer(CD) when probed by TitForTat}
-%     \label{fig:alt_cycler}
-% \end{figure}
-
 \section{GoByMajority for different parameters}\label{sec:GBM}
 
 Figures \ref{fig:GBM5} to \ref{fig:GBMoo} show fingerprints for the strategy GoByMajority (see section \ref{sec:fsm_proof}) with increasing memory depth when probed by TitForTat
@@ -89,10 +80,10 @@ Blue areas correspond to lower scores, and so the strategy actually performs wor
 This reason for this is not immediately apparent, and would be interesting to investigate in further research.
 
 \begin{figure}[htbp!]
+\centering
 \subfloat[GoByMajority with memory \newline depth 5]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_5.png}\label{fig:GBM5}}
 \subfloat[GoByMajority with memory \newline depth 10]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_10.png}}
 \subfloat[GoByMajority with memory \newline depth 20]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_20.png}}\\
-\\
 \subfloat[GoByMajority with memory \newline depth 40]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_40.png}}
 \subfloat[GoByMajority with memory \newline depth 75]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority_75.png}}
 \subfloat[GoByMajority with memory \newline depth infinite]{\includegraphics[width = 0.3\textwidth]{../img/Numerical/Go_By_Majority0.png}\label{fig:GBMoo}}
@@ -100,36 +91,37 @@ This reason for this is not immediately apparent, and would be interesting to in
 
 
 
-% \section{Random and Cycler(CDDC) with probes TFT and T42T}
-% The importance of probe selection will now be demonstrated.
-% Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
-% For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in
+\section{Random and Cycler(CDDC) with Different probes}
 
-% \begin{figure}[htbp!]
-%     \centering
-%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05.png}}
-%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
-%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
-%     \label{fig:rand_cycle_tft}
-% \end{figure}
+The importance of probe selection will now be demonstrated.
+Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
+For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in \ref{fig:rand_cycle_tft}
 
-% However, by changing the probe to TitForTwoTats, it becomes obvious that the strategies are different.
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TFT.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTat}
+    \label{fig:rand_cycle_tft}
+\end{figure}
 
-% \begin{figure}[htbp!]
-%     \centering
-%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
-%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
-%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTats}
-%     \label{fig:rand_cycle_tf2t}
-% \end{figure}
+Even when changing the probe to TitForTwoTats or TwoTitsForTat the Fingerprints remain the same, as shown in Figures \ref{fig:rand_cycle_tf2t} and \ref{fig:rand_cycle_2tft}.
 
-% \begin{figure}[htbp!]
-%     \centering
-%     \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05_2TFT.png}}
-%     \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CDDC_2TFT.png}}
-%     \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
-%     \label{fig:rand_cycle_2tft}
-% \end{figure}
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF2T.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF2T.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForTwoTat}
+    \label{fig:rand_cycle_tf2t}
+\end{figure}
+
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random05_2TFT.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler_CDDC_2TFT.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TwoTitsForTat}
+    \label{fig:rand_cycle_2tft}
+\end{figure}
 
 
 
