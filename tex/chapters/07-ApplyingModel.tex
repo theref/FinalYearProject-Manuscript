@@ -25,8 +25,8 @@ See Section \ref{sec:individual_strategies} for explanations of how these strate
 
 \section{Determining the sensitivity of the Model}
 
-All possible MemoryOne strategies are defined by the space $S = [0, 1]^4$.
-For a vector $s \in S$ and a deviation $\delta \in (0, 1)$, 16 new deviated vectors are created by taking the sum of $s$ with all possible $(\pm \delta, \pm \delta, \pm \delta, \pm \delta)$, but bounding each element in the range $[0, 1]$.
+All possible MemoryOne strategies are defined by the space $S = [0, 1]^4_{\mathbb{R}}$.
+For a vector $s \in S$ and a deviation $\delta \in (0, 1)$, 16 new deviated vectors are created by taking the sum of $s$ with all possible vectors $(\pm \delta, \pm \delta, \pm \delta, \pm \delta)$, but bounding each element in the range $[0, 1]$.
 For example, with $s = (0.2, 0, 0.5, 0.95)$ and $\delta = 0.1$, the 16 vectors produced are:
 
 \begin{itemize}
@@ -57,7 +57,7 @@ By repeating this process for different vectors $s \in S$ whilst also varying $\
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=0.5\textwidth]{../img/ML/proportion-correct.png}
+    \includegraphics[width=\textwidth]{../img/ML/proportion-correct.png}
     \caption{Caption here}
     \label{fig:m1_correct}
 \end{figure}
@@ -66,63 +66,107 @@ By repeating this process for different vectors $s \in S$ whilst also varying $\
 
 \section{Applying Model to Axelrod-Python}
 
+The final section of this report addresses the problem of determining when strategies in Axelrod-Python are identical.
+The assumption made in Section \ref{sec:training_model} must now be ignored.
+It stated: Strategies with different names are assumed to be different, but this is not necessarily the case.
+
+In order to determine whether any strategies in Axelrod-Python were identical, all of them were entered into an Ashlock Tournament.
+The corresponding results table where all strategies are compared (as described in Section \ref{sec:ashlock_tourn}) was then computed, and the model was applied to this.
+A new table could then be produced containing pairs of strategies that the model predicted were equivalent.
+
+In Figure \ref{fig:matrix_similarity}, this table is presented as a Matrix Plot.
+Note that the leading diagonal represents strategies being equivalent to themselves, also the plot is symmetric, because if strategy $A$ is similar to strategy $B$ then strategy $B$ is similar to strategy $A$.
 
 \begin{figure}[htbp!]
     \centering
-    \includegraphics[width=\linewidth]{../img/neighbourhoods/overall.png}
-    \caption{Caption here}
-    \label{fig:figure1}
+    \includegraphics[width=0.8\linewidth]{../img/ML/similarity_heatmap.png}
+    \caption{Matrix Plot of similarity}
+    \label{fig:matrix_similarity}
 \end{figure}
+
+However this plot does not provide much insight.
+Instead it can be presented as Network Graph, as in Figure \ref{fig:overall_neighbourhoods}.
+Here nodes represent strategies, and edges link nodes that the model predicted to be equivalent.
+The graph is undirected for the same reason that Figure \ref{fig:matrix_similarity} is symmetric.
+For clarity, strategies that are only similar to themselves have been omitted.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/neighbourhoods/overall.png}
+    \caption{Network Graph of strategies that the model had deemed equivalent}
+    \label{fig:overall_neighbourhoods}
+\end{figure}
+
+In Figure \ref{fig:sep_neighbourhoods}, all of the disjoint neighbourhoods from Figure \ref{fig:overall_neighbourhoods} have been separated out and some of these will now be explored.
+Figures \ref{fig:nbh_soft_gbm} and \ref{fig:nbh_hard_gbm} are perfect examples of the model exactly as expected.
+Figure \ref{fig:nbh_soft_gbm} shows that the model predicted several SoftGoByMajority strategies to be equivalent to each other.
+The only difference between them was the memory depth.
+Again in Figure \ref{fig:nbh_hard_gbm} the only difference between the various HardGoByMajority strategies was the memory depth.
+However, the model was able to distinguish between all Hard and Soft version of GoByMajority, hence the two networks are disjoint.
+
+In Figure \ref{fig:nbh_alt_cd}
+
 
 \begin{figure}[htbp!]
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/1.png}}
-\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/10.png}}
+\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/10.png}\label{fig:nbh_soft_gbm}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/102.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/107.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/12.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/16.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/17.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/18.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/2.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/22.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/24.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/29.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/30.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/31.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/36.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/38.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/4.png}}
-\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/47.png}} \\
+\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/47.png}\label{fig:nbh_alt_cd}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/49.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/55.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/58.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
-\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/60.png}}
+\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/60.png}\label{fig:nbh_hard_gbm}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/7.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/74.png}} \\
+\phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/78.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/84.png}}\\
+
+\caption{All the disjoint neighbourhoods from Figure \ref{fig:overall_neighbourhoods}}
+\label{fig:sep_neighbourhoods}
 \end{figure}
