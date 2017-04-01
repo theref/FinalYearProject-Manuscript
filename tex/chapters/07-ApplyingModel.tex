@@ -107,7 +107,8 @@ The only difference between them was the memory depth.
 Again in Figure \ref{fig:nbh_hard_gbm} the only difference between the various HardGoByMajority strategies was the memory depth.
 However, the model was able to distinguish between all Hard and Soft version of GoByMajority, hence the two networks are disjoint.
 
-In Figure \ref{fig:nbh_alt_cd}
+In Figure \ref{fig:nbh_alt_cd} the strategies Alternator and Cycler(DC) are deemed equivalent.
+Again this is encouraging as the strategies are identical except that one begins with a Cooperation and the other begins with a Defection.
 
 
 \begin{figure}[htbp!]
@@ -132,7 +133,7 @@ In Figure \ref{fig:nbh_alt_cd}
 \end{figure}
 \begin{figure}[htbp!]
 \ContinuedFloat
-\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/22.png}}
+\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/22.png}\label{fig:nbh_qlearner}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/24.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/29.png}} \\
 \phantomcaption
@@ -155,7 +156,7 @@ In Figure \ref{fig:nbh_alt_cd}
 \ContinuedFloat
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/49.png}}
 \subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/55.png}}
-\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/58.png}} \\
+\subfloat[]{\includegraphics[width = 0.3\textwidth]{../img/neighbourhoods/58.png}\label{fig:nbh_pi_e}} \\
 \phantomcaption
 \end{figure}
 \begin{figure}[htbp!]
@@ -173,3 +174,24 @@ In Figure \ref{fig:nbh_alt_cd}
 \caption{All the disjoint neighbourhoods from Figure \ref{fig:overall_neighbourhoods}}
 \label{fig:sep_neighbourhoods}
 \end{figure}
+
+
+In Figure \ref{fig:nbh_pi_e}, the strategies $\pi$ and $e$ are connect.
+These operate by attempting to make the ratio between Cooperations and Defections as close as possible to their respective mathematical constant.
+Interestingly, there is a third strategy of this form implemented in Axelrod-Pythoh, $\phi$.
+The screenshot in Figure \ref{fig:ss_pi_phi_e} shows the documentation for these strategies, including an approximation of the ratio they attempt to replicate.
+
+\begin{figure}[htbp!]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{../img/screenshots/pi_phi_e.png}
+    \caption{Axelrod-Python documentation for $\phi, \pi \text{ and } e$}
+    \label{fig:ss_pi_phi_e}
+\end{figure}
+
+Another neighbourhood that requires more inspection is shown in Figure \ref{fig:nbh_qlearner}.
+4 different QLearner strategies and the strategy AntiCycler form a complete graph, ie. the model predicts they are all equivalent to each other.
+In addition, the strategy WorseAndWorse is deemed similar to AntiCycler, but not to any of the QLearners.
+
+AntiCycler follows a sequence of plays that has no cycles: $CDD\ CD\ CCD\ CCCD\ CCCCD \dots $, whereas the QLearners use Q-Learning \cite{Watkins1992} in an attempt to find an optimal solution.
+It is understandable that different Q-Learners may be predicted equivalent by the model, as it is possible that find the same solution.
+However, without knowledge of the solution they find it is unclear why they are considered similar to AntiCycler and this would require further work.
