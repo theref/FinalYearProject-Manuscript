@@ -95,7 +95,7 @@ This reason for this is not immediately apparent, and would be interesting to in
 
 The importance of probe selection will now be demonstrated.
 Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
-For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in \ref{fig:rand_cycle_tft}
+For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in \ref{fig:rand_cycle_tft}.
 
 \begin{figure}[htbp!]
     \centering
@@ -123,6 +123,16 @@ Even when changing the probe to TitForTwoTats or TwoTitsForTat the Fingerprints 
     \label{fig:rand_cycle_2tft}
 \end{figure}
 
+However, changing the probe to TitForThreeTats as in Figure \ref{fig:rand_cycle_tf3t}, it becomes clear that the strategies are different.
+This example highlights the importance of choosing an appropriate probe when Fingerprinting.
+
+\begin{figure}[htbp!]
+    \centering
+    \subfloat[Fingerprint for Random]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Random_TF3T.png}}
+    \subfloat[Fingerprint for Cycler(CDDC)]{\includegraphics[width = 0.5\textwidth]{../img/Numerical/Cycler(CDDC)_TF3T.png}}
+    \caption{Fingerprints for Random and Cylcer(CDDC) when probed by TitForThreeTat}
+    \label{fig:rand_cycle_tf3t}
+\end{figure}
 
 
 \section{LSE plot and table}\label{sec:lse}
