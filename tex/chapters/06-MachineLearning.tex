@@ -226,9 +226,9 @@ However, the model did predict that some strategies were equivalent, despite bei
 Again, this is to be expected as no allowance was made for identical strategies with different names.
 
 Finally, it is useful to obtain a measure of the significance of each of the variables used to train the model.
-The Python package \mintinline{python}{sk-learn} provides utilities for obtaining p Values for the features used within the model.
-In the package documentation, the $\chi^2$ test is recommended for categorical data \cite{scikit-learn-docs}, and this has been used to obtain the p Values shown in Table .
-This shows that all of the variables used are statistically significant and should be included in model training.
+Feature selection is where the most significant (predictive) variable are filtered from the data in order to make better predictions faster \cite{Guyon2003}.
+The $\chi^2$ test is commonly used for performing feature selection on models \cite{Forman2003} by comparing the distribution of each feature with the independent variable.
+A $\chi^2$ test was used to obtain the p Values shown in Table \ref{tab:pvalues} which shows that all of the variables used are statistically significant and should be included in model.
 
 \begin{table}[htbp!]
     \centering
