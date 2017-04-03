@@ -2,8 +2,13 @@
 
 \chapter{Conclusion}\label{cha:conclusion}
 
-The aim of this paper was to
-The main results was...
+The main aim of this report was to assess the current tools for distinguishing between strategies in the Iterated Prisoner's Dilemma and implement them within the Axelrod-Python library.
+The report also aimed to produce a novel approach to the problem and use this to perform some analysis on the strategies contained within Axelrod-Python.
+Ultimately both of these goals were achieved and some preliminary analysis of the Axelrod-Python was completed.
+In particular, an \textbf{original} results is presented in Section \ref{sec:fsm_proof} allowing the work completed in previous literature to be extended further.
+
+
+\section{Overview}
 
 As described in Chapter \ref{cha:introduction}, the Prisoner's Dilemma is a very popular model in game theory and there have been many papers written about the subject.
 The game has been applied to many different research areas is often used to model systems in biology \cite{Sigmund1999}, sociology \cite{Franken2005}, psychology \cite{Ishibuchi2005}, and economics \cite{Chong2005}.
@@ -29,5 +34,18 @@ Finally, in Chapter \ref{cha:applying-model}, the model was used to identify equ
 First, a level of the model's sensitivity was obtained using a variety of MemoryOne strategies from Axelrod-Python.
 This was followed by the model being applied to all strategies within Axelrod-Python; producing network graphs of strategies the model considered identical.
 
+
+
 \section{The Future}
 
+Due to time constraints, there were many interesting topics that could not be investigated fully.
+Future work could include examining more Fingerprint plots, in a similar to Chapter \ref{cha:results}.
+Explaining the appearance of Fingerprints for a given strategy and probe is not trivial, especially for strategies with variable parameter.
+In addition, using more probes to produce Fingerprints to study the effect they have.
+
+In Chapters \ref{cha:machinelearning} and \ref{cha:applying-model}, only one probe is used to produce the data the model is trained on.
+The probe was selected to be in line with previous literature and it is unlikely that it is the best choice.
+The possibility of using multiple probes to train the model was also not considered.
+
+Finally, in Chapter \ref{cha:applying-model}, many of the neighbourhood network graphs were not discussed.
+A more detailed inspection of the source code for the strategies in the same network could yield interesting results regarding identical strategies within Axelrod-Python.
