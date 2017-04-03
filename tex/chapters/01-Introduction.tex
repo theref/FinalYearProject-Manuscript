@@ -5,7 +5,7 @@
 The Prisoner's Dilemma (PD) is a classic model in Game Theory.
 It is a simple two player game where the agents must make a choice of two options without communicating.
 This is often presented as two suspects who have been arrested and are being interrogated separately.
-They have the option of whether to cooperate with each other or defect and each player receives an individual payoff that depends on the actions that have been taken.
+They have the option of whether to Cooperate with each other or Defect and each player receives an individual payoff that depends on the actions that have been taken.
 This may appear quite abstract, so a more formal definition is given in Section \ref{sec:intro_pd}.
 
 Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
@@ -20,7 +20,9 @@ The general state of reproducible research is discussed further in Section \ref{
 
 Recently, a group of researchers have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
 Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
-The version of the library used in this work will be \cite{axelrodproject}, the library currently has 181 strategies implemented with the capability to run evolutionary tournaments and tournaments on different topologies.
+The version of the library used in this work will be \cite{axelrodproject}.
+This version of the library includes 181 strategies and the capability to run evolutionary tournaments and tournaments on different topologies.
+
 
 
 \section{Prisoner's Dilemma}\label{sec:intro_pd}
@@ -93,7 +95,7 @@ Currently the only known approach to this problem in the literature is Fingerpri
 \end{figure}
 
 The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
-Secondly, although the fingerprinting method is described and used at length in \cite{Ashlock2010, Ashlock2008, Ashlock2004, Ashlock2006, Ashlock2005, Ashlock2009} there is no source code readily available, it must be requested from the original author.
+Secondly, although the fingerprinting method is described and used at length in \cite{Ashlock2008,Ashlock2010, Ashlock2004, Ashlock2005, Ashlock2009, Ashlock2006,} there is no source code readily available, it must be requested from the original author.
 This project will document an implementation of fingerprinting that is at present available in the Axelrod-Python library (Chapter \ref{cha:implementation}) and also consider a statistical approach to identifying similar strategies (Chapter \ref{cha:machinelearning}).
 
 
@@ -102,7 +104,7 @@ This project will document an implementation of fingerprinting that is at presen
 Throughout this report examples and demonstrations of code will be given.
 Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this report.
 In order to help the reader differentiate between each scenario, two different colour schemes have been used.
-The first, for Axelrod-Python source code is shown in listing \ref{lst:examplesourcecode} and the second, for any bespoke code, is shown in listing \ref{lst:exampleexamplecode}.
+The first, for Axelrod-Python source code is shown in Listing \ref{lst:examplesourcecode} and the second, for any bespoke code, is shown in Listing \ref{lst:exampleexamplecode}.
 
 \begin{listing}[hbtp!]
 \begin{SourceCode}

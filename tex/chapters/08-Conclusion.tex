@@ -1,0 +1,25 @@
+%!TEX root = ../main.tex
+
+\chapter{Conclusion}\label{cha:conclusion}
+
+As described in Chapter \ref{cha:introduction}, the Prisoner's Dilemma is a very popular model in game theory and there have been many papers written about the subject.
+The game has been applied to many different research areas is often used to model systems in biology \cite{Sigmund1999}, sociology \cite{Franken2005}, psychology \cite{Ishibuchi2005}, and economics \cite{Chong2005}.
+The start of this chapter will give a brief overview of the literature and particularly relevant work will be highlighted.
+This is followed by an outline of how Axelrod's work is currently being reproduced by an open-source community.
+Finally, an introduction to fingerprinting (a technique used for identify
+similar strategies) and some necessary definitions and theorems are given at the end of the chapter.
+
+Many definitions will be now be presented, with the overall aim being to have a rigorous definition for a fingerprint.
+A definition of Finite State Machines will be given, and an explanation of how they relate to fingerprinting.
+Then definitions for the Dual, Joss-Ann and Fingerprint as presented by Ashlock in \cite{Ashlock2004}.
+It will then be shown that any strategy can be represented as a Finite State Machine, which allows the work of Ashlock to be extended to include any strategy to be used as a probe.
+Finally, an example of how to construct an analytical fingerprint will be shown in Section \ref{sec:analytical-fingerprints}.
+In essence this chapter presents a detailed review of the work of \cite{Ashlock2008, Ashlock2010, Ashlock2004,  Ashlock2005, Ashlock2009, Ashlock2006}.
+
+In this chapter several fingerprints will be examined in detail.
+In Section \ref{sec:tft} a breakdown of the fingerprint for TitForTat is given with an explanation of its appearance.
+Section \ref{sec:GBM} shows several plots for the strategy GoByMajority, with a varying parameter.
+As the parameter changes, a continuous deformation of the plot of the
+fingerprint can be observed.
+Finally, in Section \ref{sec:lse} we compare the underlying data for all fingerprints of strategies within Axelrod-Python.
+This data is used to produce a heat plot of strategies similarity.
