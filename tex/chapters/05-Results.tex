@@ -2,16 +2,16 @@
 
 \chapter{Results}\label{cha:results}
 
-In this chapter several fingerprints will be examined in detail.
-In Section \ref{sec:tft} a breakdown of the fingerprint for TitForTat is given with an explanation of its appearance.
+In this Chapter several Fingerprints will be examined in detail.
+In Section \ref{sec:tft} a breakdown of the Fingerprint for TitForTat is given with an explanation of its appearance.
 Section \ref{sec:GBM} shows several plots for the strategy GoByMajority, with a varying parameter.
 As the parameter changes, a continuous deformation of the plot of the
-fingerprint can be observed.
-Finally, in Section \ref{sec:lse} we compare the underlying data for all fingerprints of strategies within Axelrod-Python.
+Fingerprint can be observed.
+Finally, in Section \ref{sec:lse} we compare the underlying data for all Fingerprints of strategies within Axelrod-Python.
 This data is used to produce a heat plot of strategies similarity.
 
-It may be useful to recall that a fingerprint for a strategy is produced by playing it against varying stochastic transformations of a probe.
-The parameters varied are $x$ and $y$, as seen on fingerprints in this section.
+It may be useful to recall that a Fingerprint for a strategy is produced by playing it against varying stochastic transformations of a probe.
+The parameters varied are $x$ and $y$, as seen on Fingerprints in this section.
 High $x$ values correspond to high cooperation.
 Conversely, high $y$ values correspond to high defection.
 The colour at point $\hat{x}, \hat{y}$ on the plot indicates the expected value of the strategy when played against the transformation of the probe with parameters $\hat{x}, \hat{y}$.
@@ -21,7 +21,7 @@ This expected score has been approximated as outlined in Chapter \ref{cha:implem
 
 \section{Interpretation of TFT}\label{sec:tft}
 TitForTat (see Section \ref{ssec:stra_titfortat} for an explanation of its behaviour) it is one of the most well known strategies for Prisoner's Dilemma.
-Also, it produces a clean and easy to understand fingerprint, shown in Figure \ref{fig:TFT}, making it an ideal place to start.
+Also, it produces a clean and easy to understand Fingerprint, shown in Figure \ref{fig:TFT}, making it an ideal place to start.
 
 \begin{figure}[hbtp!]
 \centering
@@ -42,12 +42,12 @@ Due to the global minimum and maximum that TitForTat achieves, a score of 2.25 i
 
 \section{Varying the parameter for Random}
 
-It is possible to observe how changing a parameter for a strategy will affect its behaviour by comparing the fingerprints for each parameter.
+It is possible to observe how changing a parameter for a strategy will affect its behaviour by comparing the Fingerprints for each parameter.
 As described in Section \ref{ssec:strat_random}, Random accepts a parameter that determines the probability of cooperation.
-We can vary this parameter and create a new fingerprint each time.{}
+We can vary this parameter and create a new Fingerprint each time.{}
 In Figures \ref{fig:random0.1} to \ref{fig:random0.9} the variable is increased from 0.1 to 0.9 in steps of 0.1.
 When the parameter equal 0 or 1, Random is equivalent to the strategy Defector or Cooperator respectively.
-Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:rand_coop}.
+Those Fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:rand_coop}.
 
 \begin{figure}[htbp!]
 \centering
@@ -73,8 +73,8 @@ Those fingerprint plots are shown in Figures \ref{fig:rand_defect} and \ref{fig:
 
 \section{GoByMajority for different parameters}\label{sec:GBM}
 
-Figures \ref{fig:GBM5} to \ref{fig:GBMoo} show fingerprints for the strategy GoByMajority (see section \ref{sec:fsm_proof}) with increasing memory depth when probed by TitForTat
-Whilst the intricate nature of the fingerprints is hard to interpret, one major observation can be made.
+Figures \ref{fig:GBM5} to \ref{fig:GBMoo} show Fingerprints for the strategy GoByMajority (see section \ref{sec:fsm_proof}) with increasing memory depth when probed by TitForTat
+Whilst the intricate nature of the Fingerprints is hard to interpret, one major observation can be made.
 As the memory depth increases, a region in the middle of the right hand side of the plot transitions from red to blue.
 Blue areas correspond to lower scores, and so the strategy actually performs worse in this area when it has a larger memory.
 This reason for this is not immediately apparent, and would be interesting to investigate in further research.
@@ -94,8 +94,8 @@ This reason for this is not immediately apparent, and would be interesting to in
 \section{Random and Cycler(CDDC) with Different probes}
 
 The importance of probe selection will now be demonstrated.
-Thus far, all fingerprints shown have used TitForTat as a probe, but this is not always enough.
-For example, Random and Cycler(CDDC) produce identical fingerprints when probed with TitForTat, as shown in \ref{fig:rand_cycle_tft}.
+Thus far, all Fingerprints shown have used TitForTat as a probe, but this is not always enough.
+For example, Random and Cycler(CDDC) produce identical Fingerprints when probed with TitForTat, as shown in \ref{fig:rand_cycle_tft}.
 
 \begin{figure}[htbp!]
     \centering
@@ -135,9 +135,11 @@ This example highlights the importance of choosing an appropriate probe when Fin
 \end{figure}
 
 
-\section{LSE plot and table}\label{sec:lse}
-As described several times, a fingerprint for a strategy is merely the expected score when it plays against a probe with varying parameters.
-All the fingerprint plots shown thus far are approximations of this, where the score for specific values of $x, y$ is calculated and then plotted.
+
+\section{LSE plot}\label{sec:lse}
+
+As described several times, a Fingerprint for a strategy is merely the expected score when it plays against a probe with varying parameters.
+All the Fingerprint plots shown thus far are approximations of this, where the score for specific values of $x, y$ is calculated and then plotted.
 Within Axelrod-Python all these underlying scores are recorded in a \mintinline{python}{.csv} file and can therefore be compared directly.
 
 For two strategies $A$ and $B$ where $s_{x, y}^{(A)}$ is the score for strategy $A$ at point $x, y$ and $P_x, P_y$ are the set of points taken by $x, y$, we can compute a rudimentary value of `similarity' by calculating the Mean Square Error:
@@ -153,3 +155,15 @@ This is shown in Figure \ref{fig:mean_squares}.
     \caption{Caption here}
     \label{fig:mean_squares}
 \end{figure}
+
+
+
+\section{Conclusion}
+
+Many Fingerprints were examined in detail in this Chapter and an attempt was made to explain their appearance based on the behaviour of the strategy.
+It was also shown how varying the parameter of a strategy will continuously change the Fingerprint plot.
+The importance of probe selection was then demonstrated by producing several Fingerprints for 2 different strategies using different probes.
+The 2 strategies produced identical Fingerprints for 3 out of the 4 probes used.
+Finally, an LSE plot was created by calculating the Mean Square Error between the Fingerprints of all pairs of strategies.
+This gave an initial indication of the similarity between strategies.
+In Chapter \ref{cha:machinelearning} a better approach to finding identical strategies will be presented.

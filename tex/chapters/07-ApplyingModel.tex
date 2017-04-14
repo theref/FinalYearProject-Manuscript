@@ -4,28 +4,32 @@
 
 In this Chapter a method for assessing the sensitivity of the model will be outlined.
 This is done by making several small changes to the parameters of strategies and observing whether the model can discriminate between the new altered vectors.
-The size of the change made to the strategy will be varied and the models performance recorded for each deviation.
-It is expected that there is a cut-off where the model changes from performing well to performing badly, and this gives an approximation of it's sensitivity.
-Finally, model will be applied to the Axelrod-Python library to determine if it contains any duplicate strategies.
+The size of the change made to the strategy will be varied and the model's performance recorded for each deviation.
+It is expected that there is a cut-off where the model changes from performing well to performing badly, and this gives an approximation of its sensitivity.
+Finally, the model will be applied to the Axelrod-Python library to determine if it contains any duplicate strategies.
 
 
 
-\section{MemoryOne Strategies}
+\section{Memory One Strategies}
 
-A MemoryOne strategy bases its decision entirely on the the last round of play.
-In Axelrod-Python they are defined by a vector $v$ of length 4 that determines the probability of Cooperation given the previous rounds history, ie:
+A memory one strategy bases its decision entirely on the the last round of play.
+They are defined by a vector $v$ of length 4 that determines the probability of Cooperation given the previous rounds history \cite{Akin2015}, ie:
 $$
 v = (P(C|CC), P(C|CD), P(C|DC), P(C|DD))
 $$
-For example, a MemoryOne strategy defined by the vector $v=(1, 1, 1, 1)$ is equivalent to Cooperator.
-TitForTat can be implemented as a MemoryOne player with the vector $v=(1, 0, 1, 0)$, Pavlov as the MemoryOne player with $v=(1, 0, 0, 1)$ and Random as the MemoryOne player with $v=(0.5, 0.5, 0.5, 0.5)$.
+For example, a memory one strategy defined by the vector $v=(1, 1, 1, 1)$ is equivalent to Cooperator.
+TitForTat can be implemented as a memory one player with the vector $v=(1, 0, 1, 0)$, Pavlov as the memory one player with $v=(1, 0, 0, 1)$ and Random as the memory one player with $v=(0.5, 0.5, 0.5, 0.5)$.
 See Section \ref{sec:individual_strategies} for explanations of how these strategies operate.
 
 
 
 \section{Determining the sensitivity of the Model}
 
-All possible MemoryOne strategies are defined by the space $S = [0, 1]^4_{\mathbb{R}}$.
+At this point there is no measure of the sensitivity of the model.
+Alternatively, there is no understanding of how similar two strategies must be before the model decides they are identical.
+In this Section a method of obtaining this information using memory one strategies will be described.
+
+All possible memory one strategies are elements of the set $S = [0, 1]^4_{\mathbb{R}}$.
 For a vector $s \in S$ and a deviation $\delta \in (0, 1)$, 16 new deviated vectors are created by taking the sum of $s$ with all possible vectors $(\pm \delta, \pm \delta, \pm \delta, \pm \delta)$, but bounding each element in the range $[0, 1]$.
 For example, with $s = (0.2, 0, 0.5, 0.95)$ and $\delta = 0.1$, the 16 vectors produced are:
 
@@ -51,8 +55,8 @@ For example, with $s = (0.2, 0, 0.5, 0.95)$ and $\delta = 0.1$, the 16 vectors p
 \end{itemize}
 
 The 16 deviated vectors are then entered into an Ashlock tournament to produce the corresponding results table where all strategies are compared (as described in Section \ref{sec:ashlock_tourn}).
-The model is then be applied to this set of results, and the proportion of comparisons predicted correctly is recorded.
-As all the strategies have been defined by unique vectors, it is known that all the strategies are different and so the model should predict that they all different.
+The model obtained in Chapter \ref{cha:machinelearning} is then used on these strategies to identify the proportion of correct predictions.
+As all the strategies have been defined by unique vectors, it is known that all the strategies are different and so an ideal model would predict that they are all different.
 By repeating this process for different vectors $s \in S$ whilst also varying $\delta$, Figure \ref{fig:m1_correct} is produced.
 
 \begin{figure}[htbp!]
@@ -65,13 +69,17 @@ By repeating this process for different vectors $s \in S$ whilst also varying $\
 The model appears to reach a reasonable level of accuracy when $\delta > 0.3$.
 However, there is a large amount of variance for all $\delta$ used.
 This suggests that the original vector has a significant effect on how the model performs.
-For some MemoryOne strategies even very small deviations will be noticed by the model, but for other MemoryOne strategies it takes a much larger change before the model will recognise the difference.
+For some memory one strategies even very small deviations will be noticed by the model, but for other memory one strategies it takes a much larger change before the model will recognise the difference.
+
+This suggests that there is potential for research to be carried out to investigate how the similarity between deviated memory one strategies changes depending on the original vector used.
+
+
 
 \section{Applying Model to Axelrod-Python}
 
 The final section of this report addresses the problem of determining when strategies in Axelrod-Python are identical.
 The assumption made in Section \ref{sec:training_model} must now be ignored.
-It stated: \textit{Strategies with different names are assumed to be different}, but this is not necessarily the case.
+It was assumed that \textit{Strategies with different names are assumed to be different}, but this is ultimately not known, whilst all the implementations are different it is possible that there are equivalence of strategies.
 
 In order to determine whether any strategies in Axelrod-Python were identical, all of them were entered into an Ashlock Tournament.
 The corresponding results table where all strategies are compared (as described in Section \ref{sec:ashlock_tourn}) was then computed, and the model was applied to this.
@@ -100,15 +108,16 @@ For clarity, strategies that are only similar to themselves have been omitted.
     \label{fig:overall_neighbourhoods}
 \end{figure}
 
-In Figure \ref{fig:sep_neighbourhoods}, all of the disjoint neighbourhoods from Figure \ref{fig:overall_neighbourhoods} have been separated out and some of these will now be explored.
+In Figure \ref{fig:sep_neighbourhoods}, all of the disjoint neighbourhoods from Figure \ref{fig:overall_neighbourhoods} have been separated  and some of these will now be explored.
 Figures \ref{fig:nbh_soft_gbm} and \ref{fig:nbh_hard_gbm} are perfect examples of the model exactly as expected.
 Figure \ref{fig:nbh_soft_gbm} shows that the model predicted several SoftGoByMajority strategies to be equivalent to each other.
 The only difference between them was the memory depth.
 Again in Figure \ref{fig:nbh_hard_gbm} the only difference between the various HardGoByMajority strategies was the memory depth.
 However, the model was able to distinguish between all Hard and Soft version of GoByMajority, hence the two networks are disjoint.
+This suggests that changing the memory depth does not significantly change the way the strategy plays, but playing hard/soft has a large impact.
 
 In Figure \ref{fig:nbh_alt_cd} the strategies Alternator and Cycler(DC) are deemed equivalent.
-Again this is encouraging as the strategies are identical except that one begins with a Cooperation and the other begins with a Defection.
+Again this is understandable as the strategies are identical except that one begins with a Cooperation and the other begins with a Defection.
 
 
 \begin{figure}[htbp!]
@@ -176,9 +185,9 @@ Again this is encouraging as the strategies are identical except that one begins
 \end{figure}
 
 
-In Figure \ref{fig:nbh_pi_e}, the strategies $\pi$ and $e$ are connect.
+In Figure \ref{fig:nbh_pi_e}, the strategies $\pi$ and $e$ are connected.
 These operate by attempting to make the ratio between Cooperations and Defections as close as possible to their respective mathematical constant.
-Interestingly, there is a third strategy of this form implemented in Axelrod-Pythoh, $\phi$.
+Interestingly, there is a third strategy of this form implemented in Axelrod-Python, $\phi$.
 The screen shot in Figure \ref{fig:ss_pi_phi_e} shows the documentation for these strategies, including an approximation of the ratio they attempt to replicate.
 
 \begin{figure}[htbp!]
@@ -195,3 +204,16 @@ In addition, the strategy WorseAndWorse is deemed similar to AntiCycler, but not
 AntiCycler follows a sequence of plays that has no cycles: $CDD\ CD\ CCD\ CCCD\ CCCCD \dots $, whereas the QLearners use Q-Learning \cite{Watkins1992} in an attempt to find an optimal solution.
 It is understandable that different Q-Learners may be predicted equivalent by the model, as it is possible that find the same solution.
 However, without knowledge of the solution they find it is unclear why they are considered similar to AntiCycler and this would require further work.
+
+
+
+\section{Conclusion}
+
+Initially an estimation of the sensitivity of the model was obtained using memory one strategies and it was found the model achieved good results when the deviation was $\delta > 0.3$.
+Then the model was applied to Axelrod-Python to determine whether the library contained any duplicate strategies.
+Overall the model found 124 different neighbourhoods.
+98 neighbourhoods contained only 1 strategy, ie. the strategies were unique.
+15 neighbourhoods contained 2 strategies, 4 contained 3 strategies, 1 neighbourhood had 4 strategies, 2 neighbourhoods had 5 strategies, 2 had 6, 1 neighbourhood contained 7 strategies and the largest neighbourhood contained 8.
+
+Many of the neighbourhoods contained strategies that were logical for the model to identify as identical.
+The remaining neighbourhoods will require more analysis to determine whether the strategies they contain are actually equivalent or not.

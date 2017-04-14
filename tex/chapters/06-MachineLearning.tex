@@ -69,7 +69,8 @@ Alternator & 0.44824 & 0.5000 &  13.0 & 1.0 & 0.2484 & 0.2516 & 0.2490 & 0.2510 
 \section{Training the model}\label{sec:training_model}
 
 At this point a significant assumption must be made.
-Strategies with different names are assumed to be different, and this is how the model will be trained.
+\textbf{Strategies with different names are assumed to be different, and this is how the model will be trained.}
+This assumption will be revisited in Chapter \ref{cha:applying-model}.
 
 To train the model, all strategies were entered into an Ashlock Tournament and a results file was generated, as described in Section \ref{sec:ashlock_tourn}.
 Multiple copies of each strategy where included to compensate for the Ashlock Tournament being a stochastic process.
@@ -78,9 +79,13 @@ Each copy of a strategy was treated separately and thus had an individual line i
 Once the results had been obtained, a new set of data was created that compared all strategies against each other.
 For two strategies $A, B$ with variables $x_i^{(A)}, x_i^{(B)}$, a ratio $r_i^{(A, B)}$ is calculated for each possible variable $x_i$ where:
 $$
-r_i^{(A, B)} = \frac{\min(x_i^{(A)}, x_i^{(B)})}{\max(x_i^{(A)}, x_i^{(B)})}
+r_i^{(A, B)} =
+\begin{cases}
+1, & \mbox{if } x_i^{(A)}=x_i^{(B)}=0  \\
+\text{else}, & \frac{\min(x_i^{(A)}, x_i^{(B)})}{\max(x_i^{(A)}, x_i^{(B)})}
+\end{cases}
 $$
-In the case where both variable equal zero, instead of the ratio being undefined it is set to 1 to demonstrate that the original variables were equal.
+In the case where both variables equal zero, instead of the ratio being undefined it is set to 1 to demonstrate that the original variables were equal.
 The resulting data is shown in Table \ref{tab:ash_comparison}.
 
 \begin{sidewaystable}[htbp!]
@@ -158,10 +163,10 @@ The violin plots in Figure \ref{fig:score_4_sample_size} show the distributions 
 \end{figure}
 
 It can be seen that the violins in Figure \ref{fig:svc-samplesize} reach a maximum score faster the those in Figure \ref{fig:lr-samplesize}.
-Those is Figure \ref{fig:svc-samplesize} also show far less variance, and so the decision was made to use SVC as the model in any future work.
+Those in Figure \ref{fig:svc-samplesize} also show far less variance, and so the decision was made to use SVC as the model in any future work.
 A sample size between 30 and 40 was deemed acceptable, due to a good balance between high score, low variance and computational cost.
 
-The sample was chosen by analysing the results of the Round Robin Tournament in Axelrod-Python.
+The sample was chosen by analysing the results of the Round Robin Tournament (every strategy plays every other strategy) in Axelrod-Python.
 The strategies were ordered by their ranking in the tournament and every 5th one was selected.
 This gave a balance of strategies that were similar (close ranking) and those that were very different (large difference in ranking).
 Ordered by ranking, the 38 strategies chosen to train the model where:
@@ -234,7 +239,25 @@ A $\chi^2$ test was used to obtain the p Values shown in Table \ref{tab:pvalues}
 
 \begin{table}[htbp!]
     \centering
-    \includestandalone[]{../img/p-values}
+    \includestandalone[]{../tab/p-values}
     \caption{p Vales for all variables the model was trained on}
     \label{tab:pvalues}
 \end{table}
+
+
+
+\section{Recreating the Model}
+
+In their simplest form, Support Vector Machines are hyperplanes that separate the training data by a maximal margin \cite{Tong2001, Cortes1995}.
+In the binary classification case, all vectors lying on one side of the hyperplane are labelled as one class, and all vectors lying on the other side are labelled as the other.
+The training instances that lie closest to the hyperplane are called support vectors.
+For the model outlined in this Chapter, 596 support vectors were calculated and these can be found at \url{https://gist.github.com/theref/d942428fba535fe519ffb94ede268c80}.
+Alternatively, the data used to train the model can also be found at the same url.
+
+
+
+\section{Conclusion}
+
+In this Chapter a method for identifying similar strategies using machine learning was described.
+A walk through of training the model was given, followed by an assessment of the models performance.
+In the next Chapter, the sensitivity of the model will be assessed, followed by some results obtained from applying the model to Axelrod-Python.

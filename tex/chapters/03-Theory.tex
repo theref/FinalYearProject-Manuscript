@@ -273,7 +273,7 @@ Whilst not technically part of the Fingerprinting process, it is now useful to p
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width = 0.3\textwidth]{../img/Numerical/Win_Stay_Lose_Shift.png}
+\includegraphics[width = 0.5\textwidth]{../img/Numerical/Win_Stay_Lose_Shift.png}
 \caption{Fingerprint example for Pavlov}
 \label{fig:pavlov_fing_ex}
 \end{figure}
@@ -333,6 +333,7 @@ Theorem \ref{thm:fsm} also impacts the Fingerprint process; the result allows th
 Therefore, any strategy can be used as a probe.
 
 
+
 \section{Extended Dual}\label{sec:extend-dual}
 
 As described in Section \ref{sec:dual}, traditionally the Dual is only defined for strategies with an FSM representation.
@@ -345,6 +346,14 @@ Strategy $A'$ is said to be the \textbf{Extended Dual} of strategy $A$ if, for a
 
 This allows the Dual transformation to be applied to all strategies and therefore, any strategy can be used as the Probe in a Fingerprint (see Definition \ref{def:fingerprint}).
 
+
+
+\section{Conclusion}
+
+Many definitions for FSM's and strategy transformations were presented in this Chapter, culminating in a formal definition for the Fingerprint.
+An example construction of an Analytical Fingerprint was then given.
+This was followed by an \textbf{original} result that showed that every strategy has an FSM representation.
+This result led to the ability to extend the Dual to all strategies and therefore be able to use any strategy as a probe.
 The definitions presented throughout this Chapter will now be used to develop code to Fingerprint any strategy with any probe.
 This is explained in detail in Chapter \ref{cha:implementation}.
 
