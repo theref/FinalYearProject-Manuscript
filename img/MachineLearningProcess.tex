@@ -1,0 +1,216 @@
+%!TEX root = ../tex/main.tex
+
+%
+\begin{tikzpicture}
+    \tikzstyle{annotation}=[ellipse, text width=8cm, font=\Large];
+
+    \node (01) at (5, 6) [annotation, align=center] {Results from the Ashlock Tournament};
+    \node (01) at (14, 11) [annotation] {Compare the results of every possible pair of strategies};
+    \node (01) at (23, 11.5) [annotation] {Take a sample of strategies and select rows containing \textbf{only} those strategies. Train the model on these rows};
+    \node (01) at (32, 11) [annotation] {Score the model against the remaining rows};
+
+    \draw (0, 2) edge[out=0, in=-180, ->, thick] (1, 2);
+
+
+    % ashlock tournament results
+    \draw[fill=sol-blue]   (2,0) rectangle (8,1);
+    \draw[fill=sol-green] (2,1) rectangle (8,2);
+    \draw[fill=sol-red]    (2,2) rectangle (8,3);
+    \draw[fill=sol-violet]   (2,3) rectangle (8,4);
+
+    \draw (9, 2) edge[out=0, in=-180, ->, thick] (10, 2);
+
+    % ashlock combinations
+    \draw[fill=sol-violet]   (11,10) rectangle (12,9);
+    \draw[fill=sol-violet]   (11,9) rectangle (12,8);
+    \draw[fill=sol-violet]   (11,8) rectangle (12,7);
+    \draw[fill=sol-violet]   (11,7) rectangle (12,6);
+
+    \draw[fill=sol-violet]   (12,10) rectangle (13,9);
+    \draw[fill=sol-red]    (12,9) rectangle (13,8);
+    \draw[fill=sol-green] (12,8) rectangle (13,7);
+    \draw[fill=sol-blue]   (12,7) rectangle (13,6);
+
+    \draw[fill=sol-violet]   (13,10) rectangle (17,9.5);
+    \draw[fill=sol-violet]   (13,9.5) rectangle (17,9);
+    \draw[fill=sol-violet]   (13,9) rectangle (17,8.5);
+    \draw[fill=sol-red]    (13,8.5) rectangle (17,8);
+    \draw[fill=sol-violet]   (13,8) rectangle (17,7.5);
+    \draw[fill=sol-green] (13,7.5) rectangle (17,7);
+    \draw[fill=sol-violet]   (13,7) rectangle (17,6.5);
+    \draw[fill=sol-blue]   (13,6.5) rectangle (17,6);
+
+
+
+    \draw[fill=sol-red]   (11,6) rectangle (12,5);
+    \draw[fill=sol-red]   (11,5) rectangle (12,4);
+    \draw[fill=sol-red]   (11,4) rectangle (12,3);
+    \draw[fill=sol-red]   (11,3) rectangle (12,2);
+
+    \draw[fill=sol-violet]   (12,6) rectangle (13,5);
+    \draw[fill=sol-red]    (12,5) rectangle (13,4);
+    \draw[fill=sol-green] (12,4) rectangle (13,3);
+    \draw[fill=sol-blue]   (12,3) rectangle (13,2);
+
+    \draw[fill=sol-red]    (13,6) rectangle (17,5.5);
+    \draw[fill=sol-violet]   (13,5.5) rectangle (17,5);
+    \draw[fill=sol-red]    (13,5) rectangle (17,4.5);
+    \draw[fill=sol-red]    (13,4.5) rectangle (17,4);
+    \draw[fill=sol-red]    (13,4) rectangle (17,3.5);
+    \draw[fill=sol-green] (13,3.5) rectangle (17,3);
+    \draw[fill=sol-red]    (13,3) rectangle (17,2.5);
+    \draw[fill=sol-blue]   (13,2.5) rectangle (17,2);
+
+
+
+    \draw[fill=sol-green]   (11,2) rectangle (12,1);
+    \draw[fill=sol-green]   (11,1) rectangle (12,0);
+    \draw[fill=sol-green]   (11,0) rectangle (12,-1);
+    \draw[fill=sol-green]   (11,-1) rectangle (12,-2);
+
+    \draw[fill=sol-violet]   (12,2) rectangle (13,1);
+    \draw[fill=sol-red]    (12,1) rectangle (13,0);
+    \draw[fill=sol-green] (12,0) rectangle (13,-1);
+    \draw[fill=sol-blue]   (12,-1) rectangle (13,-2);
+
+    \draw[fill=sol-green] (13,2) rectangle (17,1.5);
+    \draw[fill=sol-violet]   (13,1.5) rectangle (17,1);
+    \draw[fill=sol-green] (13,1) rectangle (17,0.5);
+    \draw[fill=sol-red]    (13,0.5) rectangle (17,0);
+    \draw[fill=sol-green] (13,0) rectangle (17,-0.5);
+    \draw[fill=sol-green] (13,-0.5) rectangle (17,-1);
+    \draw[fill=sol-green] (13,-1) rectangle (17,-1.5);
+    \draw[fill=sol-blue]   (13,-1.5) rectangle (17,-2);
+
+
+
+    \draw[fill=sol-blue]   (11,-2) rectangle (12,-3);
+    \draw[fill=sol-blue]   (11,-3) rectangle (12,-4);
+    \draw[fill=sol-blue]   (11,-4) rectangle (12,-5);
+    \draw[fill=sol-blue]   (11,-5) rectangle (12,-6);
+
+    \draw[fill=sol-violet]   (12,-2) rectangle (13,-3);
+    \draw[fill=sol-red]    (12,-3) rectangle (13,-4);
+    \draw[fill=sol-green] (12,-4) rectangle (13,-5);
+    \draw[fill=sol-blue]   (12,-5) rectangle (13,-6);
+
+    \draw[fill=sol-blue]   (13,-2) rectangle (17,-2.5);
+    \draw[fill=sol-violet]   (13,-2.5) rectangle (17,-3);
+    \draw[fill=sol-blue]   (13,-3) rectangle (17,-3.5);
+    \draw[fill=sol-red]    (13,-3.5) rectangle (17,-4);
+    \draw[fill=sol-blue]   (13,-4) rectangle (17,-4.5);
+    \draw[fill=sol-green] (13,-4.5) rectangle (17,-5);
+    \draw[fill=sol-blue]   (13,-5) rectangle (17,-5.5);
+    \draw[fill=sol-blue]   (13,-5.5) rectangle (17,-6);
+
+    \draw (18, 2) edge[out=0, in=-180, ->, thick] (19, 2);
+
+    % sample rows to train data
+
+    \draw [dashed, line width=1mm, sol-base03] (20, 5) rectangle (26, 10);
+    \draw [dashed, line width=1mm, sol-base03] (20, 3) rectangle (26, 4);
+    \draw [dashed, line width=1mm, sol-base03] (20, -3) rectangle (26, 2);
+    \draw [dashed, line width=1mm, sol-base03] (20, -5) rectangle (26, -4);
+
+    \draw[fill=sol-red]   (20,5) rectangle (21,4);
+    \draw[fill=sol-red]   (20,3) rectangle (21,2);
+
+    \draw[fill=sol-red]    (21,5) rectangle (22,4);
+    \draw[fill=sol-blue]   (21,3) rectangle (22,2);
+
+    \draw[fill=sol-red]    (22,5) rectangle (26,4.5);
+    \draw[fill=sol-red]    (22,4.5) rectangle (26,4);
+    \draw[fill=sol-red]    (22,3) rectangle (26,2.5);
+    \draw[fill=sol-blue]   (22,2.5) rectangle (26,2);
+
+
+
+    \draw[fill=sol-blue]   (20,-3) rectangle (21,-4);
+    \draw[fill=sol-blue]   (20,-5) rectangle (21,-6);
+
+    \draw[fill=sol-red]    (21,-3) rectangle (22,-4);
+    \draw[fill=sol-blue]   (21,-5) rectangle (22,-6);
+
+    \draw[fill=sol-blue]   (22,-3) rectangle (26,-3.5);
+    \draw[fill=sol-red]    (22,-3.5) rectangle (26,-4);
+    \draw[fill=sol-blue]   (22,-5) rectangle (26,-5.5);
+    \draw[fill=sol-blue]   (22,-5.5) rectangle (26,-6);
+
+    \draw (27, 2) edge[out=0, in=-180, ->, thick] (28, 2);
+
+    % test data on remaining rows
+
+    \draw [dashed, line width=1mm, sol-base03] (29, 4) rectangle (35, 5);
+    \draw [dashed, line width=1mm, sol-base03] (29, 2) rectangle (35, 3);
+    \draw [dashed, line width=1mm, sol-base03] (29, -4) rectangle (35, -3);
+    \draw [dashed, line width=1mm, sol-base03] (29, -6) rectangle (35, -5);
+
+    \draw[fill=sol-violet]   (29,10) rectangle (30,9);
+    \draw[fill=sol-violet]   (29,9) rectangle (30,8);
+    \draw[fill=sol-violet]   (29,8) rectangle (30,7);
+    \draw[fill=sol-violet]   (29,7) rectangle (30,6);
+
+    \draw[fill=sol-violet]   (30,10) rectangle (31,9);
+    \draw[fill=sol-red]    (30,9) rectangle (31,8);
+    \draw[fill=sol-green] (30,8) rectangle (31,7);
+    \draw[fill=sol-blue]   (30,7) rectangle (31,6);
+
+    \draw[fill=sol-violet]   (31,10) rectangle (35,9.5);
+    \draw[fill=sol-violet]   (31,9.5) rectangle (35,9);
+    \draw[fill=sol-violet]   (31,9) rectangle (35,8.5);
+    \draw[fill=sol-red]    (31,8.5) rectangle (35,8);
+    \draw[fill=sol-violet]   (31,8) rectangle (35,7.5);
+    \draw[fill=sol-green] (31,7.5) rectangle (35,7);
+    \draw[fill=sol-violet]   (31,7) rectangle (35,6.5);
+    \draw[fill=sol-blue]   (31,6.5) rectangle (35,6);
+
+
+
+    \draw[fill=sol-red]   (29,6) rectangle (30,5);
+    \draw[fill=sol-red]   (29,4) rectangle (30,3);
+
+    \draw[fill=sol-violet]   (30,6) rectangle (31,5);
+    \draw[fill=sol-green] (30,4) rectangle (31,3);
+
+    \draw[fill=sol-red]    (31,6) rectangle (35,5.5);
+    \draw[fill=sol-violet]   (31,5.5) rectangle (35,5);
+    \draw[fill=sol-red]    (31,4) rectangle (35,3.5);
+    \draw[fill=sol-green] (31,3.5) rectangle (35,3);
+
+
+
+    \draw[fill=sol-green]   (29,2) rectangle (30,1);
+    \draw[fill=sol-green]   (29,1) rectangle (30,0);
+    \draw[fill=sol-green]   (29,0) rectangle (30,-1);
+    \draw[fill=sol-green]   (29,-1) rectangle (30,-2);
+
+    \draw[fill=sol-violet]   (30,2) rectangle (31,1);
+    \draw[fill=sol-red]    (30,1) rectangle (31,0);
+    \draw[fill=sol-green] (30,0) rectangle (31,-1);
+    \draw[fill=sol-blue]   (30,-1) rectangle (31,-2);
+
+    \draw[fill=sol-green] (31,2) rectangle (35,1.5);
+    \draw[fill=sol-violet]   (31,1.5) rectangle (35,1);
+    \draw[fill=sol-green] (31,1) rectangle (35,0.5);
+    \draw[fill=sol-red]    (31,0.5) rectangle (35,0);
+    \draw[fill=sol-green] (31,0) rectangle (35,-0.5);
+    \draw[fill=sol-green] (31,-0.5) rectangle (35,-1);
+    \draw[fill=sol-green] (31,-1) rectangle (35,-1.5);
+    \draw[fill=sol-blue]   (31,-1.5) rectangle (35,-2);
+
+
+
+    \draw[fill=sol-blue]   (29,-2) rectangle (30,-3);
+    \draw[fill=sol-blue]   (29,-4) rectangle (30,-5);
+
+    \draw[fill=sol-violet]   (30,-2) rectangle (31,-3);
+    \draw[fill=sol-green] (30,-4) rectangle (31,-5);
+
+    \draw[fill=sol-blue]   (31,-2) rectangle (35,-2.5);
+    \draw[fill=sol-violet]   (31,-2.5) rectangle (35,-3);
+    \draw[fill=sol-blue]   (31,-4) rectangle (35,-4.5);
+    \draw[fill=sol-green] (31,-4.5) rectangle (35,-5);
+
+
+\end{tikzpicture}
+

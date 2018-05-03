@@ -1,10 +1,7 @@
 *.DS_Store
 *checkpoint.ipynb
-<<<<<<< HEAD
-tex/_minted-main/*
-=======
 /tex/_minted-main/*
->>>>>>> intro
+*.pyg
 *.aux
 *.glo
 *.idx
@@ -22,12 +19,13 @@ tex/_minted-main/*
 *.ilg
 *.ind
 *.lof
+*.auxlock
 *.lot
 *.maf
 *.mtc
 *.mtc1
 *.out
-*.synctex.gz
+*.synctex.*
 *.run.xml
 *bcf
 *fdb_latexmk

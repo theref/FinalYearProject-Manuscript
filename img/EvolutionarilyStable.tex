@@ -1,0 +1,51 @@
+%!TEX root = ../tex/main.tex
+
+    \begin{tikzpicture}
+        \fill[sol-base1] (0,0) rectangle (6,6);
+        \fill[sol-cyan] (5,5) rectangle (6,6);
+        \draw[step=0.25cm] (0,0) grid (6,6);
+
+        \draw (7, 3) edge[out=0, in=-180, ->, thick] (8, 5);
+        \draw (7, 3) edge[out=0, in=-180, ->, thick] (8, 1);
+
+        \fill[sol-base1] (9,4) rectangle (15,10);
+        \fill[sol-cyan] (13,8) rectangle (15,10);
+        \draw[step=0.25cm] (9,4) grid (15,10);
+
+        \fill[gray] (9,-4) rectangle (15,2);
+        \fill[sol-cyan] (9,2) rectangle (15,1.75);
+        \fill[sol-cyan] (9.25,1.75) rectangle (15,1.5);
+        \fill[sol-cyan] (9.5,1.5) rectangle (15,1.25);
+        \fill[sol-cyan] (9.75,1.25) rectangle (15,1);
+        \fill[sol-cyan] (10,1) rectangle (15,0.75);
+        \fill[sol-cyan] (10.25,0.75) rectangle (15,0.5);
+        \fill[sol-cyan] (10.5,0.5) rectangle (15,0.25);
+        \fill[sol-cyan] (10.75,0.25) rectangle (15,0);
+        \fill[sol-cyan] (11,0) rectangle (15,-0.25);
+        \fill[sol-cyan] (11.25,-0.25) rectangle (15,-0.5);
+        \fill[sol-cyan] (11.5,-0.5) rectangle (15,-0.75);
+        \fill[sol-cyan] (11.75,-0.75) rectangle (15,-1);
+        \fill[sol-cyan] (12,-1) rectangle (15,-1.25);
+        \fill[sol-cyan] (12.25,-1.25) rectangle (15,-1.5);
+        \fill[sol-cyan] (12.5,-1.5) rectangle (15,-1.75);
+        \fill[sol-cyan] (12.75,-1.75) rectangle (15,-2);
+        \fill[sol-cyan] (13,-2) rectangle (15,-2.25);
+        \fill[sol-cyan] (13.25,-2.25) rectangle (15,-2.5);
+        \fill[sol-cyan] (13.5,-2.5) rectangle (15,-2.75);
+        \fill[sol-cyan] (13.75,-2.75) rectangle (15,-3);
+        \fill[sol-cyan] (14,-3) rectangle (15,-3.25);
+        \fill[sol-cyan] (14.25,-3.25) rectangle (15,-3.5);
+        \fill[sol-cyan] (14.5,-3.5) rectangle (15,-3.75);
+        \fill[sol-cyan] (14.75,-3.75) rectangle (15,-4);
+        \draw[step=0.25cm] (9,-4) grid (15,2);
+
+        \draw (16, 7) edge[out=0, in=-180, ->, thick] (17, 7);
+        \draw (16, -1) edge[out=0, in=-180, ->, thick] (17, -1);
+
+        \fill[sol-base1] (18,4) rectangle (24,10);
+        \fill[sol-cyan] (23.75,9.75) rectangle (24,10);
+        \draw[step=0.25cm] (18,4) grid (24,10);
+
+        \fill[sol-cyan] (18,-4) rectangle (24,2);
+        \draw[step=0.25cm] (18,-4) grid (24,2);
+    \end{tikzpicture}

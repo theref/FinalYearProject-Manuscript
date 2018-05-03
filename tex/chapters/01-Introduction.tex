@@ -1,0 +1,151 @@
+%!TEX root = ../main.tex
+
+\chapter{Introduction}\label{cha:introduction}
+
+The Prisoner's Dilemma (PD) is a classic model in Game Theory.
+It is a simple two player game where the agents must make a choice of two options without communicating.
+This is often presented as two suspects who have been arrested and are being interrogated separately.
+They have the option of whether to Cooperate with each other or Defect and each player receives an individual payoff that depends on the actions that have been taken.
+This may appear quite abstract, so a more formal definition is given in Section \ref{sec:intro_pd}.
+
+Consider the situation that both prisoners return to their cells each night, to be presented with the same choice the next day.
+Furthermore, allow this process to continue repeatedly.
+This is called the Iterated Prisoner's Dilemma (IPD) and has been an object of interest ever since the 1950's but became more popular after Robert Axelrod's work in the 1980's \cite{Axelrod1980a, Axelrod1980b}.
+Every player in IPD represents a strategy. A strategy is a predetermined program that tells the player what actions to take in response to the history of plays so far.
+
+Several computer based IPD tournaments have been held over the years, but the first were held by Axelrod in 1980 \cite{Axelrod1980a, Axelrod1980b}.
+Some much smaller tournaments are the two anniversary tournaments held in 2004 and the Stewart and Plotkin 2012 tournament.
+The original source code of these is only available for Axelrod's second tournament (in FORTRAN) and it is not well documented, tested or easily re-usable.
+The general state of reproducible research is discussed further in Section \ref{sec:axelrod-python}.
+
+Recently, a group of researchers have been working to improve this situation by producing an open source version of Axelrod's original tournament \cite{Knight2016}.
+Referred to as the Axelrod-Python library, it aims to provide a resource for the design of new strategies and interactions between them, as well as conducting tournaments and ecological simulations for populations of strategies.
+The version of the library used in this work will be \cite{axelrodproject}.
+This version of the library includes 181 strategies and the capability to run evolutionary tournaments and tournaments on different topologies.
+
+
+
+\section{Prisoner's Dilemma}\label{sec:intro_pd}
+
+The first formal definition of the PD was presented by Albert W. Tucker during a seminar at Stanford University \cite{Gass2005}.
+However, the idea was first formulated in 1950 \cite{Flood1958}.
+A more detailed explanation of the Prisoner's Dilemma is given in \cite{Gotts2003}.
+
+The PD can be described as follows. Two players simultaneously decide whether to Cooperate $(C)$ or Defect $(D)$, without exchanging information.
+They receive payoffs as follows:
+
+\begin{itemize}
+    \item They both choose $C$ (mutual cooperation) and receive a payoff $R$ (Reward)
+    \item They both choose $D$ (mutual defection) and receive a payoff $P$ (Punish)
+    \item One player chooses $C$ and the other chooses $D$. The cooperator receives a payoff $S$ (Sucker) and the defector receives a payoff $T$ (Temptation).
+\end{itemize}
+
+Figure \ref{eq:payoff_matrix_symb} shows the payoff matrix.
+
+\begin{equation}\label{eq:payoff_matrix_symb}
+%
+P = \bordermatrix{~ & C & D \cr
+                  C & (R, R) & (T, S) \cr
+                  D & (S, T) & (P, P) \cr}
+%
+\end{equation}
+
+There are also three assumptions that need to be stated.
+Firstly, both players are rational.
+Secondly, there is no communication between them.
+Finally, that the payoffs satisfy the following inequalities:
+
+\begin{equation}\label{eq:intuitive}
+S < D < C < T
+\end{equation}
+
+and
+
+\begin{equation}\label{eq:ensure_coop}
+(S + T) < 2 C
+\end{equation}
+
+It is then easy to see that regardless of the choice of one player, the other will always obtain a higher payoff by defecting instead of cooperating.
+Therefore we have a pure Nash Equilibrium where both players defect, despite the fact that both players would do better if they were to cooperate with each other.
+
+Equation \ref{eq:intuitive} merely fixes the payoffs in their intuitive order.
+Equation \ref{eq:ensure_coop} ensures that alternating between cooperating and defecting (players take it in turns to stab each other in the back) performs no better than mutual cooperation.
+These inequalities allow for many different payoff matrices to be formulated, but values of $(R, S, T, P) = (3, 0, 5, 1)$ are commonly used in literature \cite{Axelrod1984, Axelrod1980a, Axelrod1980a}.
+We can now explicitly state the payoff matrix, as shown in Figure \ref{eq:payoff_matrix}
+
+\begin{equation}\label{eq:payoff_matrix}
+%
+P = \bordermatrix{~ & C & D \cr
+                  C & (3, 3) & (5, 0) \cr
+                  D & (0, 5) & (1, 1) \cr}
+%
+\end{equation}
+
+\section{Problem Description}
+
+As previously mentioned, the version of the Axelrod-Python library used in this report has 181 strategies, significantly more than the 13 and 64 strategies submitted to Axelrod's first and second tournaments \cite{Axelrod1980a, Axelrod1980b}.
+This now raises the issue of duplication, and subsequently, how to differentiate between strategies.
+Currently the only known approach to this problem in the literature is Fingerprinting which produces a visual representation of a strategy, an example is shown in Figure \ref{fig:example_fing}.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../img/Numerical/Random05}
+    \caption{A plot of the fingerprint function for Random(0.5) when probed by TitForTat}
+    \label{fig:example_fing}
+\end{figure}
+
+The issue with this method is that it relies on knowledge of the underlying Markov chain of the strategy which cannot be easily constructed from the source code.
+Secondly, although the fingerprinting method is described and used at length in \cite{Ashlock2008,Ashlock2010, Ashlock2004, Ashlock2005, Ashlock2009, Ashlock2006,} there is no source code readily available, it must be requested from the original author.
+This project will document an implementation of fingerprinting that is at present available in the Axelrod-Python library (Chapter \ref{cha:implementation}) and also consider a statistical approach to identifying similar strategies (Chapter \ref{cha:machinelearning}).
+
+
+\section{Structure}
+
+Throughout this report examples and demonstrations of code will be given.
+Some of this code will be directly copied from the Axelrod-Python source code, at other times it will have been written specifically for this report.
+In order to help the reader differentiate between each scenario, two different colour schemes have been used.
+The first, for Axelrod-Python source code is shown in Listing \ref{lst:examplesourcecode} and the second, for any bespoke code, is shown in Listing \ref{lst:exampleexamplecode}.
+The code for performing all of the Machine Learning, and producing many of the plots in this report has been included in Appendix \ref{app:jupyter}.
+
+\begin{listing}[hbtp!]
+\begin{SourceCode}
+def function_name(parameters):
+    """
+    multiline comment
+    """
+    function_code = 4
+    return some_output
+\end{SourceCode}
+\caption{An example of how Axelrod-Python source code will be displayed}
+\label{lst:examplesourcecode}
+\end{listing}
+
+\begin{listing}[hbtp!]
+\begin{ExampleCode}
+def function_name(parameters):
+    """
+    multiline comment
+    """
+    function_code = 4
+    return some_output
+\end{ExampleCode}
+\caption{An example of how demonstrative code will be displayed}
+\label{lst:exampleexamplecode}
+\end{listing}{}
+
+This report is organized into several chapters. Continuing from this introduction:
+
+\begin{itemize}
+    \item In Chapter \ref{cha:literature} an overview of previous literature regarding the Prisoner's Dilemma is given.
+    Also introduces the Axelrod-Python library and recent work related to Fingerprinting.
+    \item In Chapter \ref{cha:theory} several definitions and theorems are presented, ultimately leading to a formal definition of Fingerprinting.
+    An example Analytical Fingerprint is then constructed, followed by an original result for extending Fingerprinting.
+    \item In Chapter \ref{cha:implementation} the development process and main software contribution to Axelrod-Python is described.
+    Some numerical and analytical Fingerprints are compared.
+    \item In Chapter \ref{cha:results} Several Fingerprints are examined in detail, with comparisons being made between different strategies and different probes.
+    \item In Chapter \ref{cha:machinelearning} A novel approach to identifying identical strategies using machine learning is outlined. The process of training and assessing the model is described in detail.
+    \item In Chapter \ref{cha:applying-model} An estimate of the models sensitivity is given.
+    The model is then applied to Axelrod-Python with an aim to identify duplicate strategies.
+    \item In Chapter \ref{cha:conclusion} the results of this project are summarised. Some ideas for future research are also presented.
+\end{itemize}
+
